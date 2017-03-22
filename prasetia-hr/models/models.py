@@ -77,8 +77,8 @@ class DeviceAttendance(models.Model):
 
         # print vals
         # self.device_attendance_user_ids = vals
-        # raise exceptions.except_orm(_('Success'), _('Import generated successfully'))
-        raise Warning(_('Import generated successfully'))
+        raise exceptions.except_orm(_('Success'), _('Import generated successfully'))
+        # raise Warning(_('Import generated successfully'))
         # return {}
 
 
