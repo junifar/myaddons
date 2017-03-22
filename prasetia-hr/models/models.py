@@ -58,22 +58,22 @@ class DeviceAttendance(models.Model):
     @api.multi
     def import_user(self):
 
-        # self.device_attendance_user_ids = [{'name': 'junifar', 'user_id': 1}]
+        self.device_attendance_user_ids = [{'name': 'junifar', 'user_id': 1}]
 
-        zk = ZK(self.ip_address, port=int(self.port), timeout=5)
-        try:
-            conn = zk.connect()
-            users = conn.get_users()
-            for user in users:
-                print ('name : %s - user_id = %d' % (user.name, user.uid))
-                self.device_attendance_user_ids = [
-                    {'name': '1', 'user_id': 1}
-                ]
-
-        except Exception as e:
-            raise exceptions.except_orm(_('Error'), _(
-                'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.ip_address, self.port)))
-        raise exceptions.except_orm(_('Success'), _('Import generated successfully'))
+        # zk = ZK(self.ip_address, port=int(self.port), timeout=5)
+        # try:
+        #     conn = zk.connect()
+        #     users = conn.get_users()
+        #     for user in users:
+        #         print ('name : %s - user_id = %d' % (user.name, user.uid))
+        #         self.device_attendance_user_ids = [
+        #             {'name': user.name, 'user_id': user.uid}
+        #         ]
+        #
+        # except Exception as e:
+        #     raise exceptions.except_orm(_('Error'), _(
+        #         'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.ip_address, self.port)))
+        # raise exceptions.except_orm(_('Success'), _('Import generated successfully'))
         # return {}
 
 
