@@ -67,7 +67,7 @@ class DeviceAttendance(models.Model):
             for user in users:
                 print ('name : %s - user_id = %d' % (user.name, user.uid))
                 self.device_attendance_user_ids = [
-                    {'name': user.name, 'user_id': user.uid}
+                    {'name': '1', 'user_id': 1}
                 ]
 
         except Exception as e:
