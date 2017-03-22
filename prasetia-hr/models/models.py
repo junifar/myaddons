@@ -66,9 +66,10 @@ class DeviceAttendance(models.Model):
             users = conn.get_users()
             for user in users:
                 # print ('name : %s - user_id = %d' % (user.name, user.uid))
-                self.device_attendance_user_ids = [
-                    {'name': str(user.name), 'user_id': int(user.uid)}
-                ]
+                self.device_attendance_user_ids = [{'name': 'junifar', 'user_id': 1}]
+                # self.device_attendance_user_ids = [
+                #     {'name': str(user.name), 'user_id': int(user.uid)}
+                # ]
 
         except Exception as e:
             raise exceptions.except_orm(_('Error'), _(
