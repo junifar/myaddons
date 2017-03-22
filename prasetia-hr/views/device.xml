@@ -26,6 +26,26 @@
                                 <field name="port"/>
                             </group>
                         </group>
+                        <notebook>
+                            <page name="attendance_user_information" string="User list">
+                                <field name="device_attendance_user_ids">
+                                    <tree string="User List">
+                                        <field name="name"/>
+                                        <field name="user_id"/>
+                                    </tree>
+                                    <form string="User Device">
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="user_id"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                        <footer>
+                            <button name="import_user" type="object"
+                                    string="Import User" class="oe_highlight oe_edit_only" confirm="Are you sure you want to do this?"/>
+                        </footer>
                     </sheet>
                 </form>
              </field>
