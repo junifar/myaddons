@@ -65,6 +65,7 @@ class DeviceAttendance(models.Model):
             conn = zk.connect()
             users = conn.get_users()
             for user in users:
+                print ('name : %s - user_id = %d' % (user.name, user.uid))
                 self.device_attendance_user_ids = [
                     {'name': user.name, 'user_id': user.uid}
                 ]
