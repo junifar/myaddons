@@ -16,8 +16,7 @@ def checkIP(ip):
         users = conn.get_users()
         for user in users:
             # print dir(user)
-            print
-            str(user.uid) + ' - ' + user.name
+            print str(user.uid) + ' - ' + user.name
 
             # attendances = conn.get_attendance()
             # for attendance in attendances:

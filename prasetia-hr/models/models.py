@@ -57,13 +57,23 @@ class DeviceAttendance(models.Model):
 
     @api.multi
     def import_user(self):
+
+        # self.device_attendance_user_ids = [{'name': 'junifar', 'user_id': 1}]
+
         zk = ZK(self.ip_address, port=int(self.port), timeout=5)
         try:
-            zk.connect()
+            conn = zk.connect()
+            users = conn.get_users()
+            for user in users:
+                self.device_attendance_user_ids = [
+                    {'name': user.name, 'user_id': user.uid}
+                ]
+
         except Exception as e:
-            raise exceptions.except_orm(_('Error'), _('Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.ip_address, self.port)))
-        raise exceptions.except_orm(_('Success'), _('Connection Established'))
-        return {}
+            raise exceptions.except_orm(_('Error'), _(
+                'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.ip_address, self.port)))
+        raise exceptions.except_orm(_('Success'), _('Import generated successfully'))
+        # return {}
 
 
 class DeviceAttendanceImportUser(models.Model):
