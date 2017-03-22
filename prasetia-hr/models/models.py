@@ -67,8 +67,7 @@ class DeviceAttendance(models.Model):
             users = conn.get_users()
             for user in users:
                 # self.device_attendance_user_ids = [{'name': 'junifar', 'user_id': 1}]
-                vals.append({'name': user.name, 'user_id': user.uid})
-                # print ('name : %s - user_id = %d' % (user.name, user.uid))
+                print ('name : %s - user_id = %d' % (user.name, user.uid))
                 # self.device_attendance_user_ids = [
                 #     {'name': str(user.name), 'user_id': int(user.uid)}
                 # ]
@@ -76,9 +75,10 @@ class DeviceAttendance(models.Model):
             raise exceptions.except_orm(_('Error'), _(
                 'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.ip_address, self.port)))
 
-        print vals
-        self.device_attendance_user_ids = vals
-        raise exceptions.except_orm(_('Success'), _('Import generated successfully'))
+        # print vals
+        # self.device_attendance_user_ids = vals
+        # raise exceptions.except_orm(_('Success'), _('Import generated successfully'))
+        raise Warning('Import generated successfully')
         # return {}
 
 
