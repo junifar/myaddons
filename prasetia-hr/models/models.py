@@ -57,7 +57,6 @@ class DeviceAttendance(models.Model):
 
     @api.multi
     def import_user(self):
-        conn = None
         zk = ZK(self.ip_address, port=int(self.port), timeout=5)
         try:
             zk.connect()
