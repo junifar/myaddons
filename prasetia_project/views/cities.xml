@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="projects_city_form_view">
+			<field name="name">City</field>
+			<field name="model">project.city</field>
+			<field name="arch" type="xml">
+				<form string="City">
+					<header></header>
+					<sheet>
+						<group string="City">
+                            <group>
+                                <field name="island_id"/>
+                                <field name="province_id"/>
+                            </group>
+                            <group>
+                                <field name="name"/>
+                            </group>							
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="projects_city_tree_view">
+			<field name="name">City</field>
+			<field name="model">project.city</field>
+			<field name="arch" type="xml">
+				<tree string="City" create="true">
+                    <field name="island_id"/>
+                    <field name="province_id"/>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+        <record model="ir.actions.act_window" id="city_list_action">
+			<field name="name">City</field>
+			<field name="res_model">project.city</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					City Data
+				</p>
+			</field>
+		</record>
+    </data>
+</odoo>

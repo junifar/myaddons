@@ -1,0 +1,409 @@
+<openerp>
+	<data>
+ 		<record id="hr_hr_employee_prasetia_view_form" model="ir.ui.view">
+ 			<field name="name">hr.hr.employee.prasetia.view.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <data>
+                	<field name="category_ids" position="replace"/>
+					<page name="public" position="replace">
+						<page name="public" string="Public Information">
+							<group>
+								<group string="Personal Information">
+									<field name="registration_id"/>
+									<field name="identification_id" groups="hr.group_hr_user"/>
+									<field name="religion_id"/>
+									<field name="mobile_phone"/>
+									<field name="work_email" widget="email"/>
+									<!--<field name="birth_place"/>-->
+									<!--<field name="birthday"/>-->
+								</group>
+								<group string="Position">
+									<field name="department_id"/>
+									<field name="job_id"/>
+									<field name="parent_id"/>
+								</group>
+								<group string="Birth">
+									<field name="birth_place"/>
+									<field name="birthday"/>
+								</group>
+								<group string="Status">
+									<field name="gender"/>
+									<field name="marital"/>
+								</group>
+								<group string="Bank Account Information">
+									<field name="bank_account_id" context="{'default_partner_id': address_home_id}"/>
+								</group>
+							</group>
+							<field name="notes" placeholder="Other Information ..." colspan="4"/>
+						</page>
+					</page>
+
+					<page name="public" position="after">
+						<page name="license" string="License Information">
+							<notebook>
+								<page string="License Information">
+									<field name="license_ids">
+										<tree string="License ID's">
+											<field name="name"/>
+											<field name="driver_license_type"/>
+											<field name="license_status"/>
+										</tree>
+										<form string="License ID">
+											<sheet>
+												<div class="oe_title">
+													<label for="name" class="oe_edit_only"/>
+													<h1>
+														<field name="name" placeholder="License ID"/>
+													</h1>
+												</div>
+												<group>
+													<group>
+														<field name="driver_license_type"/>
+													</group>
+													<group>
+														<field name="license_status" widget="radio"/>
+													</group>
+												</group>
+											</sheet>
+										</form>
+									</field>
+								</page>
+							</notebook>
+						</page>
+						<page name="personal_account" string="Personal Account">
+							<notebook>
+								<page string="Personal Account">
+									<field name="personal_account_ids">
+										<tree string="Personal Account">
+											<field name="personal_account_type_id"/>
+											<field name="name"/>
+											<field name="registration_date"/>
+											<field name="personal_account_status"/>
+										</tree>
+										<form string="Personal Account">
+											<sheet>
+												<group>
+													<div class="oe_title">
+														<label for="name" class="oe_edit_only"/>
+														<h1>
+															<field name="name" placeholder="Personal Account ID"/>
+														</h1>
+														<group>
+															<group>
+																<field name="personal_account_type_id"/>
+															</group>
+															<group>
+																<field name="registration_date"/>
+																<field name="personal_account_status" widget="radio"/>
+															</group>
+														</group>
+													</div>
+												</group>
+											</sheet>
+										</form>
+									</field>
+								</page>
+							</notebook>
+						</page>
+					</page>
+
+					<page name="personal_information" position="replace">
+						<page name="personal_information" string="Personal Information" groups="hr.group_hr_user">
+							<!--<group>-->
+								<!--&lt;!&ndash;<field name="address_home_id" context="{'show_address': 1}" options="{&quot;always_reload&quot;: True, &quot;highlight_first_line&quot;: True}"/>&ndash;&gt;                                -->
+							<!--</group>-->
+                            <group string="Current Address">
+                                <group>
+                                    <field name="street"/>
+                                    <field name="rt_rw"/>
+                                    <field name="home_no"/>
+                                </group>
+                                <group>
+                                    <field name="kelurahan"/>
+                                    <field name="kecamatan"/>
+                                    <field name="kota"/>
+                                    <field name="kode_pos"/>
+                                </group>
+                            </group>
+                            <group string="Address On Identity Card">
+                                <group>
+                                    <field name="street_ktp"/>
+                                    <field name="rt_rw_ktp"/>
+                                    <field name="home_no_ktp"/>
+                                </group>
+                                <group>
+                                    <field name="kelurahan_ktp"/>
+                                    <field name="kecamatan_ktp"/>
+                                    <field name="kota_ktp"/>
+                                    <field name="kode_pos_ktp"/>
+                                </group>
+                            </group>
+                            <group string="Emergency Address">
+                                <group>
+                                    <field name="name_relation"/>
+                                    <field name="relation"/>
+                                    <field name="street_emergency"/>
+                                    <field name="rt_rw_emergency"/>
+                                    <field name="home_no_emergency"/>
+                                </group>
+                                <group>
+                                    <field name="kelurahan_emergency"/>
+                                    <field name="kecamatan_emergency"/>
+                                    <field name="kota_emergency"/>
+                                    <field name="kode_pos_emergency"/>
+                                    <field name="phone_no_emergency"/>
+                                </group>
+                            </group>
+						</page>
+					</page>
+                </data>
+             </field>
+ 		</record>
+
+        <record id="hr_hr_employee_education_prasetia_view_form" model="ir.ui.view">
+ 			<field name="name">hr.hr.employee.education.prasetia.view.form</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <form string="Employee">
+					<sheet>
+                        <field name="image" widget='image' class="oe_avatar" options='{"preview_image":"image_medium"}'/>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="Employee's Name" readonly="1"/>
+                            </h1>
+                        </div>
+						<notebook>
+							<page name="education_information" string="Education Information" groups="hr.group_hr_user">
+								<field name="education_ids">
+									<tree string="Pendidikan" create="true">
+										<field name="name"/>
+										<field name="major"/>
+										<field name="city"/>
+										<field name="graduated"/>
+									</tree>
+									<form string="Pendidikan">
+										<header></header>
+										<sheet>
+											<h1>
+												<field name="name" placeholder="Nama Sekolah/Universitas"/>
+											</h1>
+											<group>
+												<group>
+													<field name="major"/>
+												</group>
+												<group>
+													<field name="year_start"/>
+													<field name="year_finish"/>
+													<field name="graduated" widget="radio"/>
+													<field name="remark"/>
+												</group>
+											</group>
+										</sheet>
+									</form>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+            </field>
+        </record>
+
+		<record id="hr_hr_employee_family_prasetia_view_form" model="ir.ui.view">
+ 			<field name="name">hr.hr.employee.family.prasetia.view.form</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <form string="Employee">
+					<sheet>
+                        <field name="image" widget='image' class="oe_avatar" options='{"preview_image":"image_medium"}'/>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="Employee's Name" readonly="1"/>
+                            </h1>
+                        </div>
+						<notebook>
+							<page name="family_information" string="Family Information" groups="hr.group_hr_user">
+								<field name="family_ids">
+									<tree string="Keluarga" create="true">
+										<field name="name"/>
+										<field name="birth_place"/>
+										<field name="date_birth"/>
+										<field name="relation_status"/>
+									</tree>
+									<form string="Keluarga">
+										<header></header>
+										<sheet>
+											<h1>
+												<field name="name" placeholder="Nama"/>
+											</h1>
+											<group>
+												<group>
+													<field name="birth_place"/>
+													<field name="date_birth"/>
+												</group>
+												<group>
+													<field name="relation_status"/>
+												</group>
+											</group>
+										</sheet>
+									</form>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+            </field>
+        </record>
+
+		<record id="hr_hr_employee_work_history_prasetia_view_form" model="ir.ui.view">
+ 			<field name="name">hr.hr.employee.work.history.prasetia.view.form</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <form string="Employee">
+					<sheet>
+                        <field name="image" widget='image' class="oe_avatar" options='{"preview_image":"image_medium"}'/>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="Employee's Name" readonly="1"/>
+                            </h1>
+                        </div>
+						<notebook>
+							<page name="work_history_information" string="Work History Information" groups="hr.group_hr_user">
+								<field name="work_history_ids">
+									<tree string="Riwayat Pekerjaan" create="true">
+										<field name="name"/>
+										<field name="role"/>
+										<field name="year_start"/>
+										<field name="year_end"/>
+										<field name="city"/>
+										<field name="reason_leave"/>
+									</tree>
+									<form string="Riwayat Pekerjaan">
+										<header></header>
+										<sheet>
+											<h1>
+												<field name="name" placeholder="Nama Perusahaan"/>
+											</h1>
+											<group>
+												<group>
+													<field name="role"/>
+													<field name="city"/>
+												</group>
+												<group>
+													<field name="year_start"/>
+													<field name="year_end"/>
+													<field name="reason_leave"/>
+													<field name="note"/>
+												</group>
+											</group>
+										</sheet>
+									</form>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+            </field>
+        </record>
+
+		<record id="hr_hr_employee_education_prasetia_view_tree" model="ir.ui.view">
+            <field name="name">hr.hr.employee.education.prasetia.view.tree</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <tree string="Employees" decoration-bf="message_needaction==True">
+                    <field name="name"/>
+                    <field name="work_phone"/>
+                    <field name="work_email"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="department_id"/>
+                    <field name="job_id"/>
+                    <field name="parent_id"/>
+                    <field name="coach_id" invisible="1"/>
+                    <field name="message_needaction" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+		<record model="ir.actions.act_window" id="hr_education_list_action">
+			<field name="name">Employee Education</field>
+			<field name="res_model">hr.employee</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Data Pendidikan Karyawan
+				</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window.view" id="act_hr_employee_tree_view">
+			<field eval="2" name="sequence"/>
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="hr_hr_employee_education_prasetia_view_tree"/>
+			<field name="act_window_id" ref="hr_education_list_action"/>
+		</record>
+
+		<record model="ir.actions.act_window.view" id="act_hr_employee_form_view">
+			<field eval="3" name="sequence"/>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="hr_hr_employee_education_prasetia_view_form"/>
+			<field name="act_window_id" ref="hr_education_list_action"/>
+		</record>
+
+		<record model="ir.actions.act_window" id="hr_family_list_action">
+			<field name="name">Employee Family</field>
+			<field name="res_model">hr.employee</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Data Keluarga Karyawan
+				</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window.view" id="act_hr_employee_family_tree_view">
+			<field eval="2" name="sequence"/>
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="hr_hr_employee_education_prasetia_view_tree"/>
+			<field name="act_window_id" ref="hr_family_list_action"/>
+		</record>
+
+		<record model="ir.actions.act_window.view" id="act_hr_employee_family_form_view">
+			<field eval="3" name="sequence"/>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="hr_hr_employee_family_prasetia_view_form"/>
+			<field name="act_window_id" ref="hr_family_list_action"/>
+		</record>
+
+		<record model="ir.actions.act_window" id="hr_work_history_list_action">
+			<field name="name">Employee Work History</field>
+			<field name="res_model">hr.employee</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Data Riwayat Pekerjaan Karyawan
+				</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window.view" id="act_hr_employee_work_history_tree_view">
+			<field eval="2" name="sequence"/>
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="hr_hr_employee_education_prasetia_view_tree"/>
+			<field name="act_window_id" ref="hr_work_history_list_action"/>
+		</record>
+
+		<record model="ir.actions.act_window.view" id="act_hr_employee_work_history_form_view">
+			<field eval="3" name="sequence"/>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="hr_hr_employee_work_history_prasetia_view_form"/>
+			<field name="act_window_id" ref="hr_work_history_list_action"/>
+		</record>
+	</data>
+</openerp>

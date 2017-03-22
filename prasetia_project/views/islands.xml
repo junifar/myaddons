@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="projects_island_form_view">
+			<field name="name">Island</field>
+			<field name="model">project.island</field>
+			<field name="arch" type="xml">
+				<form string="Island">
+					<header></header>
+					<sheet>
+						<group string="Pulau">
+							<field name="name"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="projects_island_tree_view">
+			<field name="name">Island</field>
+			<field name="model">project.island</field>
+			<field name="arch" type="xml">
+				<tree string="Area" create="true">
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+        <record model="ir.actions.act_window" id="island_list_action">
+            <field name="name">Island</field>
+            <field name="res_model">project.island</field>
+            <field name="view_mode">tree,form</field>
+            <field name="Help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Island Data
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

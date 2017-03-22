@@ -1,0 +1,40 @@
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="projects_area_form_view">
+			<field name="name">Area</field>
+			<field name="model">project.area</field>
+			<field name="arch" type="xml">
+				<form string="Area">
+					<header></header>
+					<sheet>
+						<group string="Area">
+							<field name="name"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="projects_area_tree_view">
+			<field name="name">Area</field>
+			<field name="model">project.area</field>
+			<field name="arch" type="xml">
+				<tree string="Area" create="true">
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="area_list_action">
+			<field name="name">Area</field>
+			<field name="res_model">project.area</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Area Data
+				</p>
+			</field>
+		</record>
+	</data>
+</odoo>

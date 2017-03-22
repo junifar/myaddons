@@ -1,0 +1,77 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="projects_site_form_view">
+			<field name="name">Site</field>
+			<field name="model">project.site</field>
+			<field name="arch" type="xml">
+				<form string="Site">
+					<header></header>
+					<sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Site Name"/>
+                            </h1>
+                            <group>
+                                <group>
+                                    <field name="site_alias1" placeholder="Alias 1"/>
+                                </group>
+                                <group>
+                                    <field name="site_alias2" placeholder="Alias 2"/>
+                                </group>
+                            </group>                  
+                        </div>
+                        
+						<group string="Site Information">
+                            <group>
+								<field name="site_id_prasetia"/>
+								<field name="site_id_customer"/>								
+                                <field name="customer_id"/>
+                            </group>
+							<group>								
+							</group>                            
+						</group>
+						<group>
+							<group>
+								<field name="tower_type_id"/>
+								<field name="tinggi_tower_id"/>
+								<field name="field_type_id"/>
+							</group>
+							<group>
+								<field name="area_id"/>
+                                <field name="island_id"/>
+								<field name="province_id"/>
+                                <field name="city_id"/>
+								<field name="address"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="projects_site_tree_view">
+			<field name="name">Site</field>
+			<field name="model">project.site</field>
+			<field name="arch" type="xml">
+				<tree string="Site" create="true">
+                    <field name="site_id_prasetia"/>
+					<field name="name"/>
+                    <field name="site_alias1"/>
+                    <field name="site_alias2"/>
+				</tree>
+			</field>
+		</record>
+
+        <record model="ir.actions.act_window" id="site_list_action">
+			<field name="name">Site</field>
+			<field name="res_model">project.site</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Site Data
+				</p>
+			</field>
+		</record>
+    </data>
+</odoo>

@@ -1,0 +1,11 @@
+<odoo>
+	<data>
+		<menuitem id="construction_configuration_menu" name="Construction" parent="project.menu_project_config" sequence="1" groups="base.group_no_one" />
+		<menuitem id="area_menu" name="Area" parent="construction_configuration_menu" action="area_list_action" />
+		<menuitem id="island_menu" name="Island" parent="construction_configuration_menu" action="island_list_action" />
+		<menuitem id="province_menu" name="Province" parent="construction_configuration_menu" action="province_list_action" />
+		<menuitem id="city_menu" name="City" parent="construction_configuration_menu" action="city_list_action" />
+		<menuitem id="field_type_menu" name="Field Type" parent="construction_configuration_menu" action="field_type_list_action" />
+		<menuitem id="site_menu" name="Site" parent="construction_configuration_menu" action="site_list_action" />
+	</data>
+</odoo>

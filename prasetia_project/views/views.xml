@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="odoo\myaddons\prasetia_project.list">
+      <field name="name">odoo\myaddons\prasetia_project list</field>
+      <field name="model">odoo\myaddons\prasetia_project.odoo\myaddons\prasetia_project</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="odoo\myaddons\prasetia_project.action_window">
+      <field name="name">odoo\myaddons\prasetia_project window</field>
+      <field name="res_model">odoo\myaddons\prasetia_project.odoo\myaddons\prasetia_project</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="odoo\myaddons\prasetia_project.action_server">
+      <field name="name">odoo\myaddons\prasetia_project server</field>
+      <field name="model_id" ref="model_odoo\myaddons\prasetia_project_odoo\myaddons\prasetia_project"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="odoo\myaddons\prasetia_project" id="odoo\myaddons\prasetia_project.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="odoo\myaddons\prasetia_project.menu_1" parent="odoo\myaddons\prasetia_project.menu_root"/>
+    <menuitem name="Menu 2" id="odoo\myaddons\prasetia_project.menu_2" parent="odoo\myaddons\prasetia_project.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="odoo\myaddons\prasetia_project.menu_1_list" parent="odoo\myaddons\prasetia_project.menu_1"
+              action="odoo\myaddons\prasetia_project.action_window"/>
+    <menuitem name="Server to list" id="odoo\myaddons\prasetia_project" parent="odoo\myaddons\prasetia_project.menu_2"
+              action="odoo\myaddons\prasetia_project.action_server"/>
+    -->
+  </data>
+</odoo>

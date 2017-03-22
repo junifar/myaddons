@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="projects_field_type_form_view">
+			<field name="name">Field Type</field>
+			<field name="model">project.field.type</field>
+			<field name="arch" type="xml">
+				<form string="Field Type">
+					<header></header>
+					<sheet>
+						<group string="Field Type">
+							<field name="name"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="projects_field_type_tree_view">
+			<field name="name">Field Type</field>
+			<field name="model">project.field.type</field>
+			<field name="arch" type="xml">
+				<tree string="Field Type" create="true">
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+        <record model="ir.actions.act_window" id="field_type_list_action">
+			<field name="name">Field Type</field>
+			<field name="res_model">project.field.type</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Field Type Data
+				</p>
+			</field>
+		</record>
+    </data>
+</odoo>
