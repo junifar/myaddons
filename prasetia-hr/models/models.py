@@ -76,6 +76,7 @@ class DeviceAttendance(models.Model):
             raise exceptions.except_orm(_('Error'), _(
                 'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.ip_address, self.port)))
 
+        print vals
         self.device_attendance_user_ids = vals
         raise exceptions.except_orm(_('Success'), _('Import generated successfully'))
         # return {}
