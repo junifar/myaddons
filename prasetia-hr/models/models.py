@@ -59,23 +59,24 @@ class DeviceAttendance(models.Model):
     def import_user(self):
 
         # self.device_attendance_user_ids = [{'name': 'junifar', 'user_id': 1}]
+        vals = []
 
         zk = ZK(self.ip_address, port=int(self.port), timeout=5)
         try:
             conn = zk.connect()
             users = conn.get_users()
-            self.device_attendance_user_ids = [{'name': 'junifar', 'user_id': 1}]
-            print('jalan kok')
             for user in users:
-                pass
+                # self.device_attendance_user_ids = [{'name': 'junifar', 'user_id': 1}]
+                vals.append({'name': user.name, 'user_id': user.uid})
                 # print ('name : %s - user_id = %d' % (user.name, user.uid))
                 # self.device_attendance_user_ids = [
                 #     {'name': str(user.name), 'user_id': int(user.uid)}
                 # ]
-
         except Exception as e:
             raise exceptions.except_orm(_('Error'), _(
                 'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.ip_address, self.port)))
+
+        self.device_attendance_user_ids = vals
         raise exceptions.except_orm(_('Success'), _('Import generated successfully'))
         # return {}
 
