@@ -19,7 +19,7 @@
                                 <field name="attendance_import_line_ids">
                                     <tree string="Attendance Data" editable="bottom">
                                         <field name="name"/>
-                                        <field name="absent" widget="time"/>
+                                        <field name="absent"/>
                                         <field name="status"/>
                                     </tree>
                                 </field>
