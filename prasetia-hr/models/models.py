@@ -99,12 +99,13 @@ class AttendanceImport(models.Model):
             attendances = conn.get_attendance()
             for attendance in attendances:
                 if str(attendance.timestamp.date()) == str(self.name):
-                    name = None
+                    val = None
                     for device_attendance_user in device_attendance_users:
                         if str(attendance.user_id) == str(device_attendance_user.user_id):
-                            name = device_attendance_user.employee_id.id
+                            print "============== Record Found"
+                            val = device_attendance_user.employee_id.id
                             break
-                    print "==============" + str(name)
+                    print "==============" + str(val)
                     # if name is not None:
                     #     self.attendance_import_line_ids = [{'name': name,
                     #                                         'attendance_import_id': self.id,
