@@ -89,7 +89,7 @@ class AttendanceImport(models.Model):
 
     @api.multi
     def import_absent(self):
-        self.attendance_import_line_ids = [{'name': 1}]
+        self.attendance_import_line_ids = [{'status': 1, 'name':'Erwin'}]
         # zk = ZK(self.device_attendance_id.ip_address, port=int(self.device_attendance_id.port), timeout=5)
         # try:
         #     conn = zk.connect()
