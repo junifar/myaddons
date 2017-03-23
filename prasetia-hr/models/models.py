@@ -101,9 +101,10 @@ class AttendanceImport(models.Model):
                 if str(attendance.timestamp.date()) == str(self.name):
                     val = None
                     for device_attendance_user in device_attendance_users:
-                        if str(attendance.user_id) == str(device_attendance_user.user_id) \
-                                and device_attendance_user.employee_id:
-                            val = device_attendance_user.employee_id.id
+                        # if str(attendance.user_id) == str(device_attendance_user.user_id) \
+                        #         and device_attendance_user.employee_id:
+                        if str(attendance.user_id) == str(device_attendance_user.user_id):
+                            val = device_attendance_user.id
                             break
 
                     if val is not None:
@@ -121,6 +122,6 @@ class AttendanceImportLine(models.Model):
     _name = "hr.employee.attendance.import.line"
 
     attendance_import_id = fields.Many2one('hr.employee.attendance.import', string="Attendance Import")
-    name = fields.Many2one('hr.employee', required=True, string="Attendance User")
+    name = fields.Many2one('hr.employee.attendance.import', required=True, string="Attendance User")
     absent = fields.Datetime(String="Absent Date")
     status = fields.Selection([(1, 'In'), (2, 'Out')], string="Status")
