@@ -25,6 +25,10 @@
                                 </field>
                             </page>
                         </notebook>
+                        <footer>
+                            <button name="import_absent" type="object"
+                                    string="Import Absent" class="oe_highlight oe_edit_only" confirm="Are you sure you want to do this?"/>
+                        </footer>
                     </sheet>
                 </form>
              </field>

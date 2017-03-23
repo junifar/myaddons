@@ -87,6 +87,17 @@ class AttendanceImport(models.Model):
     attendance_import_line_ids = fields.One2many('hr.employee.attendance.import.line', 'attendance_import_id',
                                                  string="List Attendance Import Line")
 
+    @api.multi
+    def import_absent(self):
+        zk = ZK(self.device_attendance_id.ip_address, port=int(self.device_attendance_id.port), timeout=5)
+        try:
+            conn = zk.connect()
+        except Exception as e:
+            raise exceptions.except_orm(_('Error'), _(
+                'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.device_attendance_id.ip_address,
+                                                                              self.device_attendance_id.port)))
+        return {}
+
 
 class AttendanceImportLine(models.Model):
     _name = "hr.employee.attendance.import.line"
