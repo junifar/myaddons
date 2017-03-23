@@ -103,7 +103,7 @@ class AttendanceImport(models.Model):
                     name = None
                     for device_attendance_user in device_attendance_users:
                         if str(attendance.user_id) == str(device_attendance_user.user_id):
-                            name = device_attendance_user.id
+                            name = device_attendance_user.employee_id.id
                             break
                     self.attendance_import_line_ids = [{'name': name,
                                                         'attendance_import_id': self.id,
@@ -119,6 +119,6 @@ class AttendanceImportLine(models.Model):
     _name = "hr.employee.attendance.import.line"
 
     attendance_import_id = fields.Many2one('hr.employee.attendance.import', string="Attendance Import")
-    name = fields.Many2one('device.attendance.user', required=True, string="Attendance User")
+    name = fields.Many2one('hr.employee', required=True, string="Attendance User")
     absent = fields.Datetime(String="Absent Date")
     status = fields.Selection([(1, 'In'), (2, 'Out')], string="Status")
