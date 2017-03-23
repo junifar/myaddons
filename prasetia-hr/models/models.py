@@ -103,7 +103,7 @@ class AttendanceImport(models.Model):
                     for device_attendance_user in device_attendance_users:
                         if str(attendance.user_id) == str(device_attendance_user.user_id):
                             print "============== Record Found"
-                            val = device_attendance_user.id
+                            val = device_attendance_user.employee_id.id
                             print "==============" + str(val)
                             break
                     print "==============" + str(val)
