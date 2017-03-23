@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+
 from odoo import models, fields, api, exceptions, _
 from zk import ZK
 
@@ -97,7 +99,8 @@ class AttendanceImport(models.Model):
             attendances = conn.get_attendance()
             for attendance in attendances:
                 # print str(attendance.timestamp.date()) + ' - ' + str(self.name)
-                if attendance.timestamp.date() == self.name:
+                if datetime.datetime.strptime(attendance.timestamp.date(), '%m/%d/%y') ==\
+                        datetime.datetime.strptime(self.name, '%m/%d/%y'):
                     print 'Cocok'
                     self.attendance_import_line_ids = [{'name': 2609,
                                                         'attendance_import_id': self.id,
