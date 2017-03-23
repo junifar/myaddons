@@ -92,6 +92,10 @@ class AttendanceImport(models.Model):
         zk = ZK(self.device_attendance_id.ip_address, port=int(self.device_attendance_id.port), timeout=5)
         try:
             conn = zk.connect()
+
+            attendances = conn.get_attendance()
+            for attendance in attendances:
+                print attendance.timestamp.date()
         except Exception as e:
             raise exceptions.except_orm(_('Error'), _(
                 'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.device_attendance_id.ip_address,
