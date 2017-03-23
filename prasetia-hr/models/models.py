@@ -89,20 +89,25 @@ class AttendanceImport(models.Model):
 
     @api.multi
     def import_absent(self):
-        # self.attendance_import_line_ids = [{'status': 1, 'name': 2609}]
+
+        device_attendance_users = self.env['device.attendance.user'].\
+            search('device_attendance_id', '=', self.device_attendance_id.id)
+
         zk = ZK(self.device_attendance_id.ip_address, port=int(self.device_attendance_id.port), timeout=5)
         try:
             conn = zk.connect()
 
             attendances = conn.get_attendance()
             for attendance in attendances:
-                # print str(attendance.timestamp.date()) + ' - ' + str(self.name)
                 if str(attendance.timestamp.date()) == str(self.name):
-                    print 'Cocok'
-                    self.attendance_import_line_ids = [{'name': 2609,
+                    name = None
+                    for device_attendance_user in device_attendance_users:
+                        if str(attendance.user_id) == str(device_attendance_user.user_id):
+                            name = device_attendance_user.id
+                            break
+                    self.attendance_import_line_ids = [{'name': name,
                                                         'attendance_import_id': self.id,
                                                         'absent': attendance.timestamp}]
-                    # print attendance.timestamp.date()
         except Exception as e:
             raise exceptions.except_orm(_('Error'), _(
                 'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.device_attendance_id.ip_address,
