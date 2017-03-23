@@ -99,8 +99,8 @@ class AttendanceImport(models.Model):
             attendances = conn.get_attendance()
             for attendance in attendances:
                 # print str(attendance.timestamp.date()) + ' - ' + str(self.name)
-                if datetime.datetime.strptime(attendance.timestamp.date(), '%m/%d/%y') ==\
-                        datetime.datetime.strptime(self.name, '%m/%d/%y'):
+                if datetime.strptime(attendance.timestamp.date(), '%m/%d/%y') ==\
+                        datetime.strptime(self.name, '%m/%d/%y'):
                     print 'Cocok'
                     self.attendance_import_line_ids = [{'name': 2609,
                                                         'attendance_import_id': self.id,
