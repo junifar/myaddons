@@ -104,10 +104,11 @@ class AttendanceImport(models.Model):
                         if str(attendance.user_id) == str(device_attendance_user.user_id):
                             name = device_attendance_user.employee_id.id
                             break
-                    if name is not None:
-                        self.attendance_import_line_ids = [{'name': name,
-                                                            'attendance_import_id': self.id,
-                                                            'absent': attendance.timestamp}]
+                    print "==============" + str(name)
+                    # if name is not None:
+                    #     self.attendance_import_line_ids = [{'name': name,
+                    #                                         'attendance_import_id': self.id,
+                    #                                         'absent': attendance.timestamp}]
         except Exception as e:
             raise exceptions.except_orm(_('Error'), _(
                 'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.device_attendance_id.ip_address,
