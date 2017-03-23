@@ -89,22 +89,22 @@ class AttendanceImport(models.Model):
 
     @api.multi
     def import_absent(self):
-        self.attendance_import_line_ids = [{'status': 1, 'name': 2609}]
-        # zk = ZK(self.device_attendance_id.ip_address, port=int(self.device_attendance_id.port), timeout=5)
-        # try:
-        #     conn = zk.connect()
-        #
-        #     attendances = conn.get_attendance()
-        #     for attendance in attendances:
-        #         if attendance.timestamp.date() == self.name:
-        #             self.attendance_import_line_ids = [{'name': 1,
-        #                                                 'attendance_import_id': self.id,
-        #                                                 'absent': attendance.timestamp}]
-        #         # print attendance.timestamp.date()
-        # except Exception as e:
-        #     raise exceptions.except_orm(_('Error'), _(
-        #         'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.device_attendance_id.ip_address,
-        #                                                                       self.device_attendance_id.port)))
+        # self.attendance_import_line_ids = [{'status': 1, 'name': 2609}]
+        zk = ZK(self.device_attendance_id.ip_address, port=int(self.device_attendance_id.port), timeout=5)
+        try:
+            conn = zk.connect()
+
+            attendances = conn.get_attendance()
+            for attendance in attendances:
+                if attendance.timestamp.date() == self.name:
+                    self.attendance_import_line_ids = [{'name': 2609,
+                                                        'attendance_import_id': self.id,
+                                                        'absent': attendance.timestamp}]
+                # print attendance.timestamp.date()
+        except Exception as e:
+            raise exceptions.except_orm(_('Error'), _(
+                'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.device_attendance_id.ip_address,
+                                                                              self.device_attendance_id.port)))
         return {}
 
 
