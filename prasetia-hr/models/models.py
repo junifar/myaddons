@@ -91,7 +91,7 @@ class AttendanceImport(models.Model):
     def import_absent(self):
 
         device_attendance_users = self.env['device.attendance.user'].\
-            search('device_attendance_id', '=', self.device_attendance_id.id)
+            search(['device_attendance_id', '=', self.device_attendance_id.id])
 
         zk = ZK(self.device_attendance_id.ip_address, port=int(self.device_attendance_id.port), timeout=5)
         try:
