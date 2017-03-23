@@ -95,7 +95,11 @@ class AttendanceImport(models.Model):
 
             attendances = conn.get_attendance()
             for attendance in attendances:
-                print attendance.timestamp.date()
+                if attendance.timestamp.date() == self.name:
+                    self.attendance_import_line_ids = [{'name': 1,
+                                                        'attendance_import_id': self.id,
+                                                        'absent': attendance.timestamp}]
+                # print attendance.timestamp.date()
         except Exception as e:
             raise exceptions.except_orm(_('Error'), _(
                 'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.device_attendance_id.ip_address,
