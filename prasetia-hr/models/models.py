@@ -97,6 +97,7 @@ class AttendanceImport(models.Model):
             attendances = conn.get_attendance()
             for attendance in attendances:
                 if attendance.timestamp.date() == self.name:
+                    print attendance.timestamp.date()
                     self.attendance_import_line_ids = [{'name': 2609,
                                                         'attendance_import_id': self.id,
                                                         'absent': attendance.timestamp}]
