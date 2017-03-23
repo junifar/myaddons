@@ -101,13 +101,11 @@ class AttendanceImport(models.Model):
                 if str(attendance.timestamp.date()) == str(self.name):
                     val = None
                     for device_attendance_user in device_attendance_users:
-                        if str(attendance.user_id) == str(device_attendance_user.user_id):
-                            print "============== Record Found"
-                            if device_attendance_user.employee_id:
-                                val = device_attendance_user.employee_id.id
-                                print "==============" + str(val)
+                        if str(attendance.user_id) == str(device_attendance_user.user_id) \
+                                and device_attendance_user.employee_id:
+                            val = device_attendance_user.employee_id.id
                             break
-                    print "==============" + str(val)
+
                     if val is not None:
                         self.attendance_import_line_ids = [{'name': val,
                                                             'attendance_import_id': self.id,
