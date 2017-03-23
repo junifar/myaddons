@@ -89,6 +89,7 @@ class AttendanceImport(models.Model):
 
     @api.multi
     def import_absent(self):
+        print "============" + str(self.device_attendance_id.id)
 
         device_attendance_users = self.env['device.attendance.user'].\
             search(['device_attendance_id', '=', self.device_attendance_id.id])
