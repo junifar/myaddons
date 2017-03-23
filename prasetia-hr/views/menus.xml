@@ -5,6 +5,7 @@
         <!--<menuitem id="education_menu" name="Pendidikan" parent="hr.menu_hr_root" action="education_list_action" />-->
         <menuitem id="education_menu" name="Pendidikan" parent="hr.menu_hr_root" action="hr_education_list_action" />
         <menuitem id="work_history_menu" name="Riwayat Pekerjaan" parent="hr.menu_hr_root" action="hr_work_history_list_action" />
+        <menuitem id="import_attendance_menu" name="Import Absen" parent="hr.menu_hr_root" action="attendance_import_list_action" />
         <menuitem id="device_menu" name="Devices" parent="hr.menu_hr_root" action="device_attendance_list_action" />
     </data>
 </odoo>

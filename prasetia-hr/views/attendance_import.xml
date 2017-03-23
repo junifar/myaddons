@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="attendance_import_form_view">
+             <field name="name">Attendance Import</field>
+             <field name="model">hr.employee.attendance.import</field>
+             <field name="arch" type="xml">
+                <form string="Import Attendance">
+					<header></header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" string="Tanggal Absen"/>
+                                <field name="device_attendance_id"/>
+                            </group>
+                            <group></group>
+                        </group>
+                        <notebook>
+                            <page name="attendance_import_line" string="List Data">
+                                <field name="attendance_import_line_ids">
+                                    <tree string="Attendance Data" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="absent"/>
+                                        <field name="status"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+             </field>
+         </record>
+
+        <record model="ir.ui.view" id="attendance_import_tree_view">
+            <field name="name">Attendance Import</field>
+			<field name="model">hr.employee.attendance.import</field>
+            <field name="arch" type="xml">
+                <tree string="Attendance Import" create="true">
+                    <field name="name" string="Tanggal Absen"/>
+                    <field name="device_attendance_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="attendance_import_list_action">
+			<field name="name">Attendance Import</field>
+			<field name="res_model">hr.employee.attendance.import</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Attendance Import List
+				</p>
+			</field>
+		</record>
+    </data>
+</odoo>

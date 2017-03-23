@@ -76,3 +76,22 @@ class DeviceAttendanceImportUser(models.Model):
     device_attendance_id = fields.Many2one('device.attendance', required=True, string="Device Name")
     name = fields.Char(required=True, string='User Name')
     user_id = fields.Integer(string='User ID/UID')
+    employee_id = fields.Many2one('hr.employee', String="Employee Name")
+
+
+class AttendanceImport(models.Model):
+    _name = "hr.employee.attendance.import"
+
+    name = fields.Date(required=True, String="Date to Import")
+    device_attendance_id = fields.Many2one('device.attendance', required=True, string="Device Name")
+    attendance_import_line_ids = fields.One2many('hr.employee.attendance.import.line', 'attendance_import_id',
+                                                 string="List Attendance Import Line")
+
+
+class AttendanceImportLine(models.Model):
+    _name = "hr.employee.attendance.import.line"
+
+    attendance_import_id = fields.Many2one('hr.employee.attendance.import', string="Attendance Import")
+    name = fields.Many2one('device.attendance.user', required=True, string="Attendance User")
+    absent = fields.Datetime(String="Absent Date")
+    status = fields.Selection([(1, 'In'), (2, 'Out')], string="Status")

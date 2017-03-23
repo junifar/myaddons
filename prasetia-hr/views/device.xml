@@ -29,9 +29,10 @@
                         <notebook>
                             <page name="attendance_user_information" string="User list">
                                 <field name="device_attendance_user_ids">
-                                    <tree string="User List">
+                                    <tree string="User List" editable="bottom">
                                         <field name="name"/>
                                         <field name="user_id"/>
+                                        <field name="employee_id" string="Employee Name"/>
                                     </tree>
                                     <form string="User Device">
                                         <group>
