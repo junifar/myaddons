@@ -122,6 +122,6 @@ class AttendanceImportLine(models.Model):
     _name = "hr.employee.attendance.import.line"
 
     attendance_import_id = fields.Many2one('hr.employee.attendance.import', string="Attendance Import")
-    name = fields.Many2one('hr.employee.attendance.import', required=True, string="Attendance User")
+    name = fields.Many2one('device.attendance.user', required=True, string="Attendance User")
     absent = fields.Datetime(String="Absent Date")
     status = fields.Selection([(1, 'In'), (2, 'Out')], string="Status")
