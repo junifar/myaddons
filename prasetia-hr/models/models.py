@@ -116,6 +116,7 @@ class AttendanceImport(models.Model):
                         #                                     'device_uid': attendance.user_id}]
                         if self.attendance_import_line_ids:
                             search_user_ids = self.search([('attendance_import_line_ids.device_uid', '=', attendance.user_id)])
+                            print '====1===='
                             print search_user_ids
                             # if search_user_ids:
                             #     if search_user_ids.attendance_import_line_ids.absent_out is None:
