@@ -111,10 +111,19 @@ class AttendanceImport(models.Model):
                             break
 
                     if val is not None:
-                        self.attendance_import_line_ids = [{'name': val,
-                                                            'attendance_import_id': self.id,
-                                                            'absent': self.utcConvert(attendance.timestamp),
-                                                            'device_uid': attendance.user_id}]
+                        for line in self.attendance_import_line_ids:
+                            if line.device_uid == attendance.user_id:
+                                if line.absent_out is None:
+                                    line.absent_out = self.utcConvert(attendance.timestamp)
+                                elif self.utcConvert(attendance.timestamp) < line.absent:
+                                    line.absent = self.utcConvert(attendance.timestamp)
+                                elif self.utcConvert(attendance.timestamp) > line.absent_out:
+                                    line.absent_out = self.utcConvert(attendance.timestamp)
+                            else:
+                                self.attendance_import_line_ids = [{'name': val,
+                                                                    'attendance_import_id': self.id,
+                                                                    'absent': self.utcConvert(attendance.timestamp),
+                                                                    'device_uid': attendance.user_id}]
         except Exception as e:
             raise exceptions.except_orm(_('Error'), _(
                 'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.device_attendance_id.ip_address,
@@ -129,4 +138,5 @@ class AttendanceImportLine(models.Model):
     device_uid = fields.Integer(string="User ID in Device")
     name = fields.Many2one('device.attendance.user', required=True, string="Attendance User")
     absent = fields.Datetime(String="Absent Date")
+    absent_out = fields.Datetime(String="Absent Date")
     status = fields.Selection([(1, 'In'), (2, 'Out')], string="Status")
