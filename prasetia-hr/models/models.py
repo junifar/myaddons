@@ -114,6 +114,26 @@ class AttendanceImport(models.Model):
                                                             'attendance_import_id': self.id,
                                                             'absent': self.utcConvert(attendance.timestamp),
                                                             'device_uid': attendance.user_id}]
+                        if self.attendance_import_line_ids:
+                            search_user_ids = self.search([('attendance_import_line_ids.device_uid', '=', attendance.user_id)])
+                            if search_user_ids:
+                                if search_user_ids.absent_out is None:
+                                    search_user_ids.absent_out = self.utcConvert(attendance.timestamp)
+                                elif self.utcConvert(attendance.timestamp) < search_user_ids.absent:
+                                    search_user_ids.absent = self.utcConvert(attendance.timestamp)
+                                elif self.utcConvert(attendance.timestamp) > search_user_ids.absent_out:
+                                    search_user_ids.absent_out = self.utcConvert(attendance.timestamp)
+                            else:
+                                self.attendance_import_line_ids = [{'name': val,
+                                                                    'attendance_import_id': self.id,
+                                                                    'absent': self.utcConvert(attendance.timestamp),
+                                                                    'device_uid': attendance.user_id}]
+                        else:
+                            self.attendance_import_line_ids = [{'name': val,
+                                                                'attendance_import_id': self.id,
+                                                                'absent': self.utcConvert(attendance.timestamp),
+                                                                'device_uid': attendance.user_id}]
+
                         # if self.attendance_import_line_ids:
                         #     for line in self.attendance_import_line_ids:
                         #         # print '====Stage 1===='
