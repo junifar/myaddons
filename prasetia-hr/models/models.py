@@ -118,7 +118,7 @@ class AttendanceImport(models.Model):
                             search_user_ids = self.search([('attendance_import_line_ids.device_uid', '=',
                                                             attendance.user_id), ('id', '=', self.id)])
                             print '====1===='
-                            print search_user_ids
+                            print search_user_ids.id
                             # if search_user_ids:
                             #     if search_user_ids.attendance_import_line_ids.absent_out is None:
                             #         search_user_ids.attendance_import_line_ids.absent_out = self.utcConvert(attendance.timestamp)
