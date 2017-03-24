@@ -113,7 +113,8 @@ class AttendanceImport(models.Model):
                     if val is not None:
                         self.attendance_import_line_ids = [{'name': val,
                                                             'attendance_import_id': self.id,
-                                                            'absent': self.utcConvert(attendance.timestamp)}]
+                                                            'absent': self.utcConvert(attendance.timestamp),
+                                                            'device_uid': attendance.user_id}]
         except Exception as e:
             raise exceptions.except_orm(_('Error'), _(
                 'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.device_attendance_id.ip_address,
@@ -125,6 +126,7 @@ class AttendanceImportLine(models.Model):
     _name = "hr.employee.attendance.import.line"
 
     attendance_import_id = fields.Many2one('hr.employee.attendance.import', string="Attendance Import")
+    device_uid = fields.Integer(string="User ID in Device")
     name = fields.Many2one('device.attendance.user', required=True, string="Attendance User")
     absent = fields.Datetime(String="Absent Date")
     status = fields.Selection([(1, 'In'), (2, 'Out')], string="Status")
