@@ -109,7 +109,6 @@ class AttendanceImport(models.Model):
                         if str(attendance.user_id) == str(device_attendance_user.user_id):
                             val = device_attendance_user.id
                             break
-
                     if val is not None:
                         for line in self.attendance_import_line_ids:
                             if line.device_uid == attendance.user_id:
