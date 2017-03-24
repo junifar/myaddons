@@ -131,11 +131,10 @@ class AttendanceImport(models.Model):
                             #                                         'absent': self.utcConvert(attendance.timestamp),
                             #                                         'device_uid': attendance.user_id}]
                         else:
-                            # self.attendance_import_line_ids = [{'name': val,
-                            #                                     'attendance_import_id': self.id,
-                            #                                     'absent': self.utcConvert(attendance.timestamp),
-                            #                                     'device_uid': attendance.user_id}]
-                            pass
+                            self.attendance_import_line_ids = [{'name': val,
+                                                                'attendance_import_id': self.id,
+                                                                'absent': self.utcConvert(attendance.timestamp),
+                                                                'device_uid': attendance.user_id}]
 
                         # if self.attendance_import_line_ids:
                         #     for line in self.attendance_import_line_ids:
