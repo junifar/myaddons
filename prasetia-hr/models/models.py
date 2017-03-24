@@ -110,10 +110,10 @@ class AttendanceImport(models.Model):
                             val = device_attendance_user.id
                             break
                     if val is not None:
-                        self.attendance_import_line_ids = [{'name': val,
-                                                            'attendance_import_id': self.id,
-                                                            'absent': self.utcConvert(attendance.timestamp),
-                                                            'device_uid': attendance.user_id}]
+                        # self.attendance_import_line_ids = [{'name': val,
+                        #                                     'attendance_import_id': self.id,
+                        #                                     'absent': self.utcConvert(attendance.timestamp),
+                        #                                     'device_uid': attendance.user_id}]
                         if self.attendance_import_line_ids:
                             search_user_ids = self.search([('attendance_import_line_ids.device_uid', '=', attendance.user_id)])
                             if search_user_ids:
