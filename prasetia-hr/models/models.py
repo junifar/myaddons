@@ -111,12 +111,12 @@ class AttendanceImport(models.Model):
                             break
                     if val is not None:
                         # print self.attendance_import_line_ids + '============'
-                        print '====Stage 0===='
+                        # print '====Stage 0===='
                         if self.attendance_import_line_ids:
                             for line in self.attendance_import_line_ids:
-                                print '====Stage 1===='
+                                # print '====Stage 1===='
                                 if line.device_uid == attendance.user_id:
-                                    print '====Stage 2===='
+                                    # print '====Stage 2===='
                                     if line.absent_out is None:
                                         line.absent_out = self.utcConvert(attendance.timestamp)
                                     elif self.utcConvert(attendance.timestamp) < line.absent:
