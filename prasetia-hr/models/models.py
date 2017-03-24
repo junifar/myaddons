@@ -67,7 +67,6 @@ class DeviceAttendance(models.Model):
         except Exception as e:
             raise exceptions.except_orm(_('Error'), _(
                 'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.ip_address, self.port)))
-        # raise exceptions.except_orm(_('Success'), _('Import generated successfully'))
         return {}
 
 
@@ -88,15 +87,13 @@ class AttendanceImport(models.Model):
     attendance_import_line_ids = fields.One2many('hr.employee.attendance.import.line', 'attendance_import_id',
                                                  string="List Attendance Import Line")
 
-    def utcConvert(self, timeVal):
+    def utcConvert(self, time_val):
         local = pytz.timezone(self.env.user.partner_id.tz)
-        local_dt = local.localize(timeVal, is_dst=None)
+        local_dt = local.localize(time_val, is_dst=None)
         return local_dt.astimezone(pytz.utc)
 
     @api.multi
     def import_absent(self):
-        print '====' + str(self.env.user.partner_id.tz)
-
         device_attendance_users = self.env['device.attendance.user']. \
             search([('device_attendance_id', '=', self.device_attendance_id.id)])
 
@@ -109,8 +106,6 @@ class AttendanceImport(models.Model):
                 if str(attendance.timestamp.date()) == str(self.name):
                     val = None
                     for device_attendance_user in device_attendance_users:
-                        # if str(attendance.user_id) == str(device_attendance_user.user_id) \
-                        #         and device_attendance_user.employee_id:
                         if str(attendance.user_id) == str(device_attendance_user.user_id):
                             val = device_attendance_user.id
                             break
