@@ -110,6 +110,7 @@ class AttendanceImport(models.Model):
                             val = device_attendance_user.id
                             break
                     if val is not None:
+                        print self.attendance_import_line_ids + '============'
                         for line in self.attendance_import_line_ids:
                             print '====Stage 1===='
                             if line.device_uid == attendance.user_id:
