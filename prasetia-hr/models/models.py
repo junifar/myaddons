@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pytz
 from odoo import models, fields, api, exceptions, _
 from zk import ZK
 
@@ -87,8 +88,15 @@ class AttendanceImport(models.Model):
     attendance_import_line_ids = fields.One2many('hr.employee.attendance.import.line', 'attendance_import_id',
                                                  string="List Attendance Import Line")
 
+    def utcConvert(self, timeVal):
+        local = pytz.timezone(self.env.user.partner_id.tz)
+        local_dt = local.localize(timeVal, is_dst=None)
+        return local_dt.astimezone(pytz.utc)
+
     @api.multi
     def import_absent(self):
+        print '====' + str(self.env.user.partner_id.tz)
+
         device_attendance_users = self.env['device.attendance.user']. \
             search([('device_attendance_id', '=', self.device_attendance_id.id)])
 
@@ -111,7 +119,7 @@ class AttendanceImport(models.Model):
                         print str(attendance.timestamp)
                         self.attendance_import_line_ids = [{'name': val,
                                                             'attendance_import_id': self.id,
-                                                            'absent': attendance.timestamp}]
+                                                            'absent': self.utcConvert(attendance.timestamp)}]
         except Exception as e:
             raise exceptions.except_orm(_('Error'), _(
                 'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.device_attendance_id.ip_address,
