@@ -111,7 +111,6 @@ class AttendanceImport(models.Model):
                             break
 
                     if val is not None:
-                        print str(attendance.timestamp)
                         self.attendance_import_line_ids = [{'name': val,
                                                             'attendance_import_id': self.id,
                                                             'absent': self.utcConvert(attendance.timestamp)}]
