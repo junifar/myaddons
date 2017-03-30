@@ -20,6 +20,7 @@
                                     <tree string="Attendance Data" editable="bottom">
                                         <field name="name"/>
                                         <field name="absent" widget="time"/>
+                                        <field name="absent_out" widget="time"/>
                                         <field name="status"/>
                                     </tree>
                                 </field>
