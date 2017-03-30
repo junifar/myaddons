@@ -114,6 +114,10 @@ class AttendanceImport(models.Model):
                                                             'attendance_import_id': self.id,
                                                             'absent': self.utcConvert(attendance.timestamp),
                                                             'device_uid': attendance.user_id}]
+                        search_user_ids = self.search([('attendance_import_line_ids.device_uid', '=',
+                                                        attendance.user_id), ('id', '=', self.id)])
+
+                        repr(search_user_ids)
                         # if self.attendance_import_line_ids:
                         #     search_user_ids = self.search([('attendance_import_line_ids.device_uid', '=',
                         #                                     attendance.user_id), ('id', '=', self.id)])
