@@ -116,7 +116,7 @@ class AttendanceImport(models.Model):
                         #                                     'device_uid': attendance.user_id}]
                         if self.attendance_import_line_ids:
                             for line in self.attendance_import_line_ids:
-                                print line.device_id
+                                print line.device_uid
                                 if line.device_uid == attendance.user_id:
                                     if line.absent_out is None:
                                         line.absent_out = self.utcConvert(attendance.timestamp)
