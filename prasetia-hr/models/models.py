@@ -120,7 +120,7 @@ class AttendanceImport(models.Model):
                         else:
                             data = self.env['hr.employee.attendance.import.line'].search(
                                 [('attendance_import_id', '=', self.id),('device_uid', '=', attendance.user_id)])
-                            print data.id
+                            data.absent_out = self.utcConvert(attendance.timestamp)
                         # if self.attendance_import_line_ids:
                         #     for line in self.attendance_import_line_ids:
                         #         print line.device_uid
