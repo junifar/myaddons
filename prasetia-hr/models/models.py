@@ -122,7 +122,7 @@ class AttendanceImport(models.Model):
                             data = self.env['hr.employee.attendance.import.line'].search(
                                 [('attendance_import_id', '=', self.id), ('device_uid', '=', attendance.user_id)])
                             # data.absent_out = self.utcConvert(attendance.timestamp)
-                            if data.absent_out is None:
+                            if not data.absent_out:
                                 data.absent_out = self.utcConvert(attendance.timestamp)
                             elif self.utcConvert(attendance.timestamp) < data.absent:
                                 data.absent = self.utcConvert(attendance.timestamp)
