@@ -94,10 +94,6 @@ class AttendanceImport(models.Model):
 
     @api.multi
     def import_absent(self):
-        for line in self.attendance_import_line_ids:
-            print line.device_uid
-            print dir(line)
-
         device_attendance_users = self.env['device.attendance.user']. \
             search([('device_attendance_id', '=', self.device_attendance_id.id)])
 
@@ -120,9 +116,8 @@ class AttendanceImport(models.Model):
                         #                                     'device_uid': attendance.user_id}]
                         if self.attendance_import_line_ids:
                             for line in self.attendance_import_line_ids:
-                                print '====Stage 1===='
+                                print line.device_id
                                 if line.device_uid == attendance.user_id:
-                                    # print '====Stage 2===='
                                     if line.absent_out is None:
                                         line.absent_out = self.utcConvert(attendance.timestamp)
                                         break
