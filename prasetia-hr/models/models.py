@@ -110,9 +110,10 @@ class AttendanceImport(models.Model):
                             val = device_attendance_user.id
                             break
                     if val is not None:
-                        count = self.env[''].search_count([('attendance_import_id', '=', self.id),
+                        count = self.env['hr.employee.attendance.import.line'].search_count([('attendance_import_id', '=', self.id),
                                                            ('device_uid', '=', attendance.user_id)])
 
+                        print count
                         if count == 0:
                             self.attendance_import_line_ids = [{'name': val,
                                                                 'attendance_import_id': self.id,
