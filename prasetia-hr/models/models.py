@@ -110,8 +110,9 @@ class AttendanceImport(models.Model):
                             val = device_attendance_user.id
                             break
                     if val is not None:
-                        count = self.env['hr.employee.attendance.import.line'].search_count([('attendance_import_id', '=', self.id),
-                                                           ('device_uid', '=', attendance.user_id)])
+                        count = self.env['hr.employee.attendance.import.line'].search_count(
+                            [('attendance_import_id', '=', self.id),
+                             ('device_uid', '=', attendance.user_id)])
                         if count == 0:
                             self.attendance_import_line_ids = [{'name': val,
                                                                 'attendance_import_id': self.id,
@@ -119,31 +120,37 @@ class AttendanceImport(models.Model):
                                                                 'device_uid': attendance.user_id}]
                         else:
                             data = self.env['hr.employee.attendance.import.line'].search(
-                                [('attendance_import_id', '=', self.id),('device_uid', '=', attendance.user_id)])
-                            data.absent_out = self.utcConvert(attendance.timestamp)
-                        # if self.attendance_import_line_ids:
-                        #     for line in self.attendance_import_line_ids:
-                        #         print line.device_uid
-                        #         if line.device_uid == attendance.user_id:
-                        #             if line.absent_out is None:
-                        #                 line.absent_out = self.utcConvert(attendance.timestamp)
-                        #                 break
-                        #             elif self.utcConvert(attendance.timestamp) < line.absent:
-                        #                 line.absent = self.utcConvert(attendance.timestamp)
-                        #                 break
-                        #             elif self.utcConvert(attendance.timestamp) > line.absent_out:
-                        #                 line.absent_out = self.utcConvert(attendance.timestamp)
-                        #                 break
-                        #         else:
-                        #             self.attendance_import_line_ids = [{'name': val,
-                        #                                                 'attendance_import_id': self.id,
-                        #                                                 'absent': self.utcConvert(attendance.timestamp),
-                        #                                                 'device_uid': attendance.user_id}]
-                        # else:
-                        #     self.attendance_import_line_ids = [{'name': val,
-                        #                                         'attendance_import_id': self.id,
-                        #                                         'absent': self.utcConvert(attendance.timestamp),
-                        #                                         'device_uid': attendance.user_id}]
+                                [('attendance_import_id', '=', self.id), ('device_uid', '=', attendance.user_id)])
+                            # data.absent_out = self.utcConvert(attendance.timestamp)
+                            if data.absent_out is None:
+                                data.absent_out = self.utcConvert(attendance.timestamp)
+                            elif self.utcConvert(attendance.timestamp) < data.absent:
+                                data.absent = self.utcConvert(attendance.timestamp)
+                            elif self.utcConvert(attendance.timestamp) > data.absent_out:
+                                data.absent_out = self.utcConvert(attendance.timestamp)
+                                # if self.attendance_import_line_ids:
+                                #     for line in self.attendance_import_line_ids:
+                                #         print line.device_uid
+                                #         if line.device_uid == attendance.user_id:
+                                #             if line.absent_out is None:
+                                #                 line.absent_out = self.utcConvert(attendance.timestamp)
+                                #                 break
+                                #             elif self.utcConvert(attendance.timestamp) < line.absent:
+                                #                 line.absent = self.utcConvert(attendance.timestamp)
+                                #                 break
+                                #             elif self.utcConvert(attendance.timestamp) > line.absent_out:
+                                #                 line.absent_out = self.utcConvert(attendance.timestamp)
+                                #                 break
+                                #         else:
+                                #             self.attendance_import_line_ids = [{'name': val,
+                                #                                                 'attendance_import_id': self.id,
+                                #                                                 'absent': self.utcConvert(attendance.timestamp),
+                                #                                                 'device_uid': attendance.user_id}]
+                                # else:
+                                #     self.attendance_import_line_ids = [{'name': val,
+                                #                                         'attendance_import_id': self.id,
+                                #                                         'absent': self.utcConvert(attendance.timestamp),
+                                #                                         'device_uid': attendance.user_id}]
         except Exception as e:
             raise exceptions.except_orm(_('Error'), _(
                 'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.device_attendance_id.ip_address,
