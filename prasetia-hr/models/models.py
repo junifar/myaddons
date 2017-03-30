@@ -110,10 +110,14 @@ class AttendanceImport(models.Model):
                             val = device_attendance_user.id
                             break
                     if val is not None:
-                        self.attendance_import_line_ids = [{'name': val,
-                                                            'attendance_import_id': self.id,
-                                                            'absent': self.utcConvert(attendance.timestamp),
-                                                            'device_uid': attendance.user_id}]
+                        count = self.env[''].search_count([('attendance_import_id', '=', self.id),
+                                                           ('device_uid', '=', attendance.user_id)])
+
+                        if count == 0:
+                            self.attendance_import_line_ids = [{'name': val,
+                                                                'attendance_import_id': self.id,
+                                                                'absent': self.utcConvert(attendance.timestamp),
+                                                                'device_uid': attendance.user_id}]
                         # if self.attendance_import_line_ids:
                         #     for line in self.attendance_import_line_ids:
                         #         print line.device_uid
