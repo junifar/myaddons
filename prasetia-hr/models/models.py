@@ -96,6 +96,7 @@ class AttendanceImport(models.Model):
     def import_absent(self):
         for line in self.attendance_import_line_ids:
             print line.device_uid
+            repr(line)
 
         # TODO : Start Here
         # device_attendance_users = self.env['device.attendance.user']. \
