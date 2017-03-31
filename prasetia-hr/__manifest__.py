@@ -31,6 +31,7 @@
         'views/education.xml',
         'views/device.xml',
         'views/attendance_import.xml',
+        'views/attendance.xml',
         'views/menus.xml',
     ],
     # only loaded in demonstration mode

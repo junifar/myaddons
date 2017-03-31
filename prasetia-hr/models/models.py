@@ -73,10 +73,10 @@ class DeviceAttendance(models.Model):
 class DeviceAttendanceImportUser(models.Model):
     _name = "device.attendance.user"
 
-    device_attendance_id = fields.Many2one('device.attendance', required=True, string="Device Name")
+    device_attendance_id = fields.Many2one('device.attendance', required=True, string="Device Name", ondelete='cascade')
     name = fields.Char(required=True, string='User Name')
     user_id = fields.Integer(string='User ID/UID')
-    employee_id = fields.Many2one('hr.employee', String="Employee Name")
+    employee_id = fields.Many2one('hr.employee', String="Employee Name", ondelete='cascade')
 
 
 class AttendanceImport(models.Model):
@@ -130,29 +130,6 @@ class AttendanceImport(models.Model):
                             elif self.utcConvert(attendance.timestamp).strftime('%Y-%m-%d %H:%M:%S.%f %Z%z') \
                                     > data.absent_out:
                                 data.absent_out = self.utcConvert(attendance.timestamp)
-                                # if self.attendance_import_line_ids:
-                                #     for line in self.attendance_import_line_ids:
-                                #         print line.device_uid
-                                #         if line.device_uid == attendance.user_id:
-                                #             if line.absent_out is None:
-                                #                 line.absent_out = self.utcConvert(attendance.timestamp)
-                                #                 break
-                                #             elif self.utcConvert(attendance.timestamp) < line.absent:
-                                #                 line.absent = self.utcConvert(attendance.timestamp)
-                                #                 break
-                                #             elif self.utcConvert(attendance.timestamp) > line.absent_out:
-                                #                 line.absent_out = self.utcConvert(attendance.timestamp)
-                                #                 break
-                                #         else:
-                                #             self.attendance_import_line_ids = [{'name': val,
-                                #                                                 'attendance_import_id': self.id,
-                                #                                                 'absent': self.utcConvert(attendance.timestamp),
-                                #                                                 'device_uid': attendance.user_id}]
-                                # else:
-                                #     self.attendance_import_line_ids = [{'name': val,
-                                #                                         'attendance_import_id': self.id,
-                                #                                         'absent': self.utcConvert(attendance.timestamp),
-                                #                                         'device_uid': attendance.user_id}]
         except Exception as e:
             raise exceptions.except_orm(_('Error'), _(
                 'Can\'t connect to device, IP : %s port %s : {}'.format(e) % (self.device_attendance_id.ip_address,
@@ -164,9 +141,20 @@ class AttendanceImport(models.Model):
 class AttendanceImportLine(models.Model):
     _name = "hr.employee.attendance.import.line"
 
-    attendance_import_id = fields.Many2one('hr.employee.attendance.import', string="Attendance Import", ondelete='cascade')
+    attendance_import_id = fields.Many2one('hr.employee.attendance.import', string="Attendance Import",
+                                           ondelete='cascade')
     device_uid = fields.Integer(string="User ID in Device")
-    name = fields.Many2one('device.attendance.user', required=True, string="Attendance User")
+    name = fields.Many2one('device.attendance.user', required=True, string="Attendance User", ondelete='cascade')
     absent = fields.Datetime(String="Absent Date")
     absent_out = fields.Datetime(String="Absent Date")
     status = fields.Selection([(1, 'In'), (2, 'Out')], string="Status")
+
+
+class Attendance(models.Model):
+    _name = 'hr.employee.attendance'
+
+    employee_id = fields.Many2one('hr.employee', String="Employee Name", ondelete='cascade')
+    name = fields.Date(required=True, String="Date to Import")
+    absent_in = fields.Datetime(String="Absent Date In")
+    absent_out = fields.Datetime(String="Absent Date Out")
+    note = fields.Text(String="Note")

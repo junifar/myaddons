@@ -7,5 +7,9 @@
         <menuitem id="work_history_menu" name="Riwayat Pekerjaan" parent="hr.menu_hr_root" action="hr_work_history_list_action" />
         <menuitem id="import_attendance_menu" name="Import Absen" parent="hr.menu_hr_root" action="attendance_import_list_action" />
         <menuitem id="device_menu" name="Devices" parent="hr.menu_hr_root" action="device_attendance_list_action" />
+
+        <menuitem id="employee_attendance_menu_root" name="Attendance"/>
+        <menuitem id="employee_attendance_menu" name="Attendance" parent="employee_attendance_menu_root"
+        action="employee_attendance_list_action" web_icon="prasetia-hr,static/description/icon.png"/>
     </data>
 </odoo>
