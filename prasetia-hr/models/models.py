@@ -164,7 +164,7 @@ class AttendanceImport(models.Model):
 class AttendanceImportLine(models.Model):
     _name = "hr.employee.attendance.import.line"
 
-    attendance_import_id = fields.Many2one('hr.employee.attendance.import', string="Attendance Import")
+    attendance_import_id = fields.Many2one('hr.employee.attendance.import', string="Attendance Import", ondelete='cascade')
     device_uid = fields.Integer(string="User ID in Device")
     name = fields.Many2one('device.attendance.user', required=True, string="Attendance User")
     absent = fields.Datetime(String="Absent Date")
