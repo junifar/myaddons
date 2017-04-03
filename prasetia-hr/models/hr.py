@@ -36,6 +36,7 @@ class Employee(models.Model):
     family_ids = fields.One2many('hr.employee.family', 'employee_id', string="List Employee Families")
     education_ids = fields.One2many('hr.employee.education', 'employee_id', string="List Employee Educations")
     work_history_ids = fields.One2many('hr.employee.work.history', 'employee_id', string="List Employee Work History")
+    attendance_ids = fields.One2many('hr.employee.attendance', 'employee_id', string="List Employee Attendance")
 
 
 class DriverLicense(models.Model):
