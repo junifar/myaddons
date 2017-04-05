@@ -8,8 +8,10 @@
         <menuitem id="import_attendance_menu" name="Import Absen" parent="hr.menu_hr_root" action="attendance_import_list_action" />
         <menuitem id="device_menu" name="Devices" parent="hr.menu_hr_root" action="device_attendance_list_action" />
 
-        <menuitem id="employee_attendance_menu_root" name="Attendance"/>
+        <menuitem id="employee_attendance_menu_root" name="Attendance" web_icon="prasetia-hr,static/description/icon.png"/>
         <menuitem id="employee_attendance_menu" name="Attendance" parent="employee_attendance_menu_root"
-        action="employee_attendance_list_action" web_icon="prasetia-hr,static/description/icon.png"/>
+        action="employee_attendance_list_action"/>
+        <menuitem id="employee_attendance_menu_kanban" name="Attendance Kanban" parent="employee_attendance_menu_root"
+        action="employee_attendance_list_action_kanban"/>
     </data>
 </odoo>
