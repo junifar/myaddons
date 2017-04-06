@@ -55,5 +55,52 @@
     <menuitem name="Server to list" id="project_custom" parent="project_custom.menu_2"
               action="project_custom.action_server"/>
     -->
+
+      <record model="ir.ui.view" id="custom_module_kanban_view">
+          <field name="name">custom.module.kanban</field>
+          <field name="model">project.sample</field>
+          <field name="type">kanban</field>
+          <field name="arch" type="xml">
+              <kanban>
+                  <!--list of field to be loaded -->
+                  <field name="name" />
+                  <field name="image" />
+                  <templates>
+                  <t t-name="kanban-box">
+                          <div class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                              <!--<a type="open">-->
+                                  <!--<img class="oe_kanban_image"-->
+                                      <!--t-att-src="kanban_image('project.sample', 'image', record.id.value)" widget="attachment_image" />-->
+                              <!--</a>-->
+                              <div class="oe_product_desc">
+                                  <h4>
+                                      <a type="edit">
+                                          <field name="name"></field>
+                                      </a>
+                                  </h4>
+                                  <ul>
+                                      <li>Field 1 : </li>
+                                      <li>Field 2 :  </li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </t>
+                  </templates>
+              </kanban>
+          </field>
+      </record>
+
+      <record id="action_custom_modul_form" model="ir.actions.act_window">
+          <field name="name">Title custom module</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">project.sample</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">kanban,tree,form</field>
+      </record>
+
+      <menuitem name="project_custom" id="project_custom.menu_root"/>
+      <menuitem name="Sample" id="project_custom.menu_1" parent="project_custom.menu_root"/>
+      <menuitem name="List" id="project_custom.menu_1_list" parent="project_custom.menu_1"
+              action="project_custom.action_custom_modul_form"/>
   </data>
 </odoo>

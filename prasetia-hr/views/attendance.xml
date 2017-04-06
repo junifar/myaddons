@@ -55,20 +55,24 @@
 			<field name="name">Attendance Employee</field>
 			<field name="model">hr.employee</field>
 			<field name="arch" type="xml">
-				<kanban string="Attendance" create="true">
+				<kanban string="Attendance" create="false" class="o_kanban_dashboard o_pos_kanban">
                     <field name="name"/>
-                    <!--<field name="work_email"/>-->
                     <templates>
-                        <field name="name"/>
                         <t t-name="kanban-box">
-                            <div class="oe_kanban_content">
-                                <div>
-                                    <strong><field name="name"/></strong>
-                                </div>
-                                <div class="o_kanban_footer">
-                                    <field name="name"/>
-                                </div>
-                            </div>
+							<div>
+								<div class="o_kanban_card_header">
+									<div class="o_kanban_card_header_title">
+										<div class="o_primary"><t t-esc="record.name.value"/></div>
+									</div>
+								</div>
+								<div class="container o_kanban_card_content o_visible">
+									<div class="row">
+										<div class="col-xs-6 o_kanban_primary_left">
+											<button class="btn btn-primary" name="open_ui" type="object">Resume</button>
+										</div>
+									</div>
+								</div>
+							</div>
                         </t>
                     </templates>
 				</kanban>

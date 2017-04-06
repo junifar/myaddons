@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Project Improvemenr",
+    'name': "Project Improvement",
 
     'summary': """
         Customization existing official module project ODOO
@@ -28,6 +28,7 @@
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'views/project_view.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

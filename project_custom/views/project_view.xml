@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+
+        <record id="view_project1" model="ir.ui.view">
+            <field name="name">project.project.tree</field>
+            <field name="model">project.project</field>
+            <field name="arch" type="xml">
+                <tree decoration-bf="message_needaction==True" string="Projects">
+                    <field name="sequence" widget="handle"/>
+                    <field name="message_needaction" invisible="1"/>
+                    <field name="name" string="Project Name"/>
+                    <field name="user_id" string="Project Manager"/>
+                    <field name="partner_id" string="Contact"/>
+                    <!--<field name="state"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="open_view_project_all_config_uji" model="ir.actions.act_window">
+            <field name="name">Projects</field>
+            <field name="res_model">project.project</field>
+            <field name="view_type">form</field>
+            <field name="domain">[]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create a new project.
+                </p><p>
+                    Organize your activities (plan tasks, track issues, invoice timesheets) for internal, personal or customer projects.
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_hr_employee_attendance_tree_view">
+			<field eval="2" name="sequence"/>
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_project1"/>
+			<field name="act_window_id" ref="open_view_project_all_config_uji"/>
+		</record>
+
+        <menuitem name="Projects 1" id="portal_services_projects_test" parent="project.menu_project_config"
+                  action="open_view_project_all_config_uji" sequence="10"/>
+    </data>
+</odoo>
