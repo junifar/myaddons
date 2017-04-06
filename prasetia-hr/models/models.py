@@ -158,3 +158,15 @@ class Attendance(models.Model):
     absent_in = fields.Datetime(String="Absent Date In")
     absent_out = fields.Datetime(String="Absent Date Out")
     note = fields.Text(String="Note")
+
+    @api.multi
+    def open_ui(self):
+        ctx = self._context.copy()
+        return {
+            'name': _('Create Attendance'),
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'hr.employee.attendance',
+            'context': ctx,
+        }
