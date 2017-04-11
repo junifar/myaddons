@@ -32,6 +32,7 @@
         'views/device.xml',
         'views/attendance_import.xml',
         'views/attendance.xml',
+        'views/attendance_report.xml',
         'views/menus.xml',
     ],
     # only loaded in demonstration mode

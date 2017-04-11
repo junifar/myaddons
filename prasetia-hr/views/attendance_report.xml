@@ -1,0 +1,76 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="attendance_report_form_view">
+			<field name="name">Attendance</field>
+			<field name="model">hr.employee.attendance.report</field>
+			<field name="arch" type="xml">
+				<form string="Attendance">
+					<header></header>
+					<sheet>
+                        <group>
+                            <field name="name" placeholder="Nama"/>
+                        </group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="attendance_report_tree_view">
+			<field name="name">Attendance</field>
+			<field name="model">hr.employee.attendance.report</field>
+			<field name="arch" type="xml">
+				<tree string="Attendance" create="true">
+                    <field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="attendance_report_kanban_view_employee">
+            <field name="name">Attendance Report</field>
+            <field name="model">hr.employee.attendance.report</field>
+            <field name="arch" type="xml">
+                <kanban string="Attendance" create="true" class="o_kanban_dashboard o_pos_kanban">
+                    <field name="name"/>
+                    <field name="kanban_dashboard"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div>
+                                <div class="o_kanban_card_header">
+                                    <div class="o_kanban_card_header_title">
+                                        <div class="o_primary"><t t-esc="record.name.value"/></div>
+                                    </div>
+                                </div>
+                                <div class="container o_kanban_card_content o_visible">
+                                    <div class="row">
+                                        <t t-value="JSON.parse(record.kanban_dashboard.raw_value)" t-set="dashboard"/>
+                                        <t t-esc="dashboard.title"/>
+                                        <t t-call="BodyGraph"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                        <t t-name="BodyGraph">
+                            <div class="o_kanban_graph_section">
+                                <field name="kanban_dashboard_graph"
+                                       t-att-graph_type="'line'"
+                                       widget="dashboard_graph"/>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="attendance_report_list_action">
+			<field name="name">Attendance Report</field>
+			<field name="res_model">hr.employee.attendance.report</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Report Attendance
+				</p>
+			</field>
+		</record>
+    </data>
+</odoo>

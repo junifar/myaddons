@@ -11,7 +11,9 @@
         <menuitem id="employee_attendance_menu_root" name="Attendance" web_icon="prasetia-hr,static/description/icon.png"/>
         <menuitem id="employee_attendance_menu" name="Attendance" parent="employee_attendance_menu_root"
         action="employee_attendance_list_action"/>
-        <menuitem id="employee_attendance_menu_kanban" name="Attendance Kanban" parent="employee_attendance_menu_root"
-        action="employee_attendance_list_action_kanban"/>
+        <menuitem id="attendance_report_menu" name="Attendance Report" parent="employee_attendance_menu_root"
+        action="attendance_report_list_action"/>
+        <!--<menuitem id="employee_attendance_menu_kanban" name="Attendance Kanban" parent="employee_attendance_menu_root"-->
+        <!--action="employee_attendance_list_action_kanban"/>-->
     </data>
 </odoo>

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import json
+
 import pytz
 from odoo import models, fields, api, exceptions, _
 from zk import ZK
@@ -170,3 +172,34 @@ class Attendance(models.Model):
             'res_model': 'hr.employee.attendance',
             'context': ctx,
         }
+
+
+class AttendanceReport(models.Model):
+    _name = 'hr.employee.attendance.report'
+
+    @api.one
+    def _kanban_dashboard(self):
+        self.kanban_dashboard = json.dumps(self.get_kanban_dashboard_datas())
+
+    @api.one
+    def _kanban_dashboard_graph(self):
+        self.kanban_dashboard_graph = json.dumps(self.get_kanban_dashboard_graph_datas())
+
+    name = fields.Char(required=True, string='Report Name')
+    kanban_dashboard = fields.Text(compute='_kanban_dashboard')
+    kanban_dashboard_graph = fields.Text(compute='_kanban_dashboard_graph')
+
+    @api.multi
+    def get_kanban_dashboard_datas(self):
+        return {
+            'title': 'Sum Data of Employee',
+            'total_employee': 10,
+        }
+
+    @api.multi
+    def get_kanban_dashboard_graph_datas(self):
+        data = [{'label': _('Past'), 'y': 100.2, 'x': "12 Mar", 'name': '12 March 2017', 'type': 'past'},
+                {'label': 'Coba', 'y': 200.2, 'x': "13 Mar", 'name': '13 March 2017', 'type': 'past'},
+                {'label': 'Coba1', 'y': 500.2, 'x': "14 Mar", 'name': '14 March 2017', 'type': 'past'},
+                {'label': 'Coba2', 'y': 10.2, 'x': "15 Mar", 'name': '15 March 2017', 'type': 'past'}]
+        return [{'values': data}]
