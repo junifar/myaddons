@@ -20,6 +20,10 @@ class site(models.Model):
     tinggi_tower_id = fields.Many2one('project.tinggi.tower', required=False, string='Tinggi Tower')
     address = fields.Text(string="Address", required=True)
 
+    @property
+    def __str__(self):
+        return self.site_id_prasetia + ' - ' + self.name
+
 
 class area(models.Model):
     _name = 'project.area'
@@ -57,3 +61,8 @@ class field_type(models.Model):
     _description = 'Field type Information'
 
     name = fields.Char(string='Field Type', required=True)
+
+class projects(models.Model):
+    _inherit = 'project.project'
+
+    site_id = fields.Many2one('project.site', string='Site ID', required=False)

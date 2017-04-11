@@ -27,7 +27,8 @@
 								<field name="site_id_customer"/>								
                                 <field name="customer_id"/>
                             </group>
-							<group>								
+							<group>
+								<field name="address"/>
 							</group>                            
 						</group>
 						<group>
@@ -41,7 +42,6 @@
                                 <field name="island_id"/>
 								<field name="province_id"/>
                                 <field name="city_id"/>
-								<field name="address"/>
 							</group>
 						</group>
 					</sheet>
