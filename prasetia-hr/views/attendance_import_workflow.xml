@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <record model="workflow" id="wkf_attendance_import">
+			<field name="name">Attendance Import Workflow</field>
+			<field name="osv">hr.employee.attendance.import</field>
+			<field name="on_create">True</field>
+		</record>
+
+        <record model="workflow.activity" id="import_unprocessed">
+			<field name="name">Unprocessed</field>
+			<field name="wkf_id" ref="wkf_attendance_import"/>
+			<field name="flow_start" eval="True"></field>
+			<field name="kind">function</field>
+			<field name="action">action_unprocessed()</field>
+		</record>
+
+        <record model="workflow.activity" id="import_imported">
+			<field name="name">Imported</field>
+			<field name="wkf_id" ref="wkf_attendance_import"/>
+			<field name="kind">function</field>
+			<field name="action">action_imported()</field>
+		</record>
+
+        <record model="workflow.transition" id="court_berkas_tilang_to_sidang">
+			<field name="act_from" ref="import_unprocessed"/>
+			<field name="act_to" ref="import_imported" />
+			<field name="signal">action_process_import</field>
+		</record>
+    </data>
+</odoo>

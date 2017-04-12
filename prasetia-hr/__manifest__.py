@@ -31,6 +31,7 @@
         'views/education.xml',
         'views/device.xml',
         'views/attendance_import.xml',
+        'views/attendance_import_workflow.xml',
         'views/attendance.xml',
         'views/attendance_report.xml',
         'views/menus.xml',

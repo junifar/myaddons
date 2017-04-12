@@ -43,10 +43,14 @@
 
         <record model="ir.ui.view" id="employee_attendance_tree_view_employee">
 			<field name="name">Attendance Employee</field>
-			<field name="model">hr.employee</field>
+			<field name="model">hr.employee.attendance</field>
 			<field name="arch" type="xml">
 				<tree string="Attendance" create="true">
-                    <field name="name"/>
+                    <field name="employee_id" string="Employee name"/>
+                    <field name="name" string="date"/>
+                    <field name="absent_in" widget="time"/>
+					<field name="absent_out" widget="time"/>
+					<field name="note"/>
 				</tree>
 			</field>
 		</record>

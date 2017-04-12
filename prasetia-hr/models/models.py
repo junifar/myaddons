@@ -88,11 +88,29 @@ class AttendanceImport(models.Model):
     device_attendance_id = fields.Many2one('device.attendance', required=True, string="Device Name")
     attendance_import_line_ids = fields.One2many('hr.employee.attendance.import.line', 'attendance_import_id',
                                                  string="List Attendance Import Line")
+    state = fields.Selection([(0, 'Unprocessed'), (1, 'Imported')], string="Status")
 
     def utcConvert(self, time_val):
         local = pytz.timezone(self.env.user.partner_id.tz)
         local_dt = local.localize(time_val, is_dst=None)
         return local_dt.astimezone(pytz.utc)
+
+    @api.multi
+    def action_unprocessed(self):
+        self.state = 0
+
+    @api.multi
+    def action_imported(self):
+        hr_employee_attendance = self.env['hr.employee.attendance']
+
+        for attendances_import_line in self.attendance_import_line_ids:
+            values = {'name': self.name,
+                      'employee_id': 18,
+                      'absent_in': attendances_import_line.absent,
+                      'absent_out': attendances_import_line.absent_out,
+                      }
+            hr_employee_attendance.create(values)
+        self.state = 1
 
     @api.multi
     def import_absent(self):
@@ -138,6 +156,27 @@ class AttendanceImport(models.Model):
                                                                               self.device_attendance_id.port)))
 
         return {}
+
+    @api.multi
+    def process_to_absen(self):
+        # TODO :
+        # 1 - read all attendance import line
+        # 2 - import into hr_employee_attendance
+
+        hr_employee_attendance = self.env['hr.employee.attendance']
+
+        for attendances_import_line in self.attendance_import_line_ids:
+            values = {'name': self.name,
+                      'employee_id': 18,
+                      'absent_in': attendances_import_line.absent,
+                      'absent_out': attendances_import_line.absent_out,
+                      }
+            hr_employee_attendance.create(values)
+        self.write({'state': 1})
+
+        # raise exceptions.except_orm(_('Notification'), _(
+        #     'Process Activate'))
+        return None
 
 
 class AttendanceImportLine(models.Model):
