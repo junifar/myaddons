@@ -80,6 +80,10 @@ class DeviceAttendanceImportUser(models.Model):
     user_id = fields.Integer(string='User ID/UID')
     employee_id = fields.Many2one('hr.employee', String="Employee Name", ondelete='cascade')
 
+    _sql_constraints = [
+        ('unique_device_attendance_id_employee_id', 'unique(device_attendance_id, employee_id)', 'Data Already Exists')
+    ]
+
 
 class AttendanceImport(models.Model):
     _name = "hr.employee.attendance.import"
