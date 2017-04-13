@@ -105,12 +105,13 @@ class AttendanceImport(models.Model):
             hr_employee_attendance = self.env['hr.employee.attendance']
 
             for attendances_import_line in self.attendance_import_line_ids:
-                values = {'name': self.name,
-                          'employee_id': 18,
-                          'absent_in': attendances_import_line.absent,
-                          'absent_out': attendances_import_line.absent_out,
-                          }
-                hr_employee_attendance.create(values)
+                if attendances_import_line.name.employee_id.id:
+                    values = {'name': self.name,
+                              'employee_id': attendances_import_line.name.employee_id.id,
+                              'absent_in': attendances_import_line.absent,
+                              'absent_out': attendances_import_line.absent_out,
+                              }
+                    hr_employee_attendance.create(values)
             self.state = 'imported'
         except Exception as e:
             raise exceptions.except_orm(_('Error'), _(
