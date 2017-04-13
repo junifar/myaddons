@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
+from datetime import datetime
 
 import pytz
 from odoo import models, fields, api, exceptions, _
@@ -222,8 +223,14 @@ class AttendanceReport(models.Model):
 
     @api.multi
     def get_kanban_dashboard_datas(self):
+        now = datetime.now()
+
         return {
             'title': 'Sum Data of Employee',
+            'periode': now.strftime("%B - %Y"),
+            'hadir': 200,
+            'izin': 100,
+            'absen': 50,
             'total_employee': 10,
         }
 

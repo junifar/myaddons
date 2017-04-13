@@ -37,14 +37,53 @@
                             <div>
                                 <div class="o_kanban_card_header">
                                     <div class="o_kanban_card_header_title">
-                                        <div class="o_primary"><t t-esc="record.name.value"/></div>
+                                        <div class="o_primary">
+                                            <t t-esc="record.name.value"/>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="container o_kanban_card_content o_visible">
                                     <div class="row">
-                                        <t t-value="JSON.parse(record.kanban_dashboard.raw_value)" t-set="dashboard"/>
-                                        <t t-esc="dashboard.title"/>
-                                        <t t-call="BodyGraph"/>
+                                        <div class="col-md-6" style="min-height:100px !important;">
+                                            <t t-call="BodyGraph"/>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <t t-value="JSON.parse(record.kanban_dashboard.raw_value)" t-set="dashboard"/>
+
+                                            <div class="form-group">
+                                                <!--<label><t t-esc="dashboard.title"/></label>-->
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Periode</th>
+                                                                    <th>:</th>
+                                                                    <th><t t-esc="dashboard.periode"/></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Hadir</td>
+                                                                    <td>:</td>
+                                                                    <td><t t-esc="dashboard.hadir"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Izin</td>
+                                                                    <td>:</td>
+                                                                    <td><t t-esc="dashboard.izin"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Absen</td>
+                                                                    <td>:</td>
+                                                                    <td><t t-esc="dashboard.absen"/></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +104,7 @@
 			<field name="name">Attendance Report</field>
 			<field name="res_model">hr.employee.attendance.report</field>
 			<field name="view_type">form</field>
-			<field name="view_mode">kanban,form</field>
+			<field name="view_mode">kanban,form,tree</field>
 			<field name="Help" type="html">
 				<p class="oe_view_nocontent_create">
 					Report Attendance
