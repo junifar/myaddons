@@ -26,7 +26,7 @@ odoo.define('attendance_report', function(require){
                             x: function (d, u) {
                                 return u
                             },
-                            margin: {'left': 0, 'right': 0, 'top': 0, 'bottom': 0},
+                            margin: {'left': 20, 'right': 20, 'top': 0, 'bottom': 0},
                             showYAxis: false,
                             showLegend: false,
                         });
@@ -39,7 +39,7 @@ odoo.define('attendance_report', function(require){
                             });
                             return label;
                         });
-                        self.chart.xAxis.axisLabel(self.data[0].title);
+                        // self.chart.xAxis.axisLabel(self.data[0].title);
                         self.chart.yAxis.tickFormat(d3.format(',.2f'));
                         break;
 
