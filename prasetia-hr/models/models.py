@@ -88,7 +88,7 @@ class AttendanceImport(models.Model):
     device_attendance_id = fields.Many2one('device.attendance', required=True, string="Device Name")
     attendance_import_line_ids = fields.One2many('hr.employee.attendance.import.line', 'attendance_import_id',
                                                  string="List Attendance Import Line")
-    state = fields.Selection([(0, 'Unprocessed'), (1, 'Imported')], string="Status")
+    state = fields.Selection([('unprocessed', 'Unprocessed'), ('imported', 'Imported')], string="Status")
 
     def utcConvert(self, time_val):
         local = pytz.timezone(self.env.user.partner_id.tz)
@@ -97,20 +97,24 @@ class AttendanceImport(models.Model):
 
     @api.multi
     def action_unprocessed(self):
-        self.state = 0
+        self.state = 'unprocessed'
 
     @api.multi
     def action_imported(self):
-        hr_employee_attendance = self.env['hr.employee.attendance']
+        try:
+            hr_employee_attendance = self.env['hr.employee.attendance']
 
-        for attendances_import_line in self.attendance_import_line_ids:
-            values = {'name': self.name,
-                      'employee_id': 18,
-                      'absent_in': attendances_import_line.absent,
-                      'absent_out': attendances_import_line.absent_out,
-                      }
-            hr_employee_attendance.create(values)
-        self.state = 1
+            for attendances_import_line in self.attendance_import_line_ids:
+                values = {'name': self.name,
+                          'employee_id': 18,
+                          'absent_in': attendances_import_line.absent,
+                          'absent_out': attendances_import_line.absent_out,
+                          }
+                hr_employee_attendance.create(values)
+            self.state = 'imported'
+        except Exception as e:
+            raise exceptions.except_orm(_('Error'), _(
+                'Some of data on your record has been exists \n\n Error {}'.format(e)))
 
     @api.multi
     def import_absent(self):
@@ -157,27 +161,6 @@ class AttendanceImport(models.Model):
 
         return {}
 
-    @api.multi
-    def process_to_absen(self):
-        # TODO :
-        # 1 - read all attendance import line
-        # 2 - import into hr_employee_attendance
-
-        hr_employee_attendance = self.env['hr.employee.attendance']
-
-        for attendances_import_line in self.attendance_import_line_ids:
-            values = {'name': self.name,
-                      'employee_id': 18,
-                      'absent_in': attendances_import_line.absent,
-                      'absent_out': attendances_import_line.absent_out,
-                      }
-            hr_employee_attendance.create(values)
-        self.write({'state': 1})
-
-        # raise exceptions.except_orm(_('Notification'), _(
-        #     'Process Activate'))
-        return None
-
 
 class AttendanceImportLine(models.Model):
     _name = "hr.employee.attendance.import.line"
@@ -194,11 +177,15 @@ class AttendanceImportLine(models.Model):
 class Attendance(models.Model):
     _name = 'hr.employee.attendance'
 
-    employee_id = fields.Many2one('hr.employee', String="Employee Name", ondelete='cascade')
+    employee_id = fields.Many2one('hr.employee', String="Employee Name", ondelete='cascade', required=True)
     name = fields.Date(required=True, String="Date to Import")
     absent_in = fields.Datetime(String="Absent Date In")
     absent_out = fields.Datetime(String="Absent Date Out")
     note = fields.Text(String="Note")
+
+    _sql_constraints = [
+        ('unique_employee_id_absent_date', 'unique(employee_id, name)', 'Data Already Exists')
+    ]
 
     @api.multi
     def open_ui(self):
