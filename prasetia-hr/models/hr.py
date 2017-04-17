@@ -71,7 +71,7 @@ class PersonalAccountType(models.Model):
 
 class DriverLicenseType(models.Model):
     _name = "hr.employee.driver.license.type"
-    name = fields.Char(required=True, string='Religion')
+    name = fields.Char(required=True, string='Driver License Type')
 
 
 class Religion(models.Model):
