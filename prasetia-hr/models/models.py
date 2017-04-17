@@ -241,3 +241,20 @@ class AttendanceReport(models.Model):
                 {'label': 'Coba1', 'y': 500.2, 'x': "14 Mar", 'name': '14 March 2017', 'type': 'past'},
                 {'label': 'Coba2', 'y': 10.2, 'x': "15 Mar", 'name': '15 March 2017', 'type': 'past'}]
         return [{'values': data}]
+
+
+class leave_type(models.Model):
+    _name = 'hr.employee.leave.request.type'
+
+    name = fields.Char(String="Leave Type Name", required=True)
+
+
+class leave_request(models.Model):
+    _name = 'hr.employee.leave.request'
+
+    name = fields.Many2one('hr.employee', String="Employee Name", ondelete='cascade', required=True)
+    department_id = fields.Many2one('hr.department', String="Departement", required=True)
+    leave_type_id = fields.Many2one('hr.employee.leave.request.type', string="Leave Type", required=True)
+    from_date = fields.Date(String="From Date", required=True)
+    to_date = fields.Date(String="To Date", required=True)
+    reason = fields.Text(String="Reason", required=True)

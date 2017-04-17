@@ -39,6 +39,10 @@ class Employee(models.Model):
     work_history_ids = fields.One2many('hr.employee.work.history', 'employee_id', string="List Employee Work History")
     attendance_ids = fields.One2many('hr.employee.attendance', 'employee_id', string="List Employee Attendance")
 
+    @property
+    def __str__(self):
+        return self.registration_id + ' - ' + self.name
+
 
 class DriverLicense(models.Model):
     _name = "hr.employee.driver.license"

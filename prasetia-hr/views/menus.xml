@@ -13,6 +13,10 @@
         action="employee_attendance_list_action"/>
         <menuitem id="attendance_report_menu" name="Attendance Report" parent="employee_attendance_menu_root"
         action="attendance_report_list_action"/>
+        <menuitem id="leave_request_menu" name="Permohonan Cuti" parent="hr.menu_hr_root"
+        action="leave_request_list_action"/>
+        <menuitem id="leave_request_type_menu" name="Jenis Cuti" parent="hr.menu_hr_root"
+        action="leave_request_type_list_action"/>
         <!--<menuitem id="employee_attendance_menu_kanban" name="Attendance Kanban" parent="employee_attendance_menu_root"-->
         <!--action="employee_attendance_list_action_kanban"/>-->
     </data>

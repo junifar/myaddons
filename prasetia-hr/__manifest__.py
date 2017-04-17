@@ -34,6 +34,8 @@
         'views/attendance_import_workflow.xml',
         'views/attendance.xml',
         'views/attendance_report.xml',
+        'views/leave_request.xml',
+        'views/leave_request_type.xml',
         'views/menus.xml',
     ],
     # only loaded in demonstration mode
