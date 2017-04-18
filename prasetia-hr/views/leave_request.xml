@@ -5,7 +5,19 @@
 			<field name="model">hr.employee.leave.request</field>
 			<field name="arch" type="xml">
 				<form string="Permohonan Cuti">
-					<header></header>
+					<header>
+						<button name="action_wait_approval" type="workflow" string="Process"
+                                states="draft" class="oe_highlight" confirm="Are you sure you want to do this ?"/>
+						<button name="action_approved" type="workflow" string="Approve"
+                                states="wait approval" class="oe_highlight" confirm="Are you sure you want to do this ?"/>
+						<button name="action_reject" type="workflow" string="Reject"
+                                states="wait approval" class="oe_highlight" confirm="Are you sure you want to do this ?"/>
+						<button name="action_cancel" type="workflow" string="Cancel"
+                                states="wait approval" class="oe_highlight" confirm="Are you sure you want to do this ?"/>
+						<button name="action_draft" type="workflow" string="Set to Draft"
+                                states="wait approval" class="oe_highlight" confirm="Are you sure you want to do this ?"/>
+						<field name="state" widget="statusbar"/>
+					</header>
 					<sheet>
                         <h1>
                             <field name="name" placeholder="name"/>

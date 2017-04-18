@@ -35,6 +35,7 @@
         'views/attendance.xml',
         'views/attendance_report.xml',
         'views/leave_request.xml',
+        'views/leave_request_workflow.xml',
         'views/leave_request_type.xml',
         'views/menus.xml',
     ],

@@ -252,6 +252,7 @@ class leave_type(models.Model):
 class leave_request(models.Model):
     _name = 'hr.employee.leave.request'
 
+    serial_number = fields.Char(String='Serial Number')
     name = fields.Many2one('hr.employee', String="Employee Name", ondelete='cascade', required=True)
     department_id = fields.Many2one('hr.department', String="Departement", required=True)
     leave_type_id = fields.Many2one('hr.employee.leave.request.type', string="Leave Type", required=True)
@@ -262,3 +263,23 @@ class leave_request(models.Model):
                               ('cancel', 'Cancel'), ('reject', 'Reject')], string="Status")
     attachment = fields.Binary(String='Attachment')
     attachment_name = fields.Char(String='File Name')
+
+    @api.multi
+    def action_draft(self):
+        self.state = 'draft'
+
+    @api.multi
+    def action_wait_approval(self):
+        self.state = 'wait approval'
+
+    @api.multi
+    def action_approved(self):
+        self.state = 'approved'
+
+    @api.multi
+    def action_cancel(self):
+        self.state = 'cancel'
+
+    @api.multi
+    def action_reject(self):
+        self.state = 'reject'
