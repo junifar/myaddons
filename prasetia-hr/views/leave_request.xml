@@ -21,6 +21,12 @@
                                 <field name="reason"/>
                             </group>
 						</group>
+						<group string="Documentation">
+							<group>
+								<field widget="binary" height="64" name="attachment" filename="attachment_name" />
+								<field name="attachment_name"/>
+							</group>
+						</group>
 					</sheet>
 				</form>
 			</field>

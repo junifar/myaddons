@@ -258,3 +258,7 @@ class leave_request(models.Model):
     from_date = fields.Date(String="From Date", required=True)
     to_date = fields.Date(String="To Date", required=True)
     reason = fields.Text(String="Reason", required=True)
+    state = fields.Selection([('draft', 'Draft'), ('wait approval', 'Wait Approval HRD'), ('approved', 'Approved'),
+                              ('cancel', 'Cancel'), ('reject', 'Reject')], string="Status")
+    attachment = fields.Binary(String='Attachment')
+    attachment_name = fields.Char(String='File Name')
