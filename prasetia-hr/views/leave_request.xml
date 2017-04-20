@@ -16,7 +16,7 @@
                                 states="wait approval" class="oe_highlight" confirm="Are you sure you want to do this ?"/>
 						<button name="action_draft" type="workflow" string="Set to Draft"
                                 states="wait approval" class="oe_highlight" confirm="Are you sure you want to do this ?"/>
-						<field name="state" widget="statusbar"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,wait approval, reject, cancel, approved"/>
 					</header>
 					<sheet>
                         <h1>
