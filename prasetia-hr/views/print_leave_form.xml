@@ -1,0 +1,141 @@
+<odoo>
+
+    <record id="paper_format_A4" model="report.paperformat">
+        <field name="name">Report Format A4 Potrait</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">30</field>
+        <field name="margin_left">30</field>
+        <field name="margin_right">30</field>
+        <field name="header_line" eval="True"/>
+        <field name="header_spacing">30</field>
+        <field name="dpi">110</field>
+    </record>
+
+    <report
+			id="action_print_leave_form"
+			model = "hr.employee.leave.request"
+			string = "Formulir Tidak Hadir Bekerja"
+			report_type = "qweb-pdf"
+			paperformat="paper_format_A4"
+			name = "prasetia-hr.print_leave_form"
+			file = "prasetia-hr.views.print_leave_form"
+            menu="False"
+			/>
+
+    <template id="print_leave_form">
+        <!--<t t-set="data_report_header_spacing" t-value="9"/>-->
+        <!--<t t-set="data_report_dpi" t-value="110"/>-->
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="data">
+                <div class="header">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                        </div>
+                        <div class="col-xs-2 col-xs-offset-2 text-center">
+                            <!-- <span t-esc="company.name"/> -->
+                        </div>
+                        <div class="col-xs-2 col-xs-offset-2 text-right">
+                            <ul class="list-inline">
+                                <li>
+                                    <span class="page"/>
+                                </li>
+                                <li>/</li>
+                                <li>
+                                    <span class="topage"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row col-xs-12 text-right">
+                        <h2>FORMULIR TIDAK HADIR BEKERJA</h2>
+                        <br/>
+                        <hr/>
+                        <strong>(Lampirkan dengan surat-surat yang diperlukan)</strong>
+                    </div>
+                </div>
+                <div class="page">
+                    <br/><br/><br/><br/>
+                    <br/><br/><br/><br/>
+                    <br/><br/><br/><br/>
+                    <div class="row">
+                        <div class="cols-xs-12 text-center"><h4>DATA PERKARA TILANG DAN BARANG BUKTI</h4></div>
+                    </div>
+                    <!--<div class="container">-->
+                        <!--<div class="row pull-left">-->
+                            <!--<div class="row text-center">-->
+                                <!--<img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' %-->
+                            <!--('Code128', data.serial_number, 800, 120)"-->
+                                     <!--style="max-height:20pt;max-width:100%;" align="center"/>-->
+                            <!--</div>-->
+                            <!--<div class="row text-center">-->
+                                <!--<p>-->
+                                    <!--<t t-esc="data.serial_number"/>-->
+                                <!--</p>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;<div class="col-sm-2">&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="col-sm-9 text-center">&ndash;&gt;-->
+                            <!--&lt;!&ndash;&#45;&#45;leave blank&#45;&#45;&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--</div>-->
+                        <!--<br/>-->
+                        <!--<br/>-->
+                        <!--<div class="row text-center">-->
+                            <!--<h3>FORMULIR TIDAK HADIR BEKERJA</h3>-->
+                            <!--<hr/>-->
+                            <!--<strong>(Lampirkan dengan surat-surat yang diperlukan)</strong>-->
+                        <!--</div>-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-4 col-md-offset-4">-->
+                                <!--<table class="table table-bordered">-->
+                                    <!--<tbody>-->
+                                        <!--<tr>-->
+                                            <!--<td>Nomor Registrasi</td>-->
+                                            <!--<td>-->
+                                                <!--<t t-esc="data.name.registration_id"/>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>Nama</td>-->
+                                            <!--<td>-->
+                                                <!--<t t-esc="data.name.name"/>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>Departement</td>-->
+                                            <!--<td>-->
+                                                <!--<t t-esc="data.name.department_id.name"/>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                    <!--</tbody>-->
+                                <!--</table>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="row">-->
+                            <!--Dengan ini saya mengajukan cuti untuk keperluan-->
+                            <!--<strong>-->
+                                <!--<t t-esc="data.leave_type_id.name"/>-->
+                            <!--</strong>-->
+                            <!--<br/>-->
+                            <!--Terhitung mulai tanggal-->
+                            <!--<strong>-->
+                                <!--<t t-esc="data.from_date"/>-->
+                            <!--</strong>-->
+                            <!--sampai tanggal-->
+                            <!--<strong>-->
+                                <!--<t t-esc="data.to_date"/>-->
+                            <!--</strong>-->
+                            <!--<br/>-->
+                            <!--Alasan penggunaan Cuti/Ijin untuk keperluan-->
+                            <!--<t t-esc="data.reason"/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

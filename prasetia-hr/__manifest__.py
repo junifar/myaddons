@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     'name': "prasetia-hr",
 
@@ -36,6 +35,7 @@
         'views/attendance_report.xml',
         'views/leave_request.xml',
         'views/leave_request_workflow.xml',
+        'views/print_leave_form.xml',
         'views/leave_request_type.xml',
         'views/menus.xml',
     ],
@@ -44,3 +44,4 @@
         'demo/demo.xml',
     ],
 }
+# -*- coding: utf-8 -*-
