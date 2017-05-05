@@ -1,0 +1,12 @@
+<odoo>
+    <template id="report_personal_absen">
+        <t t-set="data_report_margin_top" t-value="12"/>
+        <t t-set="data_report_header_spacing" t-value="9"/>
+        <t t-set="data_report_dpi" t-value="110"/>
+        <div class="header" style="font-size: 12pt;font-family:Helvetica,Verdana,Arial,sans,Lucida Grande,Calibri;">
+            <div class="row">
+                <div class="cols-xs-12 text-center"><h4>REKAPITULASI DATA PERKARA PELANGGARAN LALU LITAS / TILANG</h4></div>
+            </div>
+        </div>
+    </template>
+</odoo>

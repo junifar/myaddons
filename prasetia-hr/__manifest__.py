@@ -38,6 +38,8 @@
         'views/print_leave_form.xml',
         'views/leave_request_type.xml',
         'views/menus.xml',
+        'views/prasetia_hr_report.xml',
+        'views/report_personal_absen.xml',
         'wizard/personal_absen_views.xml',
     ],
     # only loaded in demonstration mode
