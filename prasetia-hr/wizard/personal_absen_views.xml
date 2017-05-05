@@ -37,16 +37,16 @@
             <field name="target">new</field>
         </record>
 
-        <!--<record-->
-			<!--id="personal_absen_action_values"-->
-			<!--model="ir.values">-->
-			<!--<field name="model_id" ref="tilang.model_court_kejaksaan_tinggi"/>-->
-			<!--<field name="name">Rekap Tilang Kejati</field>-->
-			<!--<field name="key2">rekap_tilang_kejati_multi</field>-->
-			<!--<field name="value" eval="'ir.actions.act_window,' +str(ref('action_wizard_tilang_kejati'))"/>-->
-			<!--<field name="key">action</field>-->
-			<!--<field name="model">court.kejaksaan_tinggi</field>-->
-		<!--</record>-->
+        <record
+			id="personal_absen_action_values"
+			model="ir.values">
+			<field name="model_id" ref="prasetia-hr.model_hr_employee_attendance"/>
+			<field name="name">Personal Absen</field>
+			<field name="key2">Personal Absenr</field>
+			<field name="value" eval="'ir.actions.act_window,' +str(ref('personal_absen_action'))"/>
+			<field name="key">action</field>
+			<field name="model">hr.employee.attendance</field>
+		</record>
 
         <menuitem id="personal_absen_menu_action" name="Personal Absent" parent="hr.menu_hr_root" action="personal_absen_action"/>
     </data>
