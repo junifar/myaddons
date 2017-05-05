@@ -38,6 +38,7 @@
         'views/print_leave_form.xml',
         'views/leave_request_type.xml',
         'views/menus.xml',
+        'wizard/personal_absen_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
