@@ -1,12 +1,19 @@
 <odoo>
     <template id="report_personal_absen">
-        <t t-set="data_report_margin_top" t-value="12"/>
-        <t t-set="data_report_header_spacing" t-value="9"/>
-        <t t-set="data_report_dpi" t-value="110"/>
-        <div class="header" style="font-size: 12pt;font-family:Helvetica,Verdana,Arial,sans,Lucida Grande,Calibri;">
-            <div class="row">
-                <div class="cols-xs-12 text-center"><h4>REKAPITULASI DATA PERKARA PELANGGARAN LALU LITAS / TILANG</h4></div>
-            </div>
-        </div>
+        <!--<t t-set="data_report_margin_top" t-value="12"/>-->
+        <!--<t t-set="data_report_header_spacing" t-value="9"/>-->
+        <!--<t t-set="data_report_dpi" t-value="110"/>-->
+        <!--<div class="header" style="font-size: 12pt;font-family:Helvetica,Verdana,Arial,sans,Lucida Grande,Calibri;">-->
+            <!--<div class="row">-->
+                <!--<div class="cols-xs-12 text-center"><h4>REKAPITULASI DATA PERKARA PELANGGARAN LALU LITAS / TILANG</h4></div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <h1>Test</h1>
+                </div>
+            </t>
+        </t>
     </template>
 </odoo>

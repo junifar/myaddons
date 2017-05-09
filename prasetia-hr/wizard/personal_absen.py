@@ -26,8 +26,9 @@ class personal_absen(models.TransientModel):
     year_filter = fields.Integer(string="Tahun", default=datetime.now().year)
 
     def _print_data(self, data):
-        records = self.env[data['model']].browse(data.get('ids',[]))
-        return None
+        records = self.env[data['model']].browse(data.get('ids', []))
+        return self.env['report'].with_context(landscape=True).get_action(records, 'report_personal_absen',
+                                                                          data=data)
 
     @api.multi
     def show_data(self):
@@ -41,6 +42,12 @@ class personal_absen(models.TransientModel):
             except ValueError:
                 raise UserError(_("Invalid year input"))
 
-        data = {'ids': self_obj.get('active_ids', []), 'model': self_obj.get('active_model', 'ir.ui.menu'),
-                'form': self.read(['employee_id', 'month_filter', 'year_filter'])}
+        # data = {'ids': self_obj.get('active_ids', []), 'model': self_obj.get('active_model', 'ir.ui.menu'),
+        #         'form': self.read(['employee_id', 'month_filter', 'year_filter'])[0]}
+
+        data = {}
+        data['ids'] = self_obj.get('active_ids', [])
+        data['model'] = self_obj.get('active_model', 'ir.ui.menu')
+        data['form'] = self.read(['employee_id', 'month_filter', 'year_filter'])[0]
+
         return self._print_data(data)
