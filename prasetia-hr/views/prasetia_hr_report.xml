@@ -15,9 +15,9 @@
 		</record>
 
         <report id="action_report_personal_absen"
-			model = 'hr.employee.attendance'
+			model = 'hr.employee.attendance1'
 			string = "Report Personal Absen"
-			report_type = "qweb-html"
+			report_type = "qweb-pdf"
 			paperformat="paper_format_A4"
 			name = "report_personal_absen"
 			file = "report_personal_absen"

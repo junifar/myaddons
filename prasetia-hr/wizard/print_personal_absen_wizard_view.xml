@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="wizard_print_personal_absen_form">
+			<field name="name">wizard.form.personal.absent</field>
+			<field name="model">personal.absent.report</field>
+			<field name="arch" type="xml">
+				<form string="Personal Absent">
+					<group>
+						<field name="employee_id"/>
+					</group>
+					<group>
+                        <group>
+                            <field name="month_filter"/>
+                        </group>
+                        <group>
+                            <field name="year_filter" widget="payment"/>
+                        </group>
+					</group>
+					<footer>
+                        <button name="show_data" type="object"
+                                string="show" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+				</form>
+			</field>
+		</record>
+
+        <record id="print_personal_absen_action" model="ir.actions.act_window">
+            <field name="name">Wizard Personal Absen</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">personal.absent.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_print_personal_absen_form"/>
+            <field name="target">new</field>
+        </record>
+        <menuitem id="print_personal_absen_menu_action" name="Print Personal Absen" parent="hr.menu_hr_root" action="print_personal_absen_action"/>
+    </data>
+</odoo>
