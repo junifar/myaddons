@@ -15,12 +15,12 @@
 		</record>
 
         <report id="action_report_personal_absen"
-			model = 'hr.employee.attendance1'
+			model = 'hr.employee.attendance'
 			string = "Report Personal Absen"
-			report_type = "qweb-pdf"
+			report_type = "qweb-html"
 			paperformat="paper_format_A4"
-			name = "report_personal_absen"
-			file = "report_personal_absen"
+			name = "prasetia-hr.report_personal_absen"
+			file = "prasetia-hr.report_personal_absen"
 			/>
     </data>
 </odoo>

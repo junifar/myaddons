@@ -27,7 +27,7 @@ class personal_absen(models.TransientModel):
 
     def _print_data(self, data):
         records = self.env[data['model']].browse(data.get('ids', []))
-        return self.env['report'].with_context(landscape=True).get_action(records, 'report_personal_absen',
+        return self.env['report'].with_context(landscape=False).get_action(records, 'prasetia-hr.report_personal_absen',
                                                                           data=data)
 
     @api.multi

@@ -41,7 +41,7 @@
         'views/report_personal_absen.xml',
         'views/prasetia_hr_report.xml',
         'wizard/personal_absen_views.xml',
-        'wizard/print_personal_absen_wizard_view.xml',
+        # 'wizard/print_personal_absen_wizard_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -14,4 +14,4 @@ class ReportPersonalAbsen(models.AbstractModel):
             'data': data['form'],
             'docs': docs,
         }
-        return self.env['report'].render('report_personal_absen', docargs)
+        return self.env['report'].render('prasetia-hr.report_personal_absen', docargs)
