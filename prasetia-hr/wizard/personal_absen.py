@@ -49,5 +49,4 @@ class personal_absen(models.TransientModel):
         data['ids'] = self_obj.get('active_ids', [])
         data['model'] = self_obj.get('active_model', 'ir.ui.menu')
         data['form'] = self.read(['employee_id', 'month_filter', 'year_filter'])[0]
-
         return self._print_data(data)

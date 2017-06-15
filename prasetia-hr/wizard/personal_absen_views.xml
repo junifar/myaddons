@@ -42,7 +42,7 @@
 			model="ir.values">
 			<field name="model_id" ref="prasetia-hr.model_hr_employee_attendance"/>
 			<field name="name">Personal Absen</field>
-			<field name="key2">Personal Absent</field>
+			<field name="key2">personal_absent_multi</field>
 			<field name="value" eval="'ir.actions.act_window,' +str(ref('personal_absen_action'))"/>
 			<field name="key">action</field>
 			<field name="model">hr.employee.attendance</field>
