@@ -26,12 +26,10 @@ class personal_absen(models.TransientModel):
     year_filter = fields.Integer(string="Tahun", default=datetime.now().year)
 
     def _print_data(self, data):
-        records = self.env[data['model']].browse(data.get('ids', []))
-        return self.env['report'].with_context(landscape=False).get_action(records, 'prasetia-hr.report_absen', data=data)
+        return self.env['report'].with_context(landscape=False).get_action(self, 'prasetia_hr.report_personal_absen', data=data)
 
     @api.multi
     def show_data(self):
-        print('===pass phase 1010===')
         self.ensure_one()
         self_obj = self.env.context
 

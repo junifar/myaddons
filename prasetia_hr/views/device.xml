@@ -1,0 +1,80 @@
+<odoo>
+    <data>
+         <record model="ir.ui.view" id="device_attendance_form_view">
+             <field name="name">Device Attendance</field>
+             <field name="model">device.attendance</field>
+             <field name="arch" type="xml">
+                <form string="Device Registration">
+					<header></header>
+                    <sheet>
+                        <h1>
+                            <field name="name" placeholder="Device Name"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="device_attendance_type_id">
+                                    <form string="Device Type">
+                                        <header></header>
+                                        <sheet>
+                                            <field name="name" placeholder="Nama"/>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </group>
+                            <group>
+                                <field name="ip_address"/>
+                                <field name="port"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="attendance_user_information" string="User list">
+                                <field name="device_attendance_user_ids">
+                                    <tree string="User List" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="user_id"/>
+                                        <field name="employee_id" string="Employee Name"/>
+                                    </tree>
+                                    <form string="User Device">
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="user_id"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                        <footer>
+                            <button name="import_user" type="object"
+                                    string="Import User" class="oe_highlight oe_edit_only" confirm="Are you sure you want to do this?"/>
+                        </footer>
+                    </sheet>
+                </form>
+             </field>
+         </record>
+
+        <record model="ir.ui.view" id="device_attendance_tree_view">
+            <field name="name">Device Attendance</field>
+			<field name="model">device.attendance</field>
+            <field name="arch" type="xml">
+                <tree string="Device List" create="true">
+                    <field name="device_attendance_type_id"/>
+                    <field name="name"/>
+                    <field name="ip_address"/>
+                    <field name="port"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="device_attendance_list_action">
+			<field name="name">Device Attendance</field>
+			<field name="res_model">device.attendance</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Device Attendance List
+				</p>
+			</field>
+		</record>
+    </data>
+</odoo>

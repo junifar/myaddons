@@ -1,0 +1,49 @@
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="wizard_form_family">
+			<field name="name">wizard.form.rekap.atk</field>
+			<field name="model">family.wizard</field>
+			<field name="arch" type="xml">
+				<form string="Rekap Family">
+                    <group>
+                        <field name="employee_id"/>
+                    </group>
+                    <group>
+                        <field name="date_filter"/>
+                    </group>
+					<footer>
+                        <button name="print_report" type="object"
+                                string="Print" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+				</form>
+			</field>
+		</record>
+
+        <record id="family_wizard_action" model="ir.actions.act_window">
+			<field name="name">Wizard Report Family</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">family.wizard</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="wizard_form_family"/>
+			<field name="target">new</field>
+		</record>
+
+        <record
+			id="family_wizard_action_values"
+			model="ir.values">
+			<field name="model_id" ref="prasetia_hr.model_hr_employee_family"/>
+			<field name="name">Rekap Family</field>
+			<field name="key2">rekap_family</field>
+			<field name="value" eval="'ir.actions.act_window,' +str(ref('family_wizard_action'))"/>
+			<field name="key">action</field>
+			<field name="model">hr.employee.family</field>
+		</record>
+
+        <menuitem id="family_wizard_menu_action"
+                  name="Family Report" parent="employee_absen_menu" action="family_wizard_action"/>
+    </data>
+</openerp>

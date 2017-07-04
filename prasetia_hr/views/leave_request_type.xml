@@ -1,0 +1,43 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="leave_request_type_form_view">
+			<field name="name">Leave Request Type</field>
+			<field name="model">hr.employee.leave.request.type</field>
+			<field name="arch" type="xml">
+				<form string="Jenis Cuti">
+					<header></header>
+					<sheet>
+                        <group>
+                            <group>
+                                <field name="name" placeholder="name"/>
+                            </group>
+                            <group></group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="leave_request_type_tree_view">
+            <field name="name">Leave Request Type</field>
+			<field name="model">hr.employee.leave.request.type</field>
+			<field name="arch" type="xml">
+				<tree string="Jenis Cuti" create="true">
+                    <field name="name"/>
+				</tree>
+			</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="leave_request_type_list_action">
+			<field name="name">Leave Request Type</field>
+			<field name="res_model">hr.employee.leave.request.type</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Tipe Cuti
+				</p>
+			</field>
+		</record>
+    </data>
+</odoo>

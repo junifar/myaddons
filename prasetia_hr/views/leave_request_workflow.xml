@@ -1,0 +1,76 @@
+<odoo>
+    <data>
+        <record model="workflow" id="wkf_leave_request">
+			<field name="name">Leave Request Workflow</field>
+			<field name="osv">hr.employee.leave.request</field>
+			<field name="on_create">True</field>
+		</record>
+
+        <record model="workflow.activity" id="draft">
+			<field name="name">Draft</field>
+			<field name="wkf_id" ref="wkf_leave_request"/>
+			<field name="flow_start" eval="True"></field>
+			<field name="kind">function</field>
+			<field name="action">action_draft()</field>
+		</record>
+
+        <record model="workflow.activity" id="wait_approval">
+			<field name="name">Wait Approval</field>
+			<field name="wkf_id" ref="wkf_leave_request"/>
+			<field name="kind">function</field>
+			<field name="action">action_wait_approval()</field>
+		</record>
+
+        <record model="workflow.activity" id="approved">
+			<field name="name">Aprroved</field>
+			<field name="wkf_id" ref="wkf_leave_request"/>
+			<field name="kind">function</field>
+			<field name="action">action_approved()</field>
+		</record>
+
+        <record model="workflow.activity" id="cancel">
+			<field name="name">Cencel</field>
+			<field name="wkf_id" ref="wkf_leave_request"/>
+			<field name="kind">function</field>
+			<field name="action">action_cancel()</field>
+		</record>
+
+        <record model="workflow.activity" id="reject">
+			<field name="name">Reject</field>
+			<field name="wkf_id" ref="wkf_leave_request"/>
+			<field name="kind">function</field>
+			<field name="action">action_reject()</field>
+		</record>
+
+        <record model="workflow.transition" id="draft_to_wait_approval">
+			<field name="act_from" ref="draft"/>
+			<field name="act_to" ref="wait_approval" />
+			<field name="signal">action_wait_approval</field>
+		</record>
+
+        <record model="workflow.transition" id="wait_approval_to_approved">
+			<field name="act_from" ref="wait_approval"/>
+			<field name="act_to" ref="approved" />
+			<field name="signal">action_approved</field>
+		</record>
+
+        <record model="workflow.transition" id="wait_approval_to_reject">
+			<field name="act_from" ref="wait_approval"/>
+			<field name="act_to" ref="reject" />
+			<field name="signal">action_reject</field>
+		</record>
+
+        <record model="workflow.transition" id="wait_approval_to_cancel">
+			<field name="act_from" ref="wait_approval"/>
+			<field name="act_to" ref="cancel" />
+			<field name="signal">action_cancel</field>
+		</record>
+
+        <record model="workflow.transition" id="wait_approval_to_draft">
+			<field name="act_from" ref="wait_approval"/>
+			<field name="act_to" ref="draft" />
+			<field name="signal">action_draft</field>
+		</record>
+
+    </data>
+</odoo>

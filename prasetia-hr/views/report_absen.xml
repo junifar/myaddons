@@ -1,0 +1,17 @@
+<odoo>
+    <template id="report_absen">
+        <t t-set="data_report_margin_top" t-value="12"/>
+        <t t-set="data_report_header_spacing" t-value="9"/>
+        <t t-set="data_report_dpi" t-value="110"/>
+        <div class="header">
+            <div class="row">
+                <div class="cols-xs-12 text-center"><h4>Laporan Pengeluaran ATK <span t-esc="tahun_filter"/></h4></div>
+            </div>
+        </div>
+        <div class="page">
+            <div class="row">
+                <h1>Its works</h1>
+            </div>
+        </div>
+    </template>
+</odoo>

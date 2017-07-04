@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <!--<menuitem id="family_menu" name="Keluarga" parent="hr.menu_hr_root" action="family_list_action" />-->
+        <menuitem id="personal_information_menu" name="Personal Info" parent="hr.menu_hr_root" sequence="3"/>
+        <menuitem id="family_menu" name="Keluarga" parent="personal_information_menu" action="hr_family_list_action" />
+        <!--<menuitem id="education_menu" name="Pendidikan" parent="hr.menu_hr_root" action="education_list_action" />-->
+        <menuitem id="education_menu" name="Pendidikan" parent="personal_information_menu" action="hr_education_list_action" />
+        <menuitem id="work_history_menu" name="Riwayat Pekerjaan" parent="personal_information_menu" action="hr_work_history_list_action" />
+        <menuitem id="import_attendance_menu" name="Import Absen" parent="hr.menu_hr_root" action="attendance_import_list_action" />
+
+
+        <menuitem id="employee_master_menu" name="Master Data" parent="hr.menu_hr_root" sequence="4"/>
+        <menuitem id="device_menu" name="Devices" parent="employee_master_menu" action="device_attendance_list_action" />
+        <menuitem id="employee_attendance_menu_root" name="Attendance" web_icon="prasetia-hr,static/description/icon.png"/>
+        <menuitem id="employee_attendance_menu" name="Attendance" parent="employee_attendance_menu_root"
+        action="employee_attendance_list_action"/>
+        <menuitem id="attendance_report_menu" name="Attendance Report" parent="employee_attendance_menu_root"
+        action="attendance_report_list_action"/>
+        <menuitem id="employee_absen_menu" name="Absen" parent="hr.menu_hr_root" sequence="4"/>
+        <menuitem id="leave_request_menu" name="Permohonan Cuti" parent="employee_absen_menu"
+        action="leave_request_list_action"/>
+        <menuitem id="leave_request_type_menu" name="Jenis Cuti" parent="employee_master_menu"
+        action="leave_request_type_list_action"/>
+        <!--<menuitem id="employee_attendance_menu_kanban" name="Attendance Kanban" parent="employee_attendance_menu_root"-->
+        <!--action="employee_attendance_list_action_kanban"/>-->
+    </data>
+</odoo>

@@ -1,0 +1,82 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="leave_request_form_view">
+			<field name="name">Leave Request</field>
+			<field name="model">hr.employee.leave.request</field>
+			<field name="arch" type="xml">
+				<form string="Permohonan Cuti">
+					<header>
+						<button name="action_wait_approval" type="workflow" string="Process"
+                                states="draft" class="oe_highlight" confirm="Are you sure you want to do this ?"/>
+						<button name="action_approved" type="workflow" string="Approve"
+                                states="wait approval" class="oe_highlight" confirm="Are you sure you want to do this ?"/>
+						<button name="action_reject" type="workflow" string="Reject"
+                                states="wait approval" class="oe_highlight" confirm="Are you sure you want to do this ?"/>
+						<button name="action_cancel" type="workflow" string="Cancel"
+                                states="wait approval" class="oe_highlight" confirm="Are you sure you want to do this ?"/>
+						<button name="action_draft" type="workflow" string="Set to Draft"
+                                states="wait approval" class="oe_highlight" confirm="Are you sure you want to do this ?"/>
+						<button name="%(action_print_leave_form)d" type="action" string="Print" class="oe_highlight"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,wait approval, reject, cancel, approved"/>
+					</header>
+					<sheet>
+						<div class="oe_title">
+							<h1>
+								<field name="name" placeholder="name"/>
+							</h1>
+							<group>
+								<group>
+									<field name="serial_number"/>
+								</group>
+								<group></group>
+							</group>
+						</div>
+						<group>
+                            <group>
+                                <field name="department_id"/>
+                                <field name="leave_type_id"/>
+                            </group>
+                            <group>
+                                <field name="from_date"/>
+                                <field name="to_date"/>
+                                <field name="reason"/>
+                            </group>
+						</group>
+						<group string="Documentation">
+							<group>
+								<field widget="binary" height="64" name="attachment" filename="attachment_name" />
+								<field name="attachment_name"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="leave_request_tree_view">
+            <field name="name">Leave Request</field>
+			<field name="model">hr.employee.leave.request</field>
+			<field name="arch" type="xml">
+				<tree string="Permohonan Cuti" create="true">
+                    <field name="name"/>
+                    <field name="department_id"/>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="reason"/>
+				</tree>
+			</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="leave_request_list_action">
+			<field name="name">Leave Request</field>
+			<field name="res_model">hr.employee.leave.request</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Ijin Cuti
+				</p>
+			</field>
+		</record>
+    </data>
+</odoo>

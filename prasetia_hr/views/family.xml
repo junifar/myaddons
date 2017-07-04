@@ -1,0 +1,55 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="family_form_view">
+			<field name="name">Family</field>
+			<field name="model">hr.employee.family</field>
+			<field name="arch" type="xml">
+				<form string="Keluarga">
+					<header></header>
+					<sheet>
+                        <h1>
+                            <field name="name" placeholder="Nama"/>
+                        </h1>
+						<group>
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="birth_place"/>
+                                <field name="date_birth"/>
+                            </group>
+                            <group>
+                                <field name="relation_status"/>
+                            </group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="family_tree_view">
+			<field name="name">Family</field>
+			<field name="model">hr.employee.family</field>
+			<field name="arch" type="xml">
+				<tree string="Keluarga" create="true">
+                    <field name="employee_id"/>
+                    <field name="name"/>
+                    <field name="birth_place"/>
+					<field name="date_birth"/>
+					<field name="relation_status"/>
+				</tree>
+			</field>
+		</record>
+
+        <record model="ir.actions.act_window" id="family_list_action">
+			<field name="name">Family</field>
+			<field name="res_model">hr.employee.family</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Data Keluarga Karyawan
+				</p>
+			</field>
+		</record>
+    </data>
+</odoo>

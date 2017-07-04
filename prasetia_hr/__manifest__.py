@@ -1,5 +1,5 @@
 {
-    'name': "prasetia-hr",
+    'name': "prasetia human resource",
 
     'summary': """
         Module Human Resource In Prasetia""",
@@ -18,7 +18,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'hr'],
+    'depends': ['base', 'hr', 'report'],
 
     # always loaded
     'data': [
@@ -39,9 +39,11 @@
         'views/leave_request_type.xml',
         'views/menus.xml',
         'views/report_personal_absen.xml',
-        'views/prasetia_hr_report.xml',
         'views/report_absen.xml',
+        'views/report_family.xml',
+        'views/prasetia_hr_report.xml',
         'wizard/personal_absen_views.xml',
+        'wizard/family_wizard_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
