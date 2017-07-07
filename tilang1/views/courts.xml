@@ -1,0 +1,360 @@
+<openerp>
+	<data>
+
+		<record model="ir.ui.view" id="court_case_pivot_view">
+			<field name="name">Rekap Sidang</field>
+			<field name="model">court.case</field>
+			<field name="arch" type="xml">
+				<pivot string="Case Summaries">
+					<field name="kejaksaan_tinggi_id" type="row"/>
+					<field name="kejaksaan_negeri_id" type="row"/>
+					<field name="tanggal_tilang" interval="quarter" type="col"/>
+					<field name="denda" type="measure"/>
+					<field name="biaya_perkara" type="measure"/>
+					<field name="uang_titipan" type="measure"/>
+					<field name="jumlah_bayar" type="measure"/>
+					<field name="selisih_uang_titipan" type="measure"/>
+				</pivot>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="court_case_graph_view">
+            <field name="name">Perkara Sidang</field>
+            <field name="model">court.case</field>
+            <field name="arch" type="xml">
+                <graph string="Case Summaries">
+                    <field name="kejaksaan_tinggi_id" type="row"/>
+					<field name="kejaksaan_negeri_id" type="row"/>
+					<field name="tanggal_tilang" interval="quarter" type="col"/>
+					<field name="denda" type="measure"/>
+					<field name="biaya_perkara" type="measure"/>
+					<field name="uang_titipan" type="measure"/>
+					<field name="jumlah_bayar" type="measure"/>
+					<field name="selisih_uang_titipan" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+		<record model="ir.ui.view" id="court_case_form_view">
+			<field name="name">Perkara Sidang</field>
+			<field name="model">court.case</field>
+			<field name="arch" type="xml">
+				<form string="Form Perkara Sidang">
+					<header>
+						<button name="action_berkas_tilang" type="workflow" string="Berkas Tilang" states="sidang" groups="tilang.group_kejari_staff,tilang.group_kejari_manager"/>
+						<button name="action_sidang" type="workflow" string="Sidang" states="berkas tilang,setoran ke negara" groups="tilang.group_kejari_staff,tilang.group_kejari_manager"/>
+						<button name="action_setoran_ke_negara" type="workflow" string="Setoran ke Negara" states="sidang,pengembalian barang bukti" groups="tilang.group_administratsi_staff"/>
+						<button name="action_pengembalian_barang_bukti" type="workflow" string="Pengembalian Barang Bukti" states="setoran ke negara,arsip" groups="tilang.group_pengembalian_barang_bukti_staff"/>
+						<button name="action_arsip" type="workflow" string="Arsip" states="pengembalian barang bukti" groups="tilang.group_kejari_staff,tilang.group_kejari_manager"/>
+						<!-- <button name="action_berkas tilang" type="workflow" string="Reset to Pencatatan Berkas" states="setoran ke negara"/> -->
+						<field name="state" widget="statusbar"/>
+					</header>
+					<sheet>
+						<!-- TODO : Will Be Modified Later -->
+						<!-- <group>
+							<button name="export_case" string="Export This Record" type="object" />
+						</group> -->
+						<group>
+							<group>
+								<field name="kejaksaan_tinggi_id" class="oe_inline"/>
+							</group>
+							<group>
+								<field name="kejaksaan_negeri_id" class="oe_inline" domain="[('kejaksaan_tinggi_id','=',kejaksaan_tinggi_id)]"/>
+							</group>
+						</group>
+						<div class="oe_title">
+							<label for="nama_terdakwa" class="oe_edit_only"/>
+							<h1>
+								<field name="nama_terdakwa" attrs="{'readonly':[('state','in',['setoran ke negara','pengembalian barang bukti','arsip'])]}"/>
+							</h1>
+						</div>
+						<div class="o_horizontal_separator">
+					        Informasi Umum
+					    </div>							
+						<group>
+							<field name="alamat_terdakwa" attrs="{'readonly':[('state','in',['setoran ke negara','pengembalian barang bukti','arsip'])]}"/>
+						</group>
+						<group>
+							<field name="nomor_tilang" attrs="{'readonly':[('state','in',['setoran ke negara','pengembalian barang bukti','arsip'])]}"/>
+						</group>
+						<group string="Informasi Tilang">
+							<group>
+								<field name="pasal" attrs="{'readonly':[('state','in',['setoran ke negara','pengembalian barang bukti','arsip'])]}"/>
+								<field name="uang_titipan" attrs="{'readonly':[('state','in',['setoran ke negara','pengembalian barang bukti','arsip'])]}"/>
+								<field name="barang_bukti_type" attrs="{'readonly':[('state','in',['setoran ke negara','pengembalian barang bukti','arsip'])]}"/>
+								<!-- <field name="warna_surat_tilang" widget="radio"  options="{'horizontal': true}" attrs="{'readonly':[('state','in',['setoran ke negara','pengembalian barang bukti','arsip'])]}"/> -->
+							</group>
+							<group>
+								<field name="tanggal_tilang" attrs="{'readonly':[('state','in',['setoran ke negara','pengembalian barang bukti','arsip'])]}"/>
+								<!-- <field name="uang_titipan" attrs="{'readonly':[('state','in',['setoran ke negara','pengembalian barang bukti','arsip'])], 'invisible':[('warna_surat_tilang','=','merah')]}"/>
+								<field name="barang_bukti" attrs="{'readonly':[('state','in',['setoran ke negara','pengembalian barang bukti','arsip'])], 'invisible':[('warna_surat_tilang','=','biru')]}"/> -->
+								<field name="barang_bukti" attrs="{'readonly':[('state','in',['setoran ke negara','pengembalian barang bukti','arsip'])]}"/>
+							</group>
+						</group>
+						<group string="Sidang dan Keputusan">
+							<group>
+								<field name="no_putusan" attrs="{'readonly':[('state','in',['berkas tilang','setoran ke negara','pengembalian barang bukti','arsip'])]}"/>
+								<field name="biaya_perkara" attrs="{'readonly':[('state','in',['berkas tilang','setoran ke negara','pengembalian barang bukti','arsip'])]}"/>
+								<field name="denda" attrs="{'readonly':[('state','in',['berkas tilang','setoran ke negara','pengembalian barang bukti','arsip'])]}"/>
+							</group>
+							<group>
+								<field name="tanggal_putusan" attrs="{'readonly':[('state','in',['berkas tilang','setoran ke negara','pengembalian barang bukti','arsip'])]}"/>
+								<field name="status_kehadiran" widget="radio"  options="{'horizontal': true}" attrs="{'readonly':[('state','in',['berkas tilang','setoran ke negara','pengembalian barang bukti','arsip'])]}"/>
+								<field name="status_hadir_kejaksaan" widget="radio"  options="{'horizontal': true}" attrs="{'readonly':[('state','in',['berkas tilang','setoran ke negara','pengembalian barang bukti','arsip'])]}"/>
+							</group>
+						</group>
+						<group string="Setoran Ke Negara">
+							<group>
+								<field name="no_setoran_ke_kas_negara" attrs="{'readonly':[('state','in',['berkas tilang','pengembalian barang bukti','arsip'])]}"/>
+								<field name="jumlah_bayar"/>								
+								<field name="remark" attrs="{'readonly':[('state','in',['berkas tilang','pengembalian barang bukti','arsip'])]}"/>
+							</group>
+							<group>
+								<field name="tgl_setoran_ke_kas_negara" attrs="{'readonly':[('state','in',['berkas tilang','pengembalian barang bukti','arsip'])]}"/>
+								<!-- <field name="selisih_uang_titipan" attrs="{'readonly':[('state','in',['setoran ke negara','pengembalian barang bukti','arsip'])]}"/> -->
+								<field name="selisih_uang_titipan"/>
+								<field name="metode_pembayaran" widget="radio" options="{'horizontal':true}" attrs="{'readonly':[('state','in',['berkas tilang','pengembalian barang bukti','arsip'])]}"/>
+							</group>
+						</group>
+						<!-- <group string="Pengembalian Barang Bukti" attrs="{'invisible':[('warna_surat_tilang','=','biru')]}"> -->
+						<group string="Pengembalian Barang Bukti">
+							<group>
+								<field name="status_pengembalian_barang_bukti" attrs="{'readonly':[('state','not in',['pengembalian barang bukti'])]}"/>
+							</group>
+							<group>
+								<field name="tanggal_pengembalian_barang_bukti" attrs="{'readonly':[('state','not in',['pengembalian barang bukti'])]}"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="court_kejaksaan_negeri_form_view">
+			<field name="name">Kejaksaan Negeri</field>
+			<field name="model">court.kejaksaan_negeri</field>
+			<field name="arch" type="xml">
+				<form string="Kejaksaan Negeri Form">
+					<sheet>
+						<group string="Kejaksaan Negeri Information">
+							<group>
+								<field name="name"/>
+							</group>
+							<group>
+								<field name="kejaksaan_tinggi_id"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="Informasi Tilang">
+								<field name="case_ids"/>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="court_kejaksaan_tinggi_form_view">
+			<field name="name">Kejaksaan Tinggi</field>
+			<field name="model">court.kejaksaan_tinggi</field>
+			<field name="arch" type="xml">
+				<form string="Kejaksaan Tinggi Form">
+					<header>
+						<button name="%(court_kejaksaan_tinggi_report)d" string="Print Report" type="action"/>
+					</header>
+					<sheet>
+						<group string="Kejaksaan Tinggi Information">
+							<group>
+								<field name="name"/>
+							</group>
+							<group></group>
+						</group>
+						<notebook>
+							<page string="Informasi Tilang">
+								<field name="case_ids">
+									<tree string="Perkara Sidang" create="true">
+										<field name="kejaksaan_negeri_id"/>
+										<field name="nomor_tilang"/>
+										<field name="tanggal_tilang"/>
+										<field name="nama_terdakwa"/>
+										<field name="denda"/>
+										<field name="state"/>
+									</tree>
+								</field>
+							</page>
+							<page string="Kejaksaan Negeri">
+								<field name="kejaksaan_negeri_ids"/>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="court_case_tree_view">
+			<field name="name">Perkara Sidang</field>
+			<field name="model">court.case</field>
+			<field name="arch" type="xml">
+				<tree string="Perkara Sidang" create="true">
+					<field name="nomor_tilang"/>
+					<field name="tanggal_tilang"/>
+					<field name="nama_terdakwa"/>
+					<field name="alamat_terdakwa"/>
+					<field name="pasal"/>
+					<field name="barang_bukti_type"/>
+					<field name="state"/>
+				</tree>
+
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="proses_search_view">
+            <field name="name">Proses Search Perkara</field>
+            <field name="model">court.case</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="nomor_tilang"/>
+                    <field name="tanggal_tilang"/>
+                    <field name="nama_terdakwa"/>
+                    <field name="warna_surat_tilang"/>
+                    <field name="state"/>
+                    <filter string="Perkara belum di proses" name="unprocess_case" domain="[('state', 'not in', ['berkas_selesai'])]"/>
+                </search>
+            </field>
+        </record>
+
+		<record model="ir.ui.view" id="court_kejaksaan_tinggi_tree_view">
+			<field name="name">Kejaksaan Tinggi</field>
+			<field name="model">court.kejaksaan_tinggi</field>
+			<field name="arch" type="xml">
+				<tree string="Kejaksaan Tinggi Tree">
+					<field name="name"/>
+				</tree>
+			</field>
+		</record> -->
+
+		<record model="ir.ui.view" id="court_kejaksaaan_negeri_tree_view">
+			<field name="name">Kejaksaan Negeri</field>
+			<field name="model">court.kejaksaan_negeri</field>
+			<field name="arch" type="xml">
+				<tree string="Kejaksaan Negeri Tree">
+					<field name="kejaksaan_tinggi_id"/>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="perkara_sidang_list_action">
+			<field name="name">Perkara Sidang</field>
+			<field name="res_model">court.case</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'search_default_state':'berkas tilang'}</field>
+			<field name="Help" type="html">
+				<p class="oe_view_no_content_create">
+					Perkara Sidang
+				</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="sidang_list_action">
+			<field name="name">Perkara Sidang</field>
+			<field name="res_model">court.case</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'search_default_state':'sidang'}</field>
+			<field name="Help" type="html">
+				<p class="oe_view_no_content_create">
+					Perkara Sidang
+				</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="setoran_list_action">
+			<field name="name">Perkara Sidang</field>
+			<field name="res_model">court.case</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'search_default_state':'setoran ke negara'}</field>
+			<field name="Help" type="html">
+				<p class="oe_view_no_content_create">
+					Perkara Sidang
+				</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="pbb_list_action">
+			<field name="name">Perkara Sidang</field>
+			<field name="res_model">court.case</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'search_default_state':'pengembalian barang bukti'}</field>
+			<field name="Help" type="html">
+				<p class="oe_view_no_content_create">
+					Perkara Sidang
+				</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="arsip_list_action">
+			<field name="name">Perkara Sidang</field>
+			<field name="res_model">court.case</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'search_default_state':'arsip'}</field>
+			<field name="Help" type="html">
+				<p class="oe_view_no_content_create">
+					Perkara Sidang
+				</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="perkara_sidang_list_action_pivot">
+			<field name="name">Perkara Sidang Kejaksaan</field>
+			<field name="res_model">court.case</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">pivot,graph</field>
+			<field name="Help" type="html">
+				<p class="oe_view_no_content_create">
+					Perkara Sidang
+				</p>
+			</field>
+		</record>				
+
+		<record model="ir.actions.act_window" id="kejaksaan_negeri_list_action">
+			<field name="name">Kejaksaan Negeri</field>
+			<field name="res_model">court.kejaksaan_negeri</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Kejaksaan Negeri Data
+				</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="kejaksaan_tinggi_list_action">
+			<field name="name">Kejaksaan Tinggi</field>
+			<field name="res_model">court.kejaksaan_tinggi</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Kejaksaan Tinggi Data
+				</p>
+			</field>
+		</record>
+
+		<menuitem id="rekap_tilang_menu" name="Perkara Tilang" action="perkara_sidang_list_action" sequence="1" groups="tilang.group_kejari_staff,tilang.group_kejari_manager,tilang.group_kejati_staff,tilang.group_kejati_manager"/>
+		<menuitem id="sidang_menu" name="Sidang" action="sidang_list_action" sequence="2" groups="tilang.group_kejari_staff,tilang.group_kejari_manager,tilang.group_kejati_staff,tilang.group_kejati_manager"/>
+		<menuitem id="setoran_menu" name="Setoran Negara" action="setoran_list_action" sequence="3" groups="tilang.group_administratsi_staff"/>
+		<menuitem id="pengembalian_barang_bukti_menu" name="Pengembalian Barang Bukti" action="pbb_list_action" sequence="4" groups="tilang.group_pengembalian_barang_bukti_staff"/>
+		<menuitem id="Arsip_menu" name="Arsip Perkara" action="arsip_list_action" sequence="5" groups="tilang.group_kejari_staff,tilang.group_kejari_manager,tilang.group_kejati_staff,tilang.group_kejati_manager,tilang.group_administratsi_staff,tilang.group_pengembalian_barang_bukti_staff"/>
+		
+		<menuitem id="rekap_kejaksaan" name="Rekap Perkara Tilang"/>
+		<menuitem id="rekap_kejaksaan_sub_menu" name="Rekap Perkara Tilang" parent="rekap_kejaksaan"/>
+		<menuitem id="configuration_kejaksaan_sub_menu" name="Setting" parent="rekap_kejaksaan"/>
+		<menuitem id="rekap_kejaksaan_tinggi" name="Kejaksaan Tinggi" parent="configuration_kejaksaan_sub_menu" action="kejaksaan_tinggi_list_action"/>
+		<menuitem id="rekap_kejaksaan_negeri" name="Kejaksaan Negeri" parent="configuration_kejaksaan_sub_menu" action="kejaksaan_negeri_list_action"/>
+	</data>
+</openerp>

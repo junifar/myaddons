@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp> 
+    <data>
+        <template id="test_master_qweb">
+            <t t-call="report.html_container"> 
+                <t t-foreach="docs" t-as="o"> 
+                    <!-- <t t-call="report.external_layout"> -->
+                        <div class="page">
+                            <div class="oe_structure"/>
+                            <div class="row">
+                                <span class="text-center"><h1>Kejaksaan Negeri</h1></span>
+                                <table class="table table condensed">
+                                    <tr>
+                                        <td><h3><strong>name</strong></h3></td>                                       
+                                        <td><h3 t-field="o.id"/></td>
+                                    </tr>                                    
+                                </table>
+                            </div>
+                        </div>
+                    <!-- </t> -->
+                </t>
+            </t> 
+        </template>
+
+         <report id="test_qweb_report"
+                string="school Management Report Qweb"
+                model="court.kejaksaan_negeri"
+                report_type = "qweb-pdf"
+                file="tilang.test_master_qweb"
+                name="tilang.test_master_qweb" />
+
+    </data>
+</openerp>

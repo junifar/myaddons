@@ -1,0 +1,129 @@
+<openerp>
+	<data>
+		
+		<record id="paper_format_A3" model="report.paperformat">
+			<field name="name">Report Format A3 Landscape</field>
+			<field name="default" eval="True"/>
+			<field name="format">A3</field>
+			<field name="orientation">Landscape</field>
+		</record>
+
+		<report 
+			id="court_kejaksaan_tinggi_report"
+			model="court.kejaksaan_tinggi"
+			string="Report Kejaksaan Tinggi"
+			name="tilang.report_kejaksaan_tinggi_view"
+			file="tilang.views.report_kejaksaan_tinggi"
+			report_type="qweb-pdf"
+			menu="False"
+			paperformat="paper_format_A3"
+			/>
+
+
+		<!--<record id="court_kejaksaan_tinggi_report" model="ir.actions.report.xml">
+			<field name="name">tilang.report_kejaksaan_tinggi_view</field>
+			<field name="model">court.kejaksaan_tinggi</field>
+			<field name="file">tilang.views.report_kejaksaan_tinggi</field>
+			<field name="paper_format_id" ref="paper_format_a3"/>
+			<field name="report_type">qweb-pdf</field>
+			<field name="menu">False</field>
+		</record> -->
+
+
+		<template id="report_kejaksaan_tinggi_view">
+			<t t-call="report.html_container">
+				<t t-foreach="docs" t-as="doc">
+					<div class="header">
+				        <div class="row">
+				            <div class="col-xs-3">
+				                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+				            </div>
+				            <div class="col-xs-2 col-xs-offset-2 text-center">
+				                <!-- <span t-esc="company.name"/> -->				                
+				            </div>
+				            <div class="col-xs-2 col-xs-offset-2 text-right">
+				                <ul class="list-inline">
+			                    <li><span class="page"/></li>
+				                    <li>/</li>
+				                    <li><span class="topage"/></li>
+				                </ul>
+				            </div>
+				        </div>
+				        <div class="row col-xs-8 text-right">
+				        	<h2>KEJAKSAAN TINGGI <span t-esc="doc.name" style="text-transform:uppercase;" /></h2>
+				        </div>
+				    </div>
+					<div class="page">
+						<div class="row">
+							<div class="cols-xs-12 text-center"><h4>DATA PERKARA TILANG DAN BARANG BUKTI</h4></div>
+						</div>
+						<br/>
+	                    <table class="table table-condensed">
+	                        <thead>
+	                            <tr>
+	                                <th class="text-center" style="vertical-align:top;">NO</th>
+	                                <th class="text-center" style="vertical-align:top;">NOMOR TILANG</th>
+	                                <th class="text-center" style="vertical-align:top;">TANGGAL TILANG</th>
+	                                <th class="text-center" style="vertical-align:top;">NAMA TERDAKWA / TERPIDANA</th>
+	                                <th class="text-center" style="vertical-align:top;">ALAMAT TERDAKWA</th>
+	                                <th class="text-center" style="vertical-align:top;">PASAL YANG DILANGGAR</th>
+	                                <th class="text-center" style="vertical-align:top;">BARANG BUKTI</th>
+	                                <th class="text-center" style="vertical-align:top;">UANG TITIPAN BRI</th>
+	                                <th class="text-center" style="vertical-align:top;">HADIR SIDANG</th>
+	                                <th class="text-center" style="vertical-align:top;">NO PUTUSAN PENGADILAN</th>
+	                                <th class="text-center" style="vertical-align:top;">DENDA</th>
+	                                <th class="text-center" style="vertical-align:top;">BIAYA PERKARA</th>
+	                                <th class="text-center" style="vertical-align:top;">TGL NO SETORAN KE KAS NEGARA</th>
+	                                <th class="text-center" style="vertical-align:top;">PENGEMBALIAN BARANG BUKTI</th>
+	                                <th class="text-center" style="vertical-align:top;">SELISIH UANG TITIPAN</th>
+	                                <th class="text-center" style="vertical-align:top;">KETERANGAN</th>
+	                            </tr>
+	                            <tr>
+	                                <th class="text-center">1</th>
+	                                <th class="text-center">2</th>
+	                                <th class="text-center">3</th>
+	                                <th class="text-center">4</th>
+	                                <th class="text-center">5</th>
+	                                <th class="text-center">6</th>
+	                                <th class="text-center">7</th>
+	                                <th class="text-center">8</th>
+	                                <th class="text-center">9</th>
+	                                <th class="text-center">10</th>
+	                                <th class="text-center">11</th>
+	                                <th class="text-center">12</th>
+	                                <th class="text-center">13</th>
+	                                <th class="text-center">14</th>
+	                                <th class="text-center">15</th>
+	                                <th class="text-center">16</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                        	<t t-foreach="doc.case_ids" t-as="case">
+		                        	<tr>
+		                                <td class="text-center">XXXX</td>
+		                                <td class="text-center"><span t-esc="case['nomor_tilang']"/></td>
+		                                <td class="text-center"><span t-esc="case['tanggal_tilang']"/></td>
+		                                <td class="text-center"><span t-esc="case['nama_terdakwa']"/></td>
+		                                <td class="text-center"><span t-esc="case['alamat_terdakwa']"/></td>
+		                                <td class="text-center"><span t-esc="case['pasal']"/></td>
+		                                <td class="text-center"><span t-esc="case['barang_bukti_type']"/></td>
+		                                <td class="text-center"><span t-esc="'{0:,.2f}'.format(int(case['uang_titipan']))"/></td>
+		                                <td class="text-center"><span t-esc="case['status_kehadiran']"/></td>
+		                                <td class="text-center"><span t-esc="case['no_putusan']"/></td>
+		                                <td class="text-center"><span t-esc="case['denda']" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/></td>
+		                                <td class="text-center"><span t-esc="case['biaya_perkara']" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/></td>
+		                                <td class="text-center"><span t-esc="case['tgl_setoran_ke_kas_negara']"/></td>
+		                                <td class="text-center"><span t-esc="case['status_pengembalian_barang_bukti']"/></td>
+		                                <td class="text-center"><span t-esc="case['selisih_uang_titipan']" t-esc-options='{"widget": "monetary", "display_currency": "res_company.currency_id"}'/></td>
+		                                <td class="text-center"><span t-esc="case['state']"/></td>
+		                            </tr>
+	                            </t>
+	                        </tbody>
+	                    </table>	                    
+	                </div>
+				</t>
+			</t>
+		</template>
+		
+	</data>
+</openerp>

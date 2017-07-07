@@ -1,0 +1,365 @@
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="wizard_form_report_kejaksaan_tinggi_view">
+			<field name="name">wizard.form.report.kejaksaan.tinggi</field>
+			<field name="model">kejaksaan.tinggi.report.tilang.xls</field>
+			<field name="arch" type="xml">
+				<form string="Report Kejaksaan tinggi">
+					<group>
+						<field name="kejaksaan_tinggi_id"/>
+					</group>
+					<group>
+						<group>
+							<field name="from_date"/>
+						</group>
+						<group>
+							<field name="to_date"/>
+						</group>
+					</group>
+					<footer>
+                        <button name="print_report" type="object"
+                                string="Print" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="wizard_form_report_kejaksaan_negeri_view">
+			<field name="name">wizard.form.report.kejaksaan.negeri</field>
+			<field name="model">kejaksaan.negeri.report.tilang.xls</field>
+			<field name="arch" type="xml">
+				<form string="Report Kejaksaan Negeri">
+					<group>
+						<group>
+							<field name="kejaksaan_tinggi_id"/>
+						</group>
+						<group>
+							<field name="kejaksaan_negeri_id"/>
+						</group>
+					</group>
+					<group>
+						<group>
+							<field name="from_date"/>
+						</group>
+						<group>
+							<field name="to_date"/>
+						</group>
+					</group>
+					<footer>
+                        <button name="print_report" type="object"
+                                string="Print" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="wizard_form_data_tilang_harian">
+			<field name="name">wizard.form.daya.tilang.harian</field>
+			<field name="model">rekap.tilang.harian</field>
+			<field name="arch" type="xml">
+				<form string="Rekap Tilang Harian">
+					<group>
+						<field name="kejaksaan_negeri_id"/>
+					</group>
+					<group>
+						<field name="date_filter"/>						
+					</group>
+					<footer>
+                        <button name="check_report" type="object"
+                                string="Print" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="wizard_form_rekap_tilang_kejati">
+			<field name="name">wizard.form.rekap.tilang.kejati</field>
+			<field name="model">rekap.tilang.kejati</field>
+			<field name="arch" type="xml">
+				<form string="Rekap Tilang Kejati">
+					<group>
+						<field name="kejaksaan_tinggi_id"/>
+					</group>
+					<group>
+						<field name="report_type" widget="radio"/>						
+					</group>
+					<group>
+						<group attrs="{'invisible':[('report_type','in',['Tahunan','Bulanan'])]}"><field name="semester_filter"/></group>
+						<group attrs="{'invisible':[('report_type','in',['Tahunan','Semester'])]}"><field name="month_filter"/></group>
+						<group><field name="year_filter" widget="payment"/></group>						
+					</group>
+					<footer>
+                        <button name="check_report" type="object"
+                                string="Print" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="wizard_form_laporan_kehadiran">
+			<field name="name">wizard.form.laporan.kehadiran</field>
+			<field name="model">laporan.kehadiran</field>
+			<field name="arch" type="xml">
+				<form string="Laporan Kehadiran">
+					<group>
+						<field name="kejaksaan_tinggi_id"/>
+					</group>
+					<group>
+						<field name="report_type" widget="radio"/>						
+					</group>
+					<group>
+						<group attrs="{'invisible':[('report_type','in',['Tahunan','Bulanan'])]}"><field name="semester_filter"/></group>
+						<group attrs="{'invisible':[('report_type','in',['Tahunan','Semester'])]}"><field name="month_filter"/></group>
+						<group><field name="year_filter" widget="payment"/></group>						
+					</group>
+					<footer>
+                        <button name="check_report" type="object"
+                                string="Print" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="wizard_form_laporan_barang_bukti">
+			<field name="name">wizard.form.laporan.barang.bukti</field>
+			<field name="model">laporan.barang.bukti</field>
+			<field name="arch" type="xml">
+				<form string="Laporan Barang Bukti">
+					<group>
+						<field name="kejaksaan_tinggi_id"/>
+					</group>
+					<group>
+						<field name="report_type" widget="radio"/>						
+					</group>
+					<group>
+						<group attrs="{'invisible':[('report_type','in',['Tahunan','Bulanan'])]}"><field name="semester_filter"/></group>
+						<group attrs="{'invisible':[('report_type','in',['Tahunan','Semester'])]}"><field name="month_filter"/></group>
+						<group><field name="year_filter" widget="payment"/></group>						
+					</group>
+					<footer>
+                        <button name="check_report" type="object"
+                                string="Print" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="wizard_form_laporan_giro">
+			<field name="name">wizard.form.laporan.giro</field>
+			<field name="model">laporan.giro</field>
+			<field name="arch" type="xml">
+				<form string="Laporan GIRO">
+					<group>
+						<field name="kejaksaan_tinggi_id"/>
+					</group>
+					<group>
+						<field name="report_type" widget="radio"/>						
+					</group>
+					<group>
+						<group attrs="{'invisible':[('report_type','in',['Tahunan','Bulanan'])]}"><field name="semester_filter"/></group>
+						<group attrs="{'invisible':[('report_type','in',['Tahunan','Semester'])]}"><field name="month_filter"/></group>
+						<group><field name="year_filter" widget="payment"/></group>						
+					</group>
+					<footer>
+                        <button name="check_report" type="object"
+                                string="Print" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="wizard_form_laporan_verstek">
+			<field name="name">wizard.form.laporan.verstek</field>
+			<field name="model">laporan.verstek</field>
+			<field name="arch" type="xml">
+				<form string="Laporan Verstek">
+					<group>
+						<field name="kejaksaan_tinggi_id"/>
+					</group>
+					<group>
+						<field name="report_type" widget="radio"/>						
+					</group>
+					<group>
+						<group attrs="{'invisible':[('report_type','in',['Tahunan','Bulanan'])]}"><field name="semester_filter"/></group>
+						<group attrs="{'invisible':[('report_type','in',['Tahunan','Semester'])]}"><field name="month_filter"/></group>
+						<group><field name="year_filter" widget="payment"/></group>						
+					</group>
+					<footer>
+                        <button name="check_report" type="object"
+                                string="Print" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_print_report_kejaksaan_tinggi" model="ir.actions.act_window">
+			<field name="name">Report Kejaksaan Tinggi</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">kejaksaan.tinggi.report.tilang.xls</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="wizard_form_report_kejaksaan_tinggi_view"/>
+			<field name="target">new</field>
+		</record>
+
+		<record id="action_print_report_kejaksaan_negeri" model="ir.actions.act_window">
+			<field name="name">Report Kejaksaan Negeri</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">kejaksaan.negeri.report.tilang.xls</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="wizard_form_report_kejaksaan_negeri_view"/>
+			<field name="target">new</field>
+		</record>
+
+		<record id="action_wizard_tilang_harian" model="ir.actions.act_window">
+			<field name="name">Rekap Tilang Harian</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">rekap.tilang.harian</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="wizard_form_data_tilang_harian"/>
+			<field name="target">new</field>
+		</record>
+
+		<record 
+			id="action_wizard_tilang_harian_values"
+			model="ir.values">
+			<field name="model_id" ref="tilang.model_court_kejaksaan_negeri"/>
+			<field name="name">Rekap Tilang Harian</field>
+			<field name="key2">rekap_tilang_harian_multi</field>
+			<field name="value" eval="'ir.actions.act_window,' +str(ref('action_wizard_tilang_harian'))"/>
+			<field name="key">action</field>
+			<field name="model">court.kejaksaan_tinggi</field>
+		</record>
+
+		<record id="action_wizard_tilang_kejati" model="ir.actions.act_window">
+			<field name="name">Wizard tilang kejati</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">rekap.tilang.kejati</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="wizard_form_rekap_tilang_kejati"/>
+			<field name="target">new</field>
+		</record>
+
+		<record 
+			id="action_wizard_tilang_kejati_values"
+			model="ir.values">
+			<field name="model_id" ref="tilang.model_court_kejaksaan_tinggi"/>
+			<field name="name">Rekap Tilang Kejati</field>
+			<field name="key2">rekap_tilang_kejati_multi</field>
+			<field name="value" eval="'ir.actions.act_window,' +str(ref('action_wizard_tilang_kejati'))"/>
+			<field name="key">action</field>
+			<field name="model">court.kejaksaan_tinggi</field>
+		</record>
+
+		<record id="action_wizard_laporan_kehadiran" model="ir.actions.act_window">
+			<field name="name">Laporan Kehadiran</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">laporan.kehadiran</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="wizard_form_laporan_kehadiran"/>
+			<field name="target">new</field>
+		</record>
+
+		<record 
+			id="action_wizard_laporan_kehadiran_values"
+			model="ir.values">
+			<field name="model_id" ref="tilang.model_court_kejaksaan_tinggi"/>
+			<field name="name">Laporan Kehadiran</field>
+			<field name="key2">rekap_laporan_kehadiran_multi</field>
+			<field name="value" eval="'ir.actions.act_window,' +str(ref('action_wizard_laporan_kehadiran'))"/>
+			<field name="key">action</field>
+			<field name="model">court.kejaksaan_tinggi</field>
+		</record>
+
+		<record id="action_wizard_laporan_barang_bukti" model="ir.actions.act_window">
+			<field name="name">Laporan Barang Bukti</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">laporan.barang.bukti</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="wizard_form_laporan_barang_bukti"/>
+			<field name="target">new</field>
+		</record>
+
+		<record 
+			id="action_wizard_laporan_barang_bukti_values"
+			model="ir.values">
+			<field name="model_id" ref="tilang.model_court_kejaksaan_tinggi"/>
+			<field name="name">Laporan Kehadiran</field>
+			<field name="key2">rekap_laporan_barang_bukti_multi</field>
+			<field name="value" eval="'ir.actions.act_window,' +str(ref('action_wizard_laporan_barang_bukti'))"/>
+			<field name="key">action</field>
+			<field name="model">court.kejaksaan_tinggi</field>
+		</record>
+
+		<record id="action_wizard_laporan_giro" model="ir.actions.act_window">
+			<field name="name">Laporan Giro</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">laporan.giro</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="wizard_form_laporan_giro"/>
+			<field name="target">new</field>
+		</record>
+
+		<record 
+			id="action_wizard_laporan_giro_values"
+			model="ir.values">
+			<field name="model_id" ref="tilang.model_court_kejaksaan_tinggi"/>
+			<field name="name">Laporan Giro</field>
+			<field name="key2">rekap_laporan_giro_multi</field>
+			<field name="value" eval="'ir.actions.act_window,' +str(ref('action_wizard_laporan_giro'))"/>
+			<field name="key">action</field>
+			<field name="model">court.kejaksaan_tinggi</field>
+		</record>
+
+		<record id="action_wizard_laporan_verstek" model="ir.actions.act_window">
+			<field name="name">Laporan Verstek</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">laporan.verstek</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="wizard_form_laporan_verstek"/>
+			<field name="target">new</field>
+		</record>
+
+		<record 
+			id="action_wizard_laporan_verstek_values"
+			model="ir.values">
+			<field name="model_id" ref="tilang.model_court_kejaksaan_tinggi"/>
+			<field name="name">Laporan Verstek</field>
+			<field name="key2">rekap_laporan_verstek_multi</field>
+			<field name="value" eval="'ir.actions.act_window,' +str(ref('action_wizard_laporan_verstek'))"/>
+			<field name="key">action</field>
+			<field name="model">court.kejaksaan_tinggi</field>
+		</record>		
+
+		<menuitem id="wizard_data_tilang_harian" name="Laporan Harian" parent="rekap_kejaksaan_sub_menu" action="action_wizard_tilang_harian"/>
+		<menuitem id="wizard_data_tilang_kejati" name="Laporan Kejati" parent="rekap_kejaksaan_sub_menu" action="action_wizard_tilang_kejati"/>
+		<menuitem id="wizard_laporan_kehadiran" name="Laporan Kehadiran" parent="rekap_kejaksaan_sub_menu" action="action_wizard_laporan_kehadiran"/>
+		<menuitem id="wizard_laporan_giro" name="Laporan GIRO" parent="rekap_kejaksaan_sub_menu" action="action_wizard_laporan_giro"/>
+		<menuitem id="wizard_laporan_sisa_barang_bukti" name="Laporan Sisa Barang Bukti" parent="rekap_kejaksaan_sub_menu" action="action_wizard_laporan_barang_bukti"/>
+		<menuitem id="wizard_laporan_verstek" name="Laporan Verstek" parent="rekap_kejaksaan_sub_menu" action="action_wizard_laporan_verstek"/>
+
+	</data>
+</openerp>

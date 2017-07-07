@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="base.group_user" model="res.groups">
+        <field name="comment">the user will be able to manage action for Tilang Apps</field>
+    </record>
+
+    <record model="ir.module.category" id="module_category_kejaksaan_negeri">
+        <field name="name">Kejaksaan Negeri</field>
+        <field name="description">Kejaksaan Negeri</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record model="ir.module.category" id="module_category_kejaksaan_tinggi">
+        <field name="name">Kejaksaan Tinggi</field>
+        <field name="description">Kejaksaan Tinggi</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record model="ir.module.category" id="module_category_kejaksaan">
+        <field name="name">Non Kejaksaan</field>
+        <field name="description">Kejaksaan Application</field>
+    </record>
+
+    <record id="group_kejari_manager" model="res.groups">
+        <field name="name">Manager Kejari</field>
+        <field name="category_id" ref="tilang.module_category_kejaksaan_negeri"/>
+        <field name="comment">the user will be able to access limited feature in kejaksaan</field>
+    </record>
+
+    <record id="group_kejari_staff" model="res.groups">
+        <field name="name">Staff Kejari</field>
+        <field name="category_id" ref="tilang.module_category_kejaksaan_negeri"/>
+        <field name="implied_ids" eval="[(4, ref('group_kejari_manager'))]"/>
+        <field name="comment">the user will be able to access limited feature in kejaksaan</field>
+    </record>
+
+    <record id="group_kejati_manager" model="res.groups">
+        <field name="name">Manager Kejati</field>
+        <field name="category_id" ref="tilang.module_category_kejaksaan_tinggi"/>
+        <field name="comment">the user will be able to access limited feature in kejaksaan</field>
+    </record>
+
+    <record id="group_kejati_staff" model="res.groups">
+        <field name="name">Staff Kejati</field>
+        <field name="category_id" ref="tilang.module_category_kejaksaan_tinggi"/>
+        <field name="implied_ids" eval="[(4, ref('group_kejati_manager'))]"/>
+        <field name="comment">the user will be able to access limited feature in kejaksaan</field>
+    </record>
+
+    <record id="group_administratsi_staff" model="res.groups">
+        <field name="name">Staff Administrasi</field>
+        <field name="category_id" ref="tilang.module_category_kejaksaan"/>
+        <field name="comment">the user will be able to access limited feature in kejaksaan</field>
+    </record>
+
+    <record id="group_pengembalian_barang_bukti_staff" model="res.groups">
+        <field name="name">Staff Pengembalian Barang Bukti</field>
+        <field name="category_id" ref="tilang.module_category_kejaksaan"/>
+        <field name="comment">the user will be able to access limited feature in kejaksaan</field>
+    </record>
+    
+    <record id="kejaksaan_filter_rule" model="ir.rule">
+        <field name="name">Kejaksaan filter</field>
+        <field name="model_id" ref="model_court_case"/>
+        <field name="groups" eval="[(4, ref('group_kejari_staff')),(4, ref('group_kejari_manager'))]"/>
+        <field name="domain_force">['&amp;',('kejaksaan_negeri_id','=',user.kejaksaan_negeri_id.id),('kejaksaan_tinggi_id','=',user.kejaksaan_tinggi_id.id)]</field>
+    </record>
+</odoo>

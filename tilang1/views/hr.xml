@@ -1,0 +1,23 @@
+<openerp>
+	<data>
+ 		<record id="hr_hr_employee_court_view_form" model="ir.ui.view">
+ 			<field name="name">hr.hr.employee.court.view.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <data>
+                	<field name="notes" position="before">
+                		<group string="Tilang configuration">
+                			<group>
+                				<field name="kejaksaan_tinggi_id"/>
+                			</group>
+                			<group>
+                				<field name="kejaksaan_negeri_id"/>
+                			</group>
+                		</group>
+                	</field>
+                </data>
+             </field>
+ 		</record>
+	</data>
+</openerp>

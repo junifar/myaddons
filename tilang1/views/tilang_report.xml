@@ -1,0 +1,73 @@
+<openerp>
+	<data>
+		<record id="paper_format_A4" model="report.paperformat">
+			<field name="name">Report Format A4 Potrait</field>
+			<field name="default" eval="True"/>
+			<field name="format">A4</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">40</field>
+		    <field name="margin_bottom">30</field>
+		    <field name="margin_left">30</field>
+		    <field name="margin_right">30</field>
+		    <field name="header_line" eval="True"/>
+		    <field name="header_spacing">30</field>
+		    <field name="dpi">110</field>
+		</record>
+
+		<report
+			id="action_report_tilang_harian"
+			model = "tilang.kejaksaan_negeri"
+			string = "Report Tilang Harian"
+			report_type = "qweb-pdf"
+			paperformat="paper_format_A4"
+			name = "tilang.report_tilang_harian"
+			file = "tilang.report_tilang_harian"
+			/>
+
+		<report id="action_report_tilang_kejati"
+			model = 'tilang.kejaksaan_tinggi'
+			string = "Report tilang kejati"
+			report_type = "qweb-pdf"
+			paperformat="paper_format_A4"
+			name = "tilang.report_tilang_kejati"
+			file = "tilang.report_tilang_kejati"
+			/>
+
+		<report id="action_laporan_kehadiran"
+			model = 'tilang.kejaksaan_tinggi'
+			string = "Laporan Kehadiran"
+			report_type = "qweb-pdf"
+			paperformat="paper_format_A4"
+			name = "tilang.laporan_kehadiran"
+			file = "tilang.laporan_kehadiran"
+			/>
+
+		<report id="action_laporan_barang_bukti"
+			model = 'tilang.kejaksaan_tinggi'
+			string = "Laporan Barang Bukti"
+			report_type = "qweb-pdf"
+			paperformat="paper_format_A4"
+			name = "tilang.laporan_barang_bukti"
+			file = "tilang.laporan_barang_bukti"
+			/>
+
+		<report id="action_laporan_giro"
+			model = 'tilang.kejaksaan_tinggi'
+			string = "Laporan GIRO"
+			report_type = "qweb-pdf"
+			paperformat="paper_format_A4"
+			name = "tilang.laporan_giro"
+			file = "tilang.laporan_giro"
+			/>
+
+		<report id="action_laporan_verstek"
+			model = 'tilang.kejaksaan_tinggi'
+			string = "Laporan Verstek"
+			report_type = "qweb-pdf"
+			paperformat="paper_format_A4"
+			name = "tilang.laporan_verstek"
+			file = "tilang.laporan_verstek"
+			/>
+
+	</data>
+</openerp>

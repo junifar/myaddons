@@ -1,0 +1,192 @@
+<odoo>
+	<template id="laporan_barang_bukti">
+    	<t t-set="data_report_margin_top" t-value="12"/>
+        <t t-set="data_report_header_spacing" t-value="9"/>
+        <t t-set="data_report_dpi" t-value="110"/>
+        <div class="header" style="font-size: 12pt;font-family:Helvetica,Verdana,Arial,sans,Lucida Grande,Calibri;">
+            <div class="row">
+                <div class="cols-xs-12 text-center"><h4>REKAPITULASI DATA PERKARA PELANGGARAN LALU LINTAS / TILANG SISA BARANG BUKTI</h4></div>
+            </div>
+            <div class="row">
+                <div class="cols-xs-12 text-center">
+                    <h4>PADA KEJAKSAAN TINGGI <span t-esc="kejaksaan_tinggi_name"/></h4>
+                </div>
+            </div>
+            <t t-if="report_type == 'Tahunan'">
+                <div class="row" style="font-size: 12pt;font-family:Helvetica,Verdana,Arial,sans,Lucida Grande,Calibri;">
+                    <div class="cols-xs-12 text-center">
+                        <h5>
+                            <b>PERIODE SEMESTER TAHUN <span t-esc="tahun_filter"/>
+                            </b>
+                        </h5>
+                    </div>
+                </div>
+            </t>
+            <t t-if="report_type == 'Bulanan'">
+                <div class="row" style="font-size: 12pt;font-family:Helvetica,Verdana,Arial,sans,Lucida Grande,Calibri;">
+                    <div class="cols-xs-12 text-center">
+                        <h5>
+                            <b>PERIODE 
+                                <t t-if="bulan_filter == 1">JANUARI </t>
+                                <t t-if="bulan_filter == 2">FEBRUARI </t>
+                                <t t-if="bulan_filter == 3">MARET </t>
+                                <t t-if="bulan_filter == 4">APRIL </t>
+                                <t t-if="bulan_filter == 5">MEI </t>
+                                <t t-if="bulan_filter == 6">JUNI </t>
+                                <t t-if="bulan_filter == 7">JULI </t>
+                                <t t-if="bulan_filter == 8">AGUSTUS </t>
+                                <t t-if="bulan_filter == 9">SEPTEMBER </t>
+                                <t t-if="bulan_filter == 10">OKTOBER </t>
+                                <t t-if="bulan_filter == 11">NOVEMBER </t>
+                                <t t-if="bulan_filter == 12">DESEMBER </t> TAHUN <span t-esc="tahun_filter"/>
+                            </b>
+                        </h5>
+                    </div>
+                </div>
+            </t>
+
+            <t t-if="report_type == 'Semester'">
+                <div class="row" style="font-size: 12pt;font-family:Helvetica,Verdana,Arial,sans,Lucida Grande,Calibri;">
+                    <div class="cols-xs-12 text-center">
+                        <h5>
+                            <b>PERIODE SEMESTER <span t-esc="semester_filter"/>
+                            <t t-if="semester_filter == 'I'">(JANUARI-JUNI)</t><t t-if="semester_filter == 'II'">(JULI-DESEMBER)</t> TAHUN <span t-esc="tahun_filter"/>
+                            </b>
+                        </h5>
+                    </div>
+                </div>
+            </t>
+           <!--  <div class="row" style="font-size: 12pt;font-family:Helvetica,Verdana,Arial,sans,Lucida Grande,Calibri;">
+                <div class="cols-xs-12 text-center">
+                    <h5>
+                        <b>PERIODE : 
+                            <t t-if="report_type == 'Bulanan'">
+                                <t t-if="bulan_filter == 1">Januari </t>
+                                <t t-if="bulan_filter == 2">Februari </t>
+                                <t t-if="bulan_filter == 3">Maret </t>
+                                <t t-if="bulan_filter == 4">April </t>
+                                <t t-if="bulan_filter == 5">Mei </t>
+                                <t t-if="bulan_filter == 6">Juni </t>
+                                <t t-if="bulan_filter == 7">Juli </t>
+                                <t t-if="bulan_filter == 8">Agustus </t>
+                                <t t-if="bulan_filter == 9">September </t>
+                                <t t-if="bulan_filter == 10">Oktober </t>
+                                <t t-if="bulan_filter == 11">November </t>
+                                <t t-if="bulan_filter == 12">Desember </t>
+                            </t> 
+                            <t t-if="report_type == 'Semester'">
+                                Semester <span t-esc="semester_filter"/> 
+                            </t><span t-esc="bulan_filter"/>
+                            <span t-esc="tahun_filter"/>
+                        </b>
+                    </h5>
+                </div>
+            </div> -->
+        </div>
+        <div class="page">
+        	 <div class="row">
+                <table class="table table-condensed table-bordered" style="border-color: black;">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="vertical-align:middle; border-color: black;" rowspan="3">No</th>
+                            <th class="text-center" style="vertical-align:middle; border-color: black;" rowspan="3">Kejaksaan Negeri</th>
+                            <th class="text-center" style="vertical-align:middle; border-color: black;" colspan="4">Sidang <t t-if="report_type == 'Tahunan'"><span t-esc="tahun_filter"/></t>
+                            <t t-if="report_type == 'Bulanan'"><t t-if="bulan_filter == 1">JANUARI </t>
+                                <t t-if="bulan_filter == 2">FEBRUARI </t>
+                                <t t-if="bulan_filter == 3">MARET </t>
+                                <t t-if="bulan_filter == 4">APRIL </t>
+                                <t t-if="bulan_filter == 5">MEI </t>
+                                <t t-if="bulan_filter == 6">JUNI </t>
+                                <t t-if="bulan_filter == 7">JULI </t>
+                                <t t-if="bulan_filter == 8">AGUSTUS </t>
+                                <t t-if="bulan_filter == 9">SEPTEMBER </t>
+                                <t t-if="bulan_filter == 10">OKTOBER </t>
+                                <t t-if="bulan_filter == 11">NOVEMBER </t>
+                                <t t-if="bulan_filter == 12">DESEMBER </t> <span t-esc="tahun_filter"/></t>
+                            <t t-if="report_type == 'Semester'">SEMESTER <span t-esc="semester_filter"/> <span t-esc="tahun_filter"/></t>
+                            </th>
+                            <th class="text-center" style="vertical-align:middle; border-color: black;" rowspan="3">Ket</th>
+                        </tr>
+                        <tr>
+                            <th class="text-center" style="vertical-align:middle; border-color: black;" rowspan="2">Jumlah Perkara</th>
+                            <th class="text-center" style="vertical-align:middle; border-color: black;" colspan="3">Barang Bukti</th>
+                        </tr>
+                        <tr>
+                            <th class="text-center" style="vertical-align:middle; border-color: black;">SUDAH DIAMBIL</th>
+                            <th class="text-center" style="vertical-align:middle; border-color: black;">BELUM DIAMBIL</th>
+                            <th class="text-center" style="vertical-align:middle; border-color: black;">TOTAL BARANG BUKTI</th>
+                        </tr>
+                        <tr>
+                            <th class="text-center" style="border-color: black;">1</th>
+                            <th class="text-center" style="border-color: black;">2</th>
+                            <th class="text-center" style="border-color: black;">3</th>
+                            <th class="text-center" style="border-color: black;">4</th>
+                            <th class="text-center" style="border-color: black;">5</th>
+                            <th class="text-center" style="border-color: black;">6</th>
+                            <th class="text-center" style="border-color: black;">7</th>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="inc" t-value="1"/>
+                        <t t-set="jumlah_perkara" t-value="0"/>                        
+                        <t t-set="total_barang_bukti_kembali" t-value="0"/>                       
+                        <t t-set="total_barang_bukti_tersisa" t-value="0"/>                        
+                        <t t-set="total_barang_bukti" t-value="0"/>                        
+
+                        <t t-foreach="case_list" t-as="case">
+                            <tr>
+                                <td class="text-center" style="border-color: black;"><span t-esc="inc"/><t t-set="inc" t-value="inc+1"/></td>
+                                <td style="border-color: black;"><span t-esc="case['kejaksaan_negeri_name']"/></td>
+                                <td class="text-center" style="border-color: black;"><span t-esc="case['jumlah_perkara']"/></td>
+                                <td class="text-center" style="border-color: black;"><span t-esc="case['count_barang_bukti_kembali']"/></td>
+                                <td class="text-center" style="border-color: black;"><span t-esc="case['count_barang_bukti_tersisa']"/></td>
+                                <td class="text-center" style="border-color: black;"><span t-esc="case['count_barang_bukti']"/></td>
+                                <td style="border-color: black;"></td>
+
+                                <t t-set="jumlah_perkara" t-value="jumlah_perkara+case['jumlah_perkara']"/>
+                                <t t-set="total_barang_bukti" t-value="total_barang_bukti+case['count_barang_bukti']"/>
+                                <t t-set="total_barang_bukti_kembali" t-value="total_barang_bukti_kembali+case['count_barang_bukti_kembali']"/>
+                                <t t-set="total_barang_bukti_tersisa" t-value="total_barang_bukti_tersisa+case['count_barang_bukti_tersisa']"/>
+                            </tr>
+                        </t>
+                        <tr>
+                            <th class="text-center" style="border-color: black;" colspan="2">JUMLAH TOTAL</th>
+
+                            <th class="text-center" style="border-color: black;"><span t-esc="jumlah_perkara"/></th>
+                            <th class="text-center" style="border-color: black;"><span t-esc="total_barang_bukti_kembali"/></th>
+                            <th class="text-center" style="border-color: black;"><span t-esc="total_barang_bukti_tersisa"/></th>
+                            <th class="text-center" style="border-color: black;"><span t-esc="total_barang_bukti"/></th>
+                            <th style="border-color: black;"></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="text-center">
+                    Mengetahui, <br/>
+                    Kepala Kejaksaan Tinggi <span t-esc="kejaksaan_tinggi_name.title()"/><br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <u>NAMA</u><br/>
+                    PANGKAT,NIP
+                    </div>
+                </div>
+                <div class="col-xs-3 col-xs-offset-4">
+                    <div class="text-center">
+                    Jakarta, <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')"/> <br/>
+                    ASISTEN TINDAK PIDANA UMUM <br/>
+                    KEJAKSAAN TINGGI <span t-esc="kejaksaan_tinggi_name.upper()"/><br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <u>NAMA</u><br/>
+                    PANGKAT,NIP
+                    </div>
+                </div>
+            </div>
+        </div>
+	</template>
+</odoo>

@@ -1,0 +1,22 @@
+<openerp>
+	<data>
+		<report 
+			id="court_report"
+			model="court.case"
+			string="Report Arsip"
+			name="tilang.report_tilang_view"
+			file="tilang.views.report_tilang"
+			report_type="qweb-pdf"/>
+
+		<template id="report_tilang_view">
+			<t t-call="report.html_container">
+				<t t-foreach="docs" t-as="doc">
+					<div class="page">
+                        <h2 t-field="doc.nomor_tilang"/>	 
+                        <p>From <span t-field="doc.nomor_tilang"/></p>                      
+                    </div>
+				</t>
+			</t>
+		</template>
+	</data>
+</openerp>

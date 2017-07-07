@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_court_case_kejari,access.court.case.kejari,model_court_case,group_kejari_manager,1,1,1,1
+access_court_kejaksaan_tinggi_kejari,access.court.kejaksaan.tinggi.kejari,model_court_kejaksaan_tinggi,group_kejari_manager,1,1,1,1
+access_court_kejaksaan_negeri_kejari,access.court.kejaksaan.negeri.kejari,model_court_kejaksaan_negeri,group_kejari_manager,1,1,1,1
+access_court_case_kejati,access.court.case.kejati,model_court_case,group_kejati_manager,1,1,1,1
+access_court_kejaksaan_tinggi_kejati,access.court.kejaksaan.tinggi.kejati,model_court_kejaksaan_tinggi,group_kejati_manager,1,1,1,1
+access_court_kejaksaan_negeri_kejati,access.court.kejaksaan.negeri.kejati,model_court_kejaksaan_negeri,group_kejati_manager,1,1,1,1
+access_court_case_administrasi,access.court.case.administrasi,model_court_case,group_administratsi_staff,1,1,1,1
+access_court_kejaksaan_tinggi_administrasi,access.court.kejaksaan.tinggi.administrasi,model_court_kejaksaan_tinggi,group_administratsi_staff,1,1,1,1
+access_court_kejaksaan_negeri_administrasi,access.court.kejaksaan.negeri.administrasi,model_court_kejaksaan_negeri,group_administratsi_staff,1,1,1,1
+access_court_case_pbb,access.court.case.pbb,model_court_case,group_pengembalian_barang_bukti_staff,1,1,1,1
+access_court_kejaksaan_tinggi_pbb,access.court.kejaksaan.tinggi.pbb,model_court_kejaksaan_tinggi,group_pengembalian_barang_bukti_staff,1,1,1,1
+access_court_kejaksaan_negeri_pbb,access.court.kejaksaan.negeri.pbb,model_court_kejaksaan_negeri,group_pengembalian_barang_bukti_staff,1,1,1,1

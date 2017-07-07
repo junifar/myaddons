@@ -1,0 +1,94 @@
+<openerp>
+	<data>
+		<record model="workflow" id="wkf_court_case">
+			<field name="name">Perkara Sidang Workflow</field>
+			<field name="osv">court.case</field>
+			<field name="on_create">True</field>
+		</record>
+
+		<record model="workflow.activity" id="berkas_tilang">
+			<field name="name">Berkas Tilang</field>
+			<field name="wkf_id" ref="wkf_court_case"/>
+			<field name="flow_start" eval="True"></field>
+			<field name="kind">function</field>
+			<field name="action">action_berkas_tilang()</field>
+		</record>
+
+		<record model="workflow.activity" id="sidang">
+			<field name="name">Sidang</field>
+			<field name="wkf_id" ref="wkf_court_case"/>
+			<field name="kind">function</field>
+			<field name="action">action_sidang()</field>
+		</record>
+
+		<record model="workflow.activity" id="setoran_ke_negara">
+			<field name="name">Setoran Ke Negara</field>
+			<field name="wkf_id" ref="wkf_court_case"/>
+			<field name="kind">function</field>
+			<field name="action">action_setoran_ke_negara()</field>
+		</record>
+
+		<record model="workflow.activity" id="pengembalian_barang_bukti">
+			<field name="name">Pengembalian Barang Bukti</field>
+			<field name="wkf_id" ref="wkf_court_case" />
+			<field name="kind">function</field>
+			<field name="action">action_pengembalian_barang_bukti()</field>
+		</record>
+
+		<record model="workflow.activity" id="arsip">
+			<field name="name">Berkas Selesai</field>
+			<field name="wkf_id" ref="wkf_court_case"/>
+			<field name="kind">function</field>
+			<field name="action">action_arsip()</field>
+		</record>
+
+		<record model="workflow.transition" id="court_berkas_tilang_to_sidang">
+			<field name="act_from" ref="berkas_tilang"/>
+			<field name="act_to" ref="sidang" />
+			<field name="signal">action_sidang</field>
+		</record>
+
+		<record model="workflow.transition" id="court_sidang_to_setoran_ke_negara">
+			<field name="act_from" ref="sidang"/>
+			<field name="act_to" ref="setoran_ke_negara" />
+			<field name="signal">action_setoran_ke_negara</field>
+		</record>
+
+		<record model="workflow.transition" id="court_setoran_ke_negara_to_pengembalian_barang_bukti">
+			<field name="act_from" ref="setoran_ke_negara"/>
+			<field name="act_to" ref="pengembalian_barang_bukti" />
+			<field name="signal">action_pengembalian_barang_bukti</field>
+		</record>
+
+		<record model="workflow.transition" id="court_pengembalian_barang_bukti_to_arsip">
+			<field name="act_from" ref="pengembalian_barang_bukti"/>
+			<field name="act_to" ref="arsip" />
+			<field name="signal">action_arsip</field>
+		</record>
+
+		<record model="workflow.transition" id="court_arsip_to_pengembalian_barang_bukti">
+			<field name="act_from" ref="arsip"/>
+			<field name="act_to" ref="pengembalian_barang_bukti" />
+			<field name="signal">action_pengembalian_barang_bukti</field>
+		</record>
+
+		<record model="workflow.transition" id="court_pengembalian_barang_bukti_to_setoran_ke_negara">
+			<field name="act_from" ref="pengembalian_barang_bukti"/>
+			<field name="act_to" ref="setoran_ke_negara" />
+			<field name="signal">action_setoran_ke_negara</field>
+		</record>
+
+		<record model="workflow.transition" id="court_setoran_ke_negara_to_sidang">
+			<field name="act_from" ref="setoran_ke_negara"/>
+			<field name="act_to" ref="sidang" />
+			<field name="signal">action_sidang</field>
+		</record>
+
+		<record model="workflow.transition" id="sidang_to_berkas_tilang">
+			<field name="act_from" ref="sidang"/>
+			<field name="act_to" ref="berkas_tilang" />
+			<field name="signal">action_berkas_tilang</field>
+		</record>
+
+	</data>
+</openerp>
