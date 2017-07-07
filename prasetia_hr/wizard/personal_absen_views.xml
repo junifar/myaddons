@@ -37,18 +37,6 @@
             <field name="target">new</field>
         </record>
 
-        <!--<record-->
-			<!--id="personal_absen_action_values"-->
-			<!--model="ir.values">-->
-			<!--<field name="model_id" ref="prasetia_hr.model_hr_employee_attendance"/>-->
-			<!--<field name="name">Personal Absen</field>-->
-			<!--<field name="key2">personal_absent_multi</field>-->
-			<!--<field name="value" eval="'ir.actions.act_window,' +str(ref('personal_absen_action'))"/>-->
-			<!--<field name="key">action</field>-->
-			<!--<field name="model">hr.employee.attendance</field>-->
-		<!--</record>-->
-
-        <menuitem id="personal_absen_menu" name="Dashboard" parent="employee_absen_menu" sequence="1"/>
-        <menuitem id="personal_absen_menu_action" name="Personal Absent" parent="personal_absen_menu" action="personal_absen_action"/>
+        <menuitem id="personal_absen_root_menu" name="Absen" sequence="98" action="personal_absen_action"/>
     </data>
 </odoo>
