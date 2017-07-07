@@ -26,15 +26,14 @@
                     </div>
                 </div>
                 <div class="row invoice-info">
-                    <div class="col-sm-4 invoice-col">
+                    <div class="col-sm-6 invoice-col">
                       <b>LAPORAN KEHADIRAN KARYAWAN</b><br/>
                       <br/>
                       <b>Noreg :</b> 110075<br/>
                       <b>Nama Karyawan :</b> <span t-esc="employee_name"/><br/>
                       <b>Periode :</b> Juni 2017
                     </div>
-                    <div class="col-sm-4 invoice-col"/>
-                    <div class="col-sm-4 invoice-col"/>
+                    <div class="col-sm-6 invoice-col"/>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 table-responsive">

@@ -20,8 +20,8 @@
 			string = "Formulir Tidak Hadir Bekerja"
 			report_type = "qweb-pdf"
 			paperformat="paper_format_A4"
-			name = "prasetia-hr.print_leave_form"
-			file = "prasetia-hr.views.print_leave_form"
+			name = "prasetia_hr.print_leave_form"
+			file = "prasetia_hr.views.print_leave_form"
             menu="False"
 			/>
 

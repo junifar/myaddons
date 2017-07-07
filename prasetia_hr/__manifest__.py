@@ -43,7 +43,7 @@
         'views/report_family.xml',
         'views/prasetia_hr_report.xml',
         'wizard/personal_absen_views.xml',
-        'wizard/family_wizard_views.xml',
+        # 'wizard/family_wizard_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -1,2 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_prasetia-hr_prasetia-hr,prasetia-hr.prasetia-hr,model_prasetia-hr_prasetia-hr,,1,0,0,0
+access_prasetia_hr_prasetia_hr,prasetia_hr.prasetia_hr,model_prasetia_hr_prasetia_hr,,1,0,0,0

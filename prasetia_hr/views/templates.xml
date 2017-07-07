@@ -20,9 +20,9 @@
         <!-- </template> -->
         <template id="assets_backend" name="hr assets" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
-            <link rel="stylesheet" href="/prasetia-hr/static/src/less/dashboard.less"/>
+            <link rel="stylesheet" href="/prasetia_hr/static/src/less/dashboard.less"/>
 
-            <script type="text/javascript" src="/prasetia-hr/static/src/js/attendance_report.js"/>
+            <script type="text/javascript" src="/prasetia_hr/static/src/js/attendance_report.js"/>
         </xpath>
     </template>
     </data>

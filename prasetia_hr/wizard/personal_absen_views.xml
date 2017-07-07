@@ -48,6 +48,7 @@
 			<!--<field name="model">hr.employee.attendance</field>-->
 		<!--</record>-->
 
-        <menuitem id="personal_absen_menu_action" name="Personal Absent" parent="employee_absen_menu" action="personal_absen_action"/>
+        <menuitem id="personal_absen_menu" name="Dashboard" parent="employee_absen_menu" sequence="1"/>
+        <menuitem id="personal_absen_menu_action" name="Personal Absent" parent="personal_absen_menu" action="personal_absen_action"/>
     </data>
 </odoo>
