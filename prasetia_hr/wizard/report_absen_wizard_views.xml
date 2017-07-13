@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="wizard_report_absent_form">
+			<field name="name">wizard.form.report.absent</field>
+			<field name="model">hr.employee.report.absent.wizard</field>
+			<field name="arch" type="xml">
+				<form string="Personal Absent">
+					<group>
+						<field name="company_id"/>
+					</group>
+					<group>
+                        <group>
+                            <field name="month_filter"/>
+                        </group>
+                        <group>
+                            <field name="year_filter" widget="payment"/>
+                        </group>
+					</group>
+					<footer>
+                        <button name="show_data" type="object"
+                                string="show" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+				</form>
+			</field>
+		</record>
+
+        <record id="report_absen_wizard_action" model="ir.actions.act_window">
+            <field name="name">Wizard Report Absen</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.employee.report.absent.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_report_absent_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="report_attendance_all_empolyee_menu" name="Laporan Absen Karyawan"
+                  parent="administration_sub_menu" action="report_absen_wizard_action"/>
+    </data>
+</odoo>

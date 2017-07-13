@@ -4,11 +4,13 @@
         <menuitem id="family_menu" name="Keluarga" parent="personal_information_menu" action="hr_family_list_action" />
         <menuitem id="education_menu" name="Pendidikan" parent="personal_information_menu" action="hr_education_list_action" />
         <menuitem id="work_history_menu" name="Riwayat Pekerjaan" parent="personal_information_menu" action="hr_work_history_list_action" />
-        <menuitem id="import_attendance_menu" name="Import Absen" parent="hr.menu_hr_root" action="attendance_import_list_action" />
+
+        <menuitem id="import_attendance_sub_menu" name="Import Absen" parent="hr.menu_hr_root"/>
+        <menuitem id="import_attendance_menu" name="Import Absen" parent="import_attendance_sub_menu" action="attendance_import_list_action" />
+        <menuitem id="device_menu" name="Devices" parent="import_attendance_sub_menu" action="device_attendance_list_action" />
 
 
-        <menuitem id="employee_master_menu" name="Master Data" parent="hr.menu_hr_root"/>
-        <menuitem id="device_menu" name="Devices" parent="employee_master_menu" action="device_attendance_list_action" />
+        <!--<menuitem id="employee_master_menu" name="Master Data" parent="hr.menu_hr_root"/>-->
 
         <menuitem id="employee_attendance_menu_root" name="Attendance" web_icon="prasetia_hr,static/description/icon.png" sequence="101"/>
         <menuitem id="employee_attendance_menu" name="Attendance" parent="employee_attendance_menu_root"
@@ -22,5 +24,10 @@
         action="leave_request_list_action"/>
         <menuitem id="leave_request_type_menu" name="Jenis Cuti" parent="employee_cuti_menu"
         action="leave_request_type_list_action"/>
+
+        <menuitem id="administration_menu" name="Administration" sequence="101"/>
+        <menuitem id="administration_sub_menu" name="Administration" parent="administration_menu"/>
+        <!--<menuitem id="report_attendance_all_empolyee_menu" name="Laporan Absen Karyawan"-->
+                  <!--parent="administration_sub_menu" action="report_absen_wizard_action"/>-->
     </data>
 </odoo>
