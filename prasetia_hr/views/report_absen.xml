@@ -1,17 +1,177 @@
 <odoo>
+    <template id="harian_absen_layout_template">
+        <div class="row">
+            <div class="col-xs-12 table-responsive">
+                <br/>
+                    <table class="table table-striped table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th>NIK</th>
+                                <th>Nama Pegawai</th>
+                                <th>Jam Kerja</th>
+                                <th>Masuk</th>
+                                <th>Keluar</th>
+                                <th>Jam Bekerja</th>
+                                <th>Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>110075</td>
+                                <td>Junifar Hidayat</td>
+                                <td>09:00 - 10:00</td>
+                                <td>09:00</td>
+                                <td>10:00</td>
+                                <td>1 Hour</td>
+                                <td>Pass</td>
+                            </tr>
+                            <tr>
+                                <td>110075</td>
+                                <td>Junifar Hidayat</td>
+                                <td>09:00 - 10:00</td>
+                                <td>09:00</td>
+                                <td>10:00</td>
+                                <td>1 Hour</td>
+                                <td>Pass</td>
+                            </tr>
+                            <tr>
+                                <td>110075</td>
+                                <td>Junifar Hidayat</td>
+                                <td>09:00 - 10:00</td>
+                                <td>09:00</td>
+                                <td>10:00</td>
+                                <td>1 Hour</td>
+                                <td>Pass</td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </template>
+
+    <template id="bulanan_absen_layout_template">
+        <div class="row">
+            <div class="col-xs-12 table-responsive">
+                <br/>
+                    <table class="table table-striped table-condensed table-bordered"
+                           style="font-family:arial; font-size:	10px">
+                        <thead>
+                            <tr>
+                                <th>NIK</th>
+                                <th>Nama Pegawai</th>
+                                <th>Masuk Bekerja</th>
+                                <th>Sakit</th>
+                                <th>Izin</th>
+                                <th>Mangkir</th>
+                                <th>Lembur</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>110075</td>
+                                <td>Junifar Hidayat</td>
+                                <td>22</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>110075</td>
+                                <td>Junifar Hidayat</td>
+                                <td>22</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>110075</td>
+                                <td>Junifar Hidayat</td>
+                                <td>22</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>110075</td>
+                                <td>Junifar Hidayat</td>
+                                <td>22</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </template>
+
+    <template id="custom_absen_layout_template">
+        Contoh report custom
+    </template>
+
     <template id="report_absen">
         <t t-set="data_report_margin_top" t-value="12"/>
         <t t-set="data_report_header_spacing" t-value="9"/>
         <t t-set="data_report_dpi" t-value="110"/>
-        <div class="header">
-            <div class="row">
-                <div class="cols-xs-12 text-center"><h4>Laporan Pengeluaran ATK <span t-esc="tahun_filter"/></h4></div>
-            </div>
-        </div>
-        <div class="page">
-            <div class="row">
-                <h1>Its works</h1>
-            </div>
-        </div>
+
+         <t t-call="report.html_container">
+             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/AdminLTE.min.css" />
+             <div class="page">
+                 <section class="invoice">
+                     <div class="row">
+                        <div class="col-xs-12">
+                          <h2 class="page-header">
+                            <i class="fa fa-globe"></i> <span t-esc="docs.company_id.name"/>
+                            <small class="pull-right"><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%B-%Y %H:%M')"/></small>
+                          </h2>
+                        </div>
+                     </div>
+                     <div class="row invoice-info">
+                        <div class="col-sm-6 invoice-col">
+                            <b>LAPORAN KEHADIRAN KARYAWAN</b><br/>
+                            <br/>
+                            <b>Report Type :</b> <span t-esc="report_type"/><br/>
+                            <t t-if="report_type == 'Bulanan'">
+                                <b>Periode :</b>
+                                <t t-if="docs.month_filter == 1">Januari </t>
+                                <t t-if="docs.month_filter == 2">Februari </t>
+                                <t t-if="docs.month_filter == 3">Maret </t>
+                                <t t-if="docs.month_filter == 4">April </t>
+                                <t t-if="docs.month_filter == 5">Mei </t>
+                                <t t-if="docs.month_filter == 6">Juni </t>
+                                <t t-if="docs.month_filter == 7">Juli </t>
+                                <t t-if="docs.month_filter == 8">Agustus </t>
+                                <t t-if="docs.month_filter == 9">September </t>
+                                <t t-if="docs.month_filter == 10">Oktober </t>
+                                <t t-if="docs.month_filter == 11">November </t>
+                                <t t-if="docs.month_filter == 12">Desember </t>
+                                <span t-esc="docs.year_filter"/>
+                            </t>
+                            <t t-if="report_type == 'Harian'">
+                                <b>Periode :</b> <span t-esc="docs.date_filter"/>
+                            </t>
+                            <t t-if="report_type == 'Custom'">
+                                <b>Periode :</b> <span t-esc="docs.date_filter_from"/> - <span t-esc="docs.date_filter_to"/>
+                            </t>
+                        </div>
+                        <div class="col-sm-6 invoice-col"/>
+                     </div>
+                     <t t-if="report_type == 'Harian'">
+                         <t t-call="prasetia_hr.harian_absen_layout_template" />
+                     </t>
+                     <t t-if="report_type == 'Bulanan'">
+                         <t t-call="prasetia_hr.bulanan_absen_layout_template" />
+                     </t>
+                     <t t-if="report_type == 'Custom'">
+                         <t t-call="prasetia_hr.custom_absen_layout_template" />
+                     </t>
+                 </section>
+             </div>
+        </t>
     </template>
+
 </odoo>

@@ -28,8 +28,8 @@
 			string = "Report Absen"
 			report_type = "qweb-html"
 			paperformat="paper_format_A4"
-			name = "report_absen"
-			file = "report_absen"
+			name = "prasetia_hr.report_absen"
+			file = "prasetia_hr.report_absen"
 			/>
 
 		<report id="action_report_family"

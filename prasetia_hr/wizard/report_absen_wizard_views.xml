@@ -8,12 +8,24 @@
 					<group>
 						<field name="company_id"/>
 					</group>
+                    <group>
+                        <field name="report_type" widget="radio"/>
+                    </group>
 					<group>
-                        <group>
+                        <group attrs="{'invisible':[('report_type','in',['Harian', 'Custom'])]}">
                             <field name="month_filter"/>
                         </group>
-                        <group>
+                        <group attrs="{'invisible':[('report_type','in',['Harian', 'Custom'])]}">
                             <field name="year_filter" widget="payment"/>
+                        </group>
+                        <group attrs="{'invisible':[('report_type','in',['Bulanan', 'Custom'])]}">
+                            <field name="date_filter"/>
+                        </group>
+                        <group attrs="{'invisible':[('report_type','in',['Harian', 'Bulanan'])]}">
+                            <field name="date_filter_from"/>
+                        </group>
+                        <group attrs="{'invisible':[('report_type','in',['Harian', 'Bulanan'])]}">
+                            <field name="date_filter_to" widget="payment"/>
                         </group>
 					</group>
 					<footer>
