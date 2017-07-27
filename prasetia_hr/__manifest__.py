@@ -37,6 +37,7 @@
         'views/leave_request.xml',
         'views/leave_request_workflow.xml',
         'views/leave_request_type.xml',
+        'views/leave_administration.xml',
         'views/menus.xml',
         'views/report_personal_absen.xml',
         'views/report_absen.xml',

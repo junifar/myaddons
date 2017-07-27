@@ -1,0 +1,72 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="leave_periode_form_view">
+			<field name="name">Leave Periode</field>
+			<field name="model">hr.employee.leave.periode</field>
+			<field name="arch" type="xml">
+                <form string="Administrasi Cuti">
+                    <sheet>
+                        <div class="oe_title">
+							<h1>
+								<field name="company_id" placeholder="Company Name"/>
+							</h1>
+                            <group>
+							    <field name="name"/>
+							</group>
+						</div>
+                        <notebook>
+                            <page name="leave_periode_line" string="Cuti Tahunan">
+                                <field name="leave_periode_detail_ids">
+                                    <tree string="Cuti Tahunan" editable="bottom">
+                                        <field name="employee_id"/>
+                                        <field name="annual_leave"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="long_leave_periode_line" string="Cuti 5 Tahunan">
+                                <field name="long_leave_periode_detail_ids">
+                                    <tree string="Cuti 5 Tahunan" editable="bottom">
+                                        <field name="employee_id"/>
+                                        <field name="annual_leave"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="other_leave_periode_line" string="Cuti Lainnya">
+                                <field name="other_leave_periode_detail_ids">
+                                    <tree string="Cuti Lainnya" editable="bottom">
+                                        <field name="employee_id"/>
+                                        <field name="leave_type_id"/>
+                                        <field name="annual_leave"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="leave_periode_tree_view">
+            <field name="name">Leave Periode</field>
+			<field name="model">hr.employee.leave.periode</field>
+			<field name="arch" type="xml">
+				<tree string="Administrasi Cuti" create="true">
+                    <field name="company_id"/>
+                    <field name="name"/>
+				</tree>
+			</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="leave_periode_list_action">
+			<field name="name">Leave Periode</field>
+			<field name="res_model">hr.employee.leave.periode</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Administrasi Cuti
+				</p>
+			</field>
+		</record>
+    </data>
+</odoo>

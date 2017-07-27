@@ -26,7 +26,9 @@
         action="leave_request_type_list_action"/>
 
         <menuitem id="administration_menu" name="Administration" sequence="101"/>
-        <menuitem id="administration_sub_menu" name="Administration" parent="administration_menu"/>
+        <menuitem id="administration_leave_management_sub_menu" name="Leave Management" parent="administration_menu" sequence="1"/>
+        <menuitem id="administration_leave_periode_menu" name="Cuti" parent="administration_leave_management_sub_menu" action="leave_periode_list_action"/>
+        <menuitem id="administration_report_sub_menu" name="Report" parent="administration_menu" sequence="2"/>
         <!--<menuitem id="report_attendance_all_empolyee_menu" name="Laporan Absen Karyawan"-->
                   <!--parent="administration_sub_menu" action="report_absen_wizard_action"/>-->
     </data>

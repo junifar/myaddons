@@ -16,33 +16,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>110075</td>
-                                <td>Junifar Hidayat</td>
-                                <td>09:00 - 10:00</td>
-                                <td>09:00</td>
-                                <td>10:00</td>
-                                <td>1 Hour</td>
-                                <td>Pass</td>
-                            </tr>
-                            <tr>
-                                <td>110075</td>
-                                <td>Junifar Hidayat</td>
-                                <td>09:00 - 10:00</td>
-                                <td>09:00</td>
-                                <td>10:00</td>
-                                <td>1 Hour</td>
-                                <td>Pass</td>
-                            </tr>
-                            <tr>
-                                <td>110075</td>
-                                <td>Junifar Hidayat</td>
-                                <td>09:00 - 10:00</td>
-                                <td>09:00</td>
-                                <td>10:00</td>
-                                <td>1 Hour</td>
-                                <td>Pass</td>
-                            </tr>
+                            <t t-foreach="data_absen" t-as="data">
+                                <tr>
+                                    <td><span t-esc="data['registration_id']"/></td>
+                                    <td><span t-esc="data['name_related']"/></td>
+                                    <td>08:30 - 17:30</td>
+                                    <td><span t-esc="data['absent_in']"/> </td>
+                                    <td><span t-esc="data['absent_out']"/></td>
+                                    <td><span t-esc="data['work_hours']"/></td>
+                                    <td><span t-esc="data['note']"/></td>
+                                </tr>
+                            </t>
                         </tbody>
                     </table>
             </div>

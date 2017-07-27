@@ -49,6 +49,6 @@
         </record>
 
         <menuitem id="report_attendance_all_empolyee_menu" name="Laporan Absen Karyawan"
-                  parent="administration_sub_menu" action="report_absen_wizard_action"/>
+                  parent="administration_report_sub_menu" action="report_absen_wizard_action"/>
     </data>
 </odoo>

@@ -2,3 +2,4 @@
 
 from . import models
 from . import hr
+from . import leave_models
