@@ -22,6 +22,9 @@
                                         <field name="annual_leave"/>
                                     </tree>
                                 </field>
+                                <button name="action_import_employee" type="object"
+                                        string="Batch" class="oe_highlight oe_edit_only "
+                                        confirm="Are you sure you want to do this?"/>
                             </page>
                             <page name="long_leave_periode_line" string="Cuti 5 Tahunan">
                                 <field name="long_leave_periode_detail_ids">

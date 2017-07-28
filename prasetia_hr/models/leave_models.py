@@ -7,11 +7,27 @@ class LeavePeriode(models.Model):
     company_id = fields.Many2one('res.company', required=True, string="Perusahaan")
     name = fields.Char(string="Periode Cuti", required=True)
     leave_periode_detail_ids = fields.One2many('hr.employee.leave.periode.detail', 'leave_periode_id',
-                                                 string="List Periode Detail Line")
+                                               string="List Periode Detail Line")
     long_leave_periode_detail_ids = fields.One2many('hr.employee.long.leave.periode.detail', 'leave_periode_id',
-                                               string="List Long Periode Detail Line")
+                                                    string="List Long Periode Detail Line")
     other_leave_periode_detail_ids = fields.One2many('hr.employee.other.leave.periode.detail', 'leave_periode_id',
-                                               string="List Other Periode Detail Line")
+                                                     string="List Other Periode Detail Line")
+
+    @api.multi
+    def action_import_employee(self):
+        hr_employee_leave_periode_detail = self.env['hr.employee.leave.periode.detail']
+
+        values = {
+            'leave_periode_id': self.id,
+            'employee_id': 1,
+            'annual_leave': 12
+        }
+
+        hr_employee_leave_periode_detail.create(values)
+
+        print '===***==='
+        print 'Its work'
+        return None
 
 
 class LeavePeriodeDetail(models.Model):
@@ -20,6 +36,10 @@ class LeavePeriodeDetail(models.Model):
     leave_periode_id = fields.Many2one('hr.employee.leave.periode', required=True, string="Periode Cuti")
     employee_id = fields.Many2one('hr.employee', required=True, string="Nama Pegawai")
     annual_leave = fields.Integer(string='Hak Cuti Tahunan', required=True)
+
+    _sql_constraints = [
+        ('unique_leave_periode_id_employee_id', 'unique(leave_periode_id, employee_id)', 'Employee Already Registered')
+    ]
 
 
 class LongLeavePeriodeDetail(models.Model):
