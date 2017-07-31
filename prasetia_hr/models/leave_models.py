@@ -6,6 +6,7 @@ class LeavePeriode(models.Model):
 
     company_id = fields.Many2one('res.company', required=True, string="Perusahaan")
     name = fields.Char(string="Periode Cuti", required=True)
+    default_annual_leave = fields.Integer(String="Standar Cuti (Hari)", required=True)
     leave_periode_detail_ids = fields.One2many('hr.employee.leave.periode.detail', 'leave_periode_id',
                                                string="List Periode Detail Line")
     long_leave_periode_detail_ids = fields.One2many('hr.employee.long.leave.periode.detail', 'leave_periode_id',
@@ -17,16 +18,25 @@ class LeavePeriode(models.Model):
     def action_import_employee(self):
         hr_employee_leave_periode_detail = self.env['hr.employee.leave.periode.detail']
 
-        values = {
-            'leave_periode_id': self.id,
-            'employee_id': 1,
-            'annual_leave': 12
-        }
+        hr_employee_datas = self.env['hr.employee'].search([('resource_id.active', '=', True)])
+        if hr_employee_datas:
+            for data in hr_employee_datas:
+                # print data.name_related.encode("utf-8")
 
-        hr_employee_leave_periode_detail.create(values)
+                is_found = False
+                for check in hr_employee_leave_periode_detail.search([('leave_periode_id', '=', self.id)]):
+                    if check.employee_id.id == data.id:
+                        is_found = True
+                        break
 
-        print '===***==='
-        print 'Its work'
+                if not is_found:
+                    values = {
+                        'leave_periode_id': self.id,
+                        'employee_id': data.id,
+                        'annual_leave': self.default_annual_leave
+                    }
+                    hr_employee_leave_periode_detail.create(values)
+
         return None
 
 

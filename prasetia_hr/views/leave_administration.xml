@@ -12,6 +12,7 @@
 							</h1>
                             <group>
 							    <field name="name"/>
+                                <field name="default_annual_leave"/>
 							</group>
 						</div>
                         <notebook>
