@@ -207,8 +207,52 @@
                             </table>
                         </div>
                     </div>
+                    <div class="row">
+                        <br/>
+                    </div>
+                    <div class="row">
+                        <table class="table table-bordered table-condensed">
+                            <tr>
+                                <th colspan="4" style="text-align:center;">
+                                    Data Cuti Tahun 2017
+                                </th>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" style="width: 150px;">Hak Cuti</td>
+                                <td>Tahunan _____ Hari</td>
+                                <td rowspan="2" style="width: 150px;">Cuti yang sudah digunakan</td>
+                                <td>Tahunan _____ Hari</td>
+                            </tr>
+                            <tr>
+                                <td>Panjang _____ Hari</td>
+                                <td>Panjang _____ Hari</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">Cuti Bersama</td>
+                                <td rowspan="2">Sisa Cuti</td>
+                                <td>Tahunan _____ Hari</td>
+                                <td>Tahunan _____ Hari</td>
+                            </tr>
+                            <tr>
+                                <td>Panjang _____ Hari</td>
+                                <td>Panjang _____ Hari</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <br/>
+                    </div>
+                    <div class="row">
+                        Terhitung mulai tanggal [[tanggal mulai cuti]] Sampai dengan tanggal [[tanggal akhir cuti]] <br/>
+                        Alasan penggunaan Cuti / Ijin untuk keperluan [[Deskripsi Keperluan]]
+                    </div>
+                    <div class="row">
+                        <br/>
+                    </div>
+                    <div class="row">
+                        Tanggal Pengajuan [[tanggal pengajuan]]
+                    </div>
                 </div>
-
             </t>
         </t>
     </template>
