@@ -24,17 +24,19 @@
 							<h1>
 								<field name="name" placeholder="name"/>
 							</h1>
-							<group>
-								<group>
-									<field name="serial_number"/>
-								</group>
-								<group></group>
-							</group>
+							<!--<group>-->
+								<!--<group>-->
+									<!--<field name="serial_number"/>-->
+								<!--</group>-->
+								<!--<group></group>-->
+							<!--</group>-->
 						</div>
 						<group>
                             <group>
                                 <field name="department_id"/>
-                                <field name="leave_type_id"/>
+								<field name="leave_category" widget="radio"/>
+                                <field name="leave_type_id" attrs="{'invisible':['|',
+                                ('leave_category','=','cuti tahunan'), ('leave_category', '=', 'cuti panjang')]}"/>
                             </group>
                             <group>
                                 <field name="from_date"/>

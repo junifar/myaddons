@@ -255,7 +255,9 @@ class leave_request(models.Model):
     serial_number = fields.Char(String='Serial Number')
     name = fields.Many2one('hr.employee', String="Employee Name", ondelete='cascade', required=True)
     department_id = fields.Many2one('hr.department', String="Departement", required=True)
-    leave_type_id = fields.Many2one('hr.employee.leave.request.type', string="Leave Type", required=True)
+    leave_category = fields.Selection([('cuti tahunan', 'Cuti Tahunan'), ('cuti panjang', 'Cuti Panjang'),
+                                       ('other', 'Cuti Lainnya')], default='cuti tahunan')
+    leave_type_id = fields.Many2one('hr.employee.leave.request.type', string="Leave Type")
     from_date = fields.Date(String="From Date", required=True)
     to_date = fields.Date(String="To Date", required=True)
     reason = fields.Text(String="Reason", required=True)
