@@ -38,6 +38,7 @@ class Employee(models.Model):
     education_ids = fields.One2many('hr.employee.education', 'employee_id', string="List Employee Educations")
     work_history_ids = fields.One2many('hr.employee.work.history', 'employee_id', string="List Employee Work History")
     attendance_ids = fields.One2many('hr.employee.attendance', 'employee_id', string="List Employee Attendance")
+    contract_ids = fields.One2many('hr.employee.contract', 'employee_id', string="List Employee Contract")
 
     @property
     def __str__(self):
@@ -77,3 +78,18 @@ class DriverLicenseType(models.Model):
 class Religion(models.Model):
     _name = "hr.religion"
     name = fields.Char(required=True, string='Religion')
+
+
+class EmployeeStatusType(models.Model):
+    _name = "hr.employee.status.type"
+    name = fields.Char(required=True, string='Status Type')
+
+
+class EmployeeContract(models.Model):
+    _name = "hr.employee.contract"
+
+    name = fields.Many2one('hr.employee.status.type', required=True, string='Status')
+    employee_id = fields.Many2one('hr.employee', required=True)
+    start_date = fields.Date(string='Mulai')
+    end_date = fields.Date(string='Selesai')
+    note = fields.Text(String="Note")

@@ -107,6 +107,17 @@
 								</page>
 							</notebook>
 						</page>
+
+
+						<page name="personal_contract" string="Status Kepegawaian">
+							<field name="contract_ids">
+								<tree string="Status Kepegawaian">
+									<field name="name"/>
+									<field name="start_date"/>
+									<field name="end_date"/>
+								</tree>
+							</field>
+						</page>
 					</page>
 
 					<page name="personal_information" position="replace">
