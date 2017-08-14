@@ -16,6 +16,7 @@
 									<field name="religion_id"/>
 									<field name="mobile_phone"/>
 									<field name="work_email" widget="email"/>
+									<field name="date_join"/>
 									<!--<field name="birth_place"/>-->
 									<!--<field name="birthday"/>-->
 								</group>

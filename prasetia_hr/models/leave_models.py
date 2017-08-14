@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from odoo import models, fields, api, exceptions, _
 
 
@@ -18,7 +20,8 @@ class LeavePeriode(models.Model):
     def action_import_employee(self):
         hr_employee_leave_periode_detail = self.env['hr.employee.leave.periode.detail']
 
-        hr_employee_datas = self.env['hr.employee'].search([('resource_id.active', '=', True)])
+        hr_employee_datas = self.env['hr.employee'].search(['&', ('resource_id.active', '=', True),
+                                                            ('date_join', '!=', False)])
         if hr_employee_datas:
             for data in hr_employee_datas:
                 # print data.name_related.encode("utf-8")
@@ -29,11 +32,16 @@ class LeavePeriode(models.Model):
                         is_found = True
                         break
 
+                join_date = datetime.strptime(data.date_join, "%Y-%m-%d").date()
+
                 if not is_found:
                     values = {
                         'leave_periode_id': self.id,
                         'employee_id': data.id,
-                        'annual_leave': self.default_annual_leave
+                        'annual_leave': self.default_annual_leave,
+                        'start_periode': datetime.strptime('01-01-'+self.name, "%d-%m-%Y").date(),
+                        'end_periode': datetime.strptime(str(join_date.day) + '-' + str(join_date.month) + '-' +
+                                                         str(int(self.name)+1), "%d-%m-%Y").date()
                     }
                     hr_employee_leave_periode_detail.create(values)
 
@@ -46,6 +54,10 @@ class LeavePeriodeDetail(models.Model):
     leave_periode_id = fields.Many2one('hr.employee.leave.periode', required=True, string="Periode Cuti")
     employee_id = fields.Many2one('hr.employee', required=True, string="Nama Pegawai")
     annual_leave = fields.Integer(string='Hak Cuti Tahunan', required=True)
+    annual_leave_used = fields.Integer(string='Cuti Terpakai', requird=True)
+    start_periode = fields.Date(string='Tanggal Mulai Berlaku', required=True)
+    end_periode = fields.Date(string='Tanggal Akhir Berlaku', required=True)
+    locked = fields.Boolean(string='Locked', default=False)
 
     _sql_constraints = [
         ('unique_leave_periode_id_employee_id', 'unique(leave_periode_id, employee_id)', 'Employee Already Registered')

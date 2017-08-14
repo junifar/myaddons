@@ -39,6 +39,7 @@ class Employee(models.Model):
     work_history_ids = fields.One2many('hr.employee.work.history', 'employee_id', string="List Employee Work History")
     attendance_ids = fields.One2many('hr.employee.attendance', 'employee_id', string="List Employee Attendance")
     contract_ids = fields.One2many('hr.employee.contract', 'employee_id', string="List Employee Contract")
+    date_join = fields.Date(string='Tanggal Masuk', required=True)
 
     @property
     def __str__(self):
