@@ -8,7 +8,9 @@ class LeavePeriode(models.Model):
 
     company_id = fields.Many2one('res.company', required=True, string="Perusahaan")
     name = fields.Char(string="Periode Cuti", required=True)
-    default_annual_leave = fields.Integer(String="Standar Cuti (Hari)", required=True)
+    default_annual_leave = fields.Integer(string="Standar Cuti (Hari)", required=True)
+    government_holiday = fields.Integer(string="C.B Pemerintah", required=True, default=0)
+    company_holiday = fields.Integer(string="C.B Perusahaan", required=True, default=0)
     leave_periode_detail_ids = fields.One2many('hr.employee.leave.periode.detail', 'leave_periode_id',
                                                string="List Periode Detail Line")
     long_leave_periode_detail_ids = fields.One2many('hr.employee.long.leave.periode.detail', 'leave_periode_id',
@@ -39,9 +41,9 @@ class LeavePeriode(models.Model):
                         'leave_periode_id': self.id,
                         'employee_id': data.id,
                         'annual_leave': self.default_annual_leave,
-                        'start_periode': datetime.strptime('01-01-'+self.name, "%d-%m-%Y").date(),
+                        'start_periode': datetime.strptime('01-01-' + self.name, "%d-%m-%Y").date(),
                         'end_periode': datetime.strptime(str(join_date.day) + '-' + str(join_date.month) + '-' +
-                                                         str(int(self.name)+1), "%d-%m-%Y").date()
+                                                         str(int(self.name) + 1), "%d-%m-%Y").date()
                     }
                     hr_employee_leave_periode_detail.create(values)
 

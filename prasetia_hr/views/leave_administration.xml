@@ -11,8 +11,14 @@
 								<field name="company_id" placeholder="Company Name"/>
 							</h1>
                             <group>
-							    <field name="name"/>
-                                <field name="default_annual_leave"/>
+							    <group>
+                                    <field name="name"/>
+                                </group>
+                                <group>
+                                    <field name="default_annual_leave"/>
+                                    <field name="government_holiday"/>
+                                    <field name="company_holiday"/>
+                                </group>
 							</group>
 						</div>
                         <notebook>
