@@ -23,6 +23,15 @@
 			file = "prasetia_hr.report_personal_absen"
 			/>
 
+		<report id="action_report_personal_leave"
+			model = 'hr.employee.attendance'
+			string = "Report Personal Leave"
+			report_type = "qweb-html"
+			paperformat="paper_format_A4"
+			name = "prasetia_hr.report_personal_leave"
+			file = "prasetia_hr.report_personal_leave"
+			/>
+
 		<report id="action_report_absen"
 			model = 'hr.employee.attendance'
 			string = "Report Absen"

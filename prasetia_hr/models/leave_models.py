@@ -42,8 +42,7 @@ class LeavePeriode(models.Model):
                         'employee_id': data.id,
                         'annual_leave': self.default_annual_leave,
                         'start_periode': datetime.strptime('01-01-' + self.name, "%d-%m-%Y").date(),
-                        'end_periode': datetime.strptime(str(join_date.day) + '-' + str(join_date.month) + '-' +
-                                                         str(int(self.name) + 1), "%d-%m-%Y").date()
+                        'end_periode': datetime.strptime('30-06-' + str(int(self.name)+1), "%d-%m-%Y").date()
                     }
                     hr_employee_leave_periode_detail.create(values)
 

@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="wizard_personal_leave_form">
+			<field name="name">wizard.form.personal.leave</field>
+			<field name="model">hr.employee.personal.leave</field>
+			<field name="arch" type="xml">
+				<form string="Personal leave">
+                    <group>
+						<field name="company_id"/>
+					</group>
+					<group>
+						<field name="employee_id"/>
+					</group>
+					<group>
+                        <group>
+                            <field name="month_filter"/>
+                        </group>
+                        <group>
+                            <field name="year_filter" widget="payment"/>
+                        </group>
+					</group>
+					<footer>
+                        <button name="show_data" type="object"
+                                string="show" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+				</form>
+			</field>
+		</record>
+
+        <record id="personal_leave_action" model="ir.actions.act_window">
+            <field name="name">Wizard Personal leave</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.employee.personal.leave</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_personal_leave_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="report_cuti_menu" name="Sisa Cuti Karyawan" parent="prasetia_hr.information_cuti_menu"
+        action="personal_leave_action"/>
+    </data>
+</odoo>

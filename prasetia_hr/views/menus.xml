@@ -5,6 +5,7 @@
         <menuitem id="education_menu" name="Pendidikan" parent="personal_information_menu" action="hr_education_list_action" />
         <menuitem id="work_history_menu" name="Riwayat Pekerjaan" parent="personal_information_menu" action="hr_work_history_list_action" />
         <menuitem id="contract_menu" name="Status Kepegawaian" parent="personal_information_menu" action="contract_list_action" />
+        <menuitem id="kartu_keluarga_menu" name="Kartu Keluarga" parent="personal_information_menu" action="kartu_keluarga_list_action" />
 
         <menuitem id="import_attendance_sub_menu" name="Import Absen" parent="hr.menu_hr_root"/>
         <menuitem id="import_attendance_menu" name="Import Absen" parent="import_attendance_sub_menu" action="attendance_import_list_action" />
@@ -21,8 +22,8 @@
 
         <menuitem id="employee_cuti_root_menu" name="Cuti" sequence="99"/>
         <menuitem id="information_cuti_menu" name="Information" parent="employee_cuti_root_menu" sequence="1"/>
-        <menuitem id="report_cuti_menu" name="Sisa Cuti Karyawan" parent="information_cuti_menu"
-        action="leave_request_list_action"/>
+        <!--<menuitem id="report_cuti_menu" name="Sisa Cuti Karyawan" parent="information_cuti_menu"-->
+        <!--action="prasetia_hr.personal_leave_action"/>-->
         <menuitem id="employee_cuti_menu" name="Cuti" parent="employee_cuti_root_menu" sequence="2"/>
         <menuitem id="leave_request_menu" name="Permohonan Cuti" parent="employee_cuti_menu"
         action="leave_request_list_action"/>
@@ -33,6 +34,8 @@
         <menuitem id="administration_leave_management_sub_menu" name="Leave Management" parent="administration_menu" sequence="1"/>
         <menuitem id="administration_leave_periode_menu" name="Cuti" parent="administration_leave_management_sub_menu" action="leave_periode_list_action"/>
         <menuitem id="administration_report_sub_menu" name="Report" parent="administration_menu" sequence="2"/>
+        <menuitem id="administration_configuration_menu" name="Configuration" parent="administration_menu" sequence="3"/>
+        <menuitem id="administration_directorate_menu" name="Directorate" parent="administration_configuration_menu" action="directorate_list_action"/>
         <!--<menuitem id="report_attendance_all_empolyee_menu" name="Laporan Absen Karyawan"-->
                   <!--parent="administration_sub_menu" action="report_absen_wizard_action"/>-->
     </data>

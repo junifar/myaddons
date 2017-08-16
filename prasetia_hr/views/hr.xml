@@ -12,15 +12,18 @@
 							<group>
 								<group string="Personal Information">
 									<field name="registration_id"/>
+									<field name="nama_panggilan"/>
 									<field name="identification_id" groups="hr.group_hr_user"/>
 									<field name="religion_id"/>
 									<field name="mobile_phone"/>
+									<field name="mobile_phone_2"/>
 									<field name="work_email" widget="email"/>
 									<field name="date_join"/>
 									<!--<field name="birth_place"/>-->
 									<!--<field name="birthday"/>-->
 								</group>
 								<group string="Position">
+									<field name="directorate_id"/>
 									<field name="department_id"/>
 									<field name="job_id"/>
 									<field name="parent_id"/>
@@ -28,6 +31,7 @@
 								<group string="Birth">
 									<field name="birth_place"/>
 									<field name="birthday"/>
+									<field name="blood_type"/>
 								</group>
 								<group string="Status">
 									<field name="gender"/>
@@ -35,6 +39,7 @@
 								</group>
 								<group string="Bank Account Information">
 									<field name="bank_account_id" context="{'default_partner_id': address_home_id}"/>
+									<!--<field name="bank_account_id"/>-->
 								</group>
 							</group>
 							<field name="notes" placeholder="Other Information ..." colspan="4"/>
@@ -124,13 +129,14 @@
 					<page name="personal_information" position="replace">
 						<page name="personal_information" string="Personal Information" groups="hr.group_hr_user">
 							<!--<group>-->
-								<!--&lt;!&ndash;<field name="address_home_id" context="{'show_address': 1}" options="{&quot;always_reload&quot;: True, &quot;highlight_first_line&quot;: True}"/>&ndash;&gt;                                -->
+								<!--<field name="address_home_id" context="{'show_address': 1}" options="{&quot;always_reload&quot;: True, &quot;highlight_first_line&quot;: True}"/>-->
 							<!--</group>-->
                             <group string="Current Address">
                                 <group>
                                     <field name="street"/>
                                     <field name="rt_rw"/>
                                     <field name="home_no"/>
+									<field name="telepon"/>
                                 </group>
                                 <group>
                                     <field name="kelurahan"/>
@@ -144,6 +150,7 @@
                                     <field name="street_ktp"/>
                                     <field name="rt_rw_ktp"/>
                                     <field name="home_no_ktp"/>
+									<field name="telepon_ktp"/>
                                 </group>
                                 <group>
                                     <field name="kelurahan_ktp"/>
@@ -166,7 +173,26 @@
                                     <field name="kota_emergency"/>
                                     <field name="kode_pos_emergency"/>
                                     <field name="phone_no_emergency"/>
+                                    <field name="handphone_no_emergency"/>
                                 </group>
+                            </group>
+							<group string="NPWP">
+                                <group>
+                                    <field name="no_npwp"/>
+                                </group>
+                                <group>
+                                    <field name="tanggal_npwp"/>
+                                </group>
+                            </group>
+							<group string="BPJS">
+								<group string="Kesehatan">
+									<field name="no_bpjs_kesehatan" string="Nomor BPJS"/>
+									<field name="tanggal_kepesertaan_BPJS_kesehatan"/>
+								</group>
+								<group string="Ketenagakerjaan">
+									<field name="no_bpjs_ketenagakerjaan" string="Nomor BPJS"/>
+									<field name="tanggal_kepesertaan_BPJS_ketenagakerjaan"/>
+								</group>
                             </group>
 						</page>
 					</page>

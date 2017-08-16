@@ -1,6 +1,5 @@
 <odoo>
     <data>
-
         <record model="ir.ui.view" id="family_form_view">
 			<field name="name">Family</field>
 			<field name="model">hr.employee.family</field>
