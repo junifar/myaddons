@@ -40,6 +40,7 @@
 								<group string="Bank Account Information">
 									<field name="employee_bank_id"/>
 									<field name="employee_account_bank"/>
+									<field name="employee_account_bank_branch"/>
 									<!--<field name="bank_account_id" context="{'default_partner_id': address_home_id}"/>-->
 									<!--<field name="bank_account_id"/>-->
 								</group>

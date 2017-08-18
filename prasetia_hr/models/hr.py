@@ -60,6 +60,7 @@ class Employee(models.Model):
 
     employee_bank_id = fields.Many2one('res.bank', string='Bank')
     employee_account_bank = fields.Char(string="Nomor Rekening")
+    employee_account_bank_branch = fields.Char(string="Cabang")
 
     @property
     def __str__(self):
