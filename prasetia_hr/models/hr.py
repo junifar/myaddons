@@ -58,6 +58,9 @@ class Employee(models.Model):
     no_bpjs_ketenagakerjaan = fields.Char(string="No BPJS Ketenagakerjaan")
     tanggal_kepesertaan_BPJS_ketenagakerjaan = fields.Char(string="Tgl Kepesertaan")
 
+    employee_bank_id = fields.Many2one('res.bank', string='Bank')
+    employee_account_bank = fields.Char(string="Nomor Rekening")
+
     @property
     def __str__(self):
         return self.registration_id + ' - ' + self.name

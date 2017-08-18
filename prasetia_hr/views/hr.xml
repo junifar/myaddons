@@ -38,7 +38,9 @@
 									<field name="marital"/>
 								</group>
 								<group string="Bank Account Information">
-									<field name="bank_account_id" context="{'default_partner_id': address_home_id}"/>
+									<field name="employee_bank_id"/>
+									<field name="employee_account_bank"/>
+									<!--<field name="bank_account_id" context="{'default_partner_id': address_home_id}"/>-->
 									<!--<field name="bank_account_id"/>-->
 								</group>
 							</group>
@@ -113,7 +115,6 @@
 								</page>
 							</notebook>
 						</page>
-
 
 						<page name="personal_contract" string="Status Kepegawaian">
 							<field name="contract_ids">
