@@ -54,6 +54,14 @@
                                     </tree>
                                 </field>
                             </page>
+                            <page name="cuti_bersama_pemerintah" string="Cuti Bersama Pemerintah">
+                                <field name="cuti_pemerintah_ids" widget="many2many">
+                                    <tree string="Cuti Bersama Pemerintah">
+										<field name="tanggal_libur"/>
+										<field name="description"/>
+									</tree>
+                                </field>
+                            </page>
                         </notebook>
                     </sheet>
                 </form>

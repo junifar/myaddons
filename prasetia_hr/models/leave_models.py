@@ -17,6 +17,8 @@ class LeavePeriode(models.Model):
                                                     string="List Long Periode Detail Line")
     other_leave_periode_detail_ids = fields.One2many('hr.employee.other.leave.periode.detail', 'leave_periode_id',
                                                      string="List Other Periode Detail Line")
+    cuti_pemerintah_ids = fields.Many2many('hr.employee.calendar.cuti.pemerintah', 'rel_cuti_pemerintah_leave_periode',
+                                           string="Cuti Bersama Pemerintah")
 
     @api.multi
     def action_import_employee(self):

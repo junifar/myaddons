@@ -146,3 +146,23 @@ class KartuKeluargaDetail(models.Model):
     relation = fields.Selection([('Kepala Keluarga', 'Kepala Keluarga'),
                                  ('Istri', 'Istri'), ('Anak', 'Anak'),
                                  ('Saudara', 'Saudara')], string="Hubungan Dalam Keluarga")
+
+
+class CalendarYear(models.Model):
+    _name = "hr.employee.calendar.year"
+
+    name = fields.Char(String='Periode Tahun Berjalan', required=True)
+    cuti_pemerintah_ids = fields.One2many('hr.employee.calendar.cuti.pemerintah', 'calendar_year_id',
+                                          string='Cuti Bersama Pemerintah')
+
+
+class CutiPemerintah(models.Model):
+    _name = "hr.employee.calendar.cuti.pemerintah"
+
+    calendar_year_id = fields.Many2one('hr.employee.calendar.year', required=True)
+    tanggal_libur = fields.Date(string="Tanggal", required=True)
+    description = fields.Char(string="Deskripsi")
+
+    _sql_constraints = [
+        ('unique_cuti_pemerintah', 'unique(calendar_year_id, tanggal_libur)', 'Data Already Exists')
+    ]

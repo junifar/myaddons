@@ -31,6 +31,7 @@
         'views/device.xml',
         'views/contract.xml',
         'views/directorate.xml',
+        'views/calendar_tahunan.xml',
         'views/kartu_keluarga.xml',
         'views/attendance_import.xml',
         'views/attendance_import_workflow.xml',

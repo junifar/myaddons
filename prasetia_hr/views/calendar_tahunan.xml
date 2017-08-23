@@ -1,0 +1,62 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="calendar_year_form_view">
+			<field name="name">Calendar Year</field>
+			<field name="model">hr.employee.calendar.year</field>
+			<field name="arch" type="xml">
+				<form string="Calendar">
+					<header></header>
+					<sheet>
+                        <h1>
+                            <field name="name" placeholder="Periode Tahun Berjalan"/>
+                        </h1>
+						<notebook>
+                            <page name="cuti_pemerintah" string="Cuti Bersama Pemerintah">
+                                <field name="cuti_pemerintah_ids">
+									<tree string="Cuti Bersama Pemerintah">
+										<field name="tanggal_libur"/>
+										<field name="description"/>
+									</tree>
+									<form string="Cuti Bersama Pemerintah">
+										<sheet>
+											<group>
+												<group>
+													<field name="tanggal_libur"/>
+													<field name="description"/>
+												</group>
+												<group>
+												</group>
+											</group>
+										</sheet>
+									</form>
+								</field>
+                            </page>
+                        </notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="calendar_year_tree_view">
+			<field name="name">Calendar Year</field>
+			<field name="model">hr.employee.calendar.year</field>
+			<field name="arch" type="xml">
+				<tree string="Calendar Year" create="true">
+                    <field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+        <record model="ir.actions.act_window" id="calendar_year_list_action">
+			<field name="name">Calendar Year</field>
+			<field name="res_model">hr.employee.calendar.year</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Calendar Tahunan
+				</p>
+			</field>
+		</record>
+    </data>
+</odoo>
