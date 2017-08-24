@@ -39,11 +39,21 @@
                                 ('leave_category','=','cuti tahunan'), ('leave_category', '=', 'cuti panjang')]}"/>
                             </group>
                             <group>
-                                <field name="from_date"/>
-                                <field name="to_date"/>
+                                <!--<field name="from_date"/>-->
+                                <!--<field name="to_date"/>-->
                                 <field name="reason"/>
                             </group>
 						</group>
+						<notebook>
+							<page string="Tanggal Izin Bekerja">
+								<field name="attendance_ids">
+									<tree editable="top">
+										<field name="name" string="Tanggal Izin"/>
+										<field name="note" string="Remark"/>
+									</tree>
+								</field>
+							</page>
+						</notebook>
 						<group string="Documentation">
 							<group>
 								<field widget="binary" height="64" name="attachment" filename="attachment_name" />
@@ -62,8 +72,8 @@
 				<tree string="Permohonan Cuti" create="true">
                     <field name="name"/>
                     <field name="department_id"/>
-                    <field name="from_date"/>
-                    <field name="to_date"/>
+                    <!--<field name="from_date"/>-->
+                    <!--<field name="to_date"/>-->
                     <field name="reason"/>
 				</tree>
 			</field>

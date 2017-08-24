@@ -183,11 +183,15 @@ class AttendanceImportLine(models.Model):
 class Attendance(models.Model):
     _name = 'hr.employee.attendance'
 
-    employee_id = fields.Many2one('hr.employee', String="Employee Name", ondelete='cascade', required=True)
-    name = fields.Date(required=True, String="Date to Import")
-    absent_in = fields.Datetime(String="Absent Date In")
-    absent_out = fields.Datetime(String="Absent Date Out")
-    note = fields.Text(String="Note")
+    employee_id = fields.Many2one('hr.employee', string="Employee Name", ondelete='cascade', required=True)
+    name = fields.Date(required=True, string="Date to Import")
+    absent_in = fields.Datetime(string="Absent Date In")
+    absent_out = fields.Datetime(string="Absent Date Out")
+    note = fields.Text(string="Note")
+    attendance_status = fields.Selection([('hadir', 'Present'),
+                                         ('izin', 'Izin'), ('mangkir', 'Mangkir')],
+                                        string="Status Kehadiran")
+    leave_request_id = fields.Many2one('hr.employee.leave.request', string="Ijin Tidak Bekerja")
 
     _sql_constraints = [
         ('unique_employee_id_absent_date', 'unique(employee_id, name)', 'Data Already Exists')
@@ -258,13 +262,15 @@ class leave_request(models.Model):
     leave_category = fields.Selection([('cuti tahunan', 'Cuti Tahunan'), ('cuti panjang', 'Cuti Panjang'),
                                        ('other', 'Cuti Lainnya')], default='cuti tahunan')
     leave_type_id = fields.Many2one('hr.employee.leave.request.type', string="Leave Type")
-    from_date = fields.Date(String="From Date", required=True)
-    to_date = fields.Date(String="To Date", required=True)
+    # from_date = fields.Date(String="From Date", required=True)
+    # to_date = fields.Date(String="To Date", required=True)
     reason = fields.Text(String="Reason", required=True)
     state = fields.Selection([('draft', 'Draft'), ('wait approval', 'Wait Approval HRD'), ('approved', 'Approved'),
                               ('cancel', 'Cancel'), ('reject', 'Reject')], string="Status")
     attachment = fields.Binary(String='Attachment')
     attachment_name = fields.Char(String='File Name')
+    attendance_ids = fields.One2many('hr.employee.attendance', 'leave_request_id',
+                                                string="List Izin Karyawan")
 
     @api.multi
     def action_draft(self):

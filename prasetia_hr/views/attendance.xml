@@ -17,6 +17,7 @@
                             <group>
                                 <field name="absent_in"/>
                                 <field name="absent_out"/>
+                                <field name="attendance_status"/>
                             </group>
 						</group>
                         <group>
@@ -36,6 +37,7 @@
                     <field name="name"/>
                     <field name="absent_in" widget="time"/>
 					<field name="absent_out" widget="time"/>
+					<field name="attendance_status"/>
 					<field name="note"/>
 				</tree>
 			</field>
@@ -50,6 +52,7 @@
                     <field name="name" string="date"/>
                     <field name="absent_in" widget="time"/>
 					<field name="absent_out" widget="time"/>
+					<field name="attendance_status"/>
 					<field name="note"/>
 				</tree>
 			</field>
