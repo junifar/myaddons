@@ -30,7 +30,6 @@ class personal_absen(models.TransientModel):
 
     @api.multi
     def show_data(self):
-        self.ensure_one()
         self_obj = self.env.context
 
         while True:

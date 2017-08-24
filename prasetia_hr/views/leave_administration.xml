@@ -13,11 +13,11 @@
                             <group>
 							    <group>
                                     <field name="name"/>
+                                    <field name="default_annual_leave"/>
                                 </group>
                                 <group>
-                                    <field name="default_annual_leave"/>
-                                    <field name="government_holiday"/>
-                                    <field name="company_holiday"/>
+                                    <!--<field name="government_holiday"/>-->
+                                    <!--<field name="company_holiday"/>-->
                                 </group>
 							</group>
 						</div>
@@ -55,11 +55,31 @@
                                 </field>
                             </page>
                             <page name="cuti_bersama_pemerintah" string="Cuti Bersama Pemerintah">
-                                <field name="cuti_pemerintah_ids" widget="many2many">
+                                <field name="cuti_pemerintah_ids" options="{'no_create': True}">
                                     <tree string="Cuti Bersama Pemerintah">
 										<field name="tanggal_libur"/>
 										<field name="description"/>
 									</tree>
+                                </field>
+                            </page>
+                            <page name="cuti_bersama_perusahaan" string="Cuti Bersama Perusahaan">
+                                <field name="cuti_perusahaan_ids">
+                                    <tree string="Cuti Bersama Perusahaan">
+										<field name="tanggal_libur"/>
+										<field name="description"/>
+									</tree>
+                                    <form string="Cuti Bersama Perusahaan">
+										<sheet>
+											<group>
+												<group>
+													<field name="tanggal_libur"/>
+													<field name="description"/>
+												</group>
+												<group>
+												</group>
+											</group>
+										</sheet>
+									</form>
                                 </field>
                             </page>
                         </notebook>

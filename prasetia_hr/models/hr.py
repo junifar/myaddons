@@ -162,7 +162,13 @@ class CutiPemerintah(models.Model):
     calendar_year_id = fields.Many2one('hr.employee.calendar.year', required=True)
     tanggal_libur = fields.Date(string="Tanggal", required=True)
     description = fields.Char(string="Deskripsi")
-
+    name = fields.Char(string="Tanggal Cuti Bersama Pemerintah", compute="_compute_desc_cuti_bersama_pemerintah",
+                       store=True)
     _sql_constraints = [
         ('unique_cuti_pemerintah', 'unique(calendar_year_id, tanggal_libur)', 'Data Already Exists')
     ]
+
+    @api.depends('tanggal_libur', 'description')
+    def _compute_desc_cuti_bersama_pemerintah(self):
+        for rec in self:
+            rec.name = rec.tanggal_libur + " - " + rec.description
