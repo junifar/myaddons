@@ -256,7 +256,7 @@ class leave_type(models.Model):
 class leave_request(models.Model):
     _name = 'hr.employee.leave.request'
 
-    serial_number = fields.Char(String='Serial Number')
+    serial_number = fields.Char(String='Form Number Number')
     name = fields.Many2one('hr.employee', String="Employee Name", ondelete='cascade', required=True)
     department_id = fields.Many2one('hr.department', String="Departement", required=True)
     leave_category = fields.Selection([('cuti tahunan', 'Cuti Tahunan'), ('cuti panjang', 'Cuti Panjang'),
@@ -292,25 +292,3 @@ class leave_request(models.Model):
     def action_reject(self):
         self.state = 'reject'
 
-    # @api.model
-    # def create(self, vals):
-    #     data = super(leave_request, self).create(vals)
-    #     data.reason = 'ini'
-    #     return data
-    #
-    # def _modify_child(self, attendance_ids):
-    #     vals = {}
-    #     for data in attendance_ids:
-    #         # vals = {
-    #         #     'employee_id': 1
-    #         # }
-    #         # data[2]['employee_id'] = 1
-    #         print data[2]
-    #         data[2]['name'] = '2017-08-26'
-    #         print data[2]
-    #     return attendance_ids
-    #
-    # @api.multi
-    # def write(self, vals):
-    #     res = super(leave_request, self).write(vals)
-    #     return res
