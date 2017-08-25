@@ -46,8 +46,9 @@
 						</group>
 						<notebook>
 							<page string="Tanggal Izin Bekerja">
-								<field name="attendance_ids">
+								<field name="attendance_ids" context="{'default_employee_id': name, 'default_note': reason}">
 									<tree editable="top">
+										<field name="employee_id" domain="[('id', '=', parent.name)]"/>
 										<field name="name" string="Tanggal Izin"/>
 										<field name="note" string="Remark"/>
 									</tree>

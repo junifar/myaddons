@@ -189,8 +189,8 @@ class Attendance(models.Model):
     absent_out = fields.Datetime(string="Absent Date Out")
     note = fields.Text(string="Note")
     attendance_status = fields.Selection([('hadir', 'Present'),
-                                         ('izin', 'Izin'), ('mangkir', 'Mangkir')],
-                                        string="Status Kehadiran")
+                                          ('izin', 'Izin'), ('mangkir', 'Mangkir')],
+                                         string="Status Kehadiran")
     leave_request_id = fields.Many2one('hr.employee.leave.request', string="Ijin Tidak Bekerja")
 
     _sql_constraints = [
@@ -270,7 +270,7 @@ class leave_request(models.Model):
     attachment = fields.Binary(String='Attachment')
     attachment_name = fields.Char(String='File Name')
     attendance_ids = fields.One2many('hr.employee.attendance', 'leave_request_id',
-                                                string="List Izin Karyawan")
+                                     string="List Izin Karyawan")
 
     @api.multi
     def action_draft(self):
@@ -291,3 +291,26 @@ class leave_request(models.Model):
     @api.multi
     def action_reject(self):
         self.state = 'reject'
+
+    # @api.model
+    # def create(self, vals):
+    #     data = super(leave_request, self).create(vals)
+    #     data.reason = 'ini'
+    #     return data
+    #
+    # def _modify_child(self, attendance_ids):
+    #     vals = {}
+    #     for data in attendance_ids:
+    #         # vals = {
+    #         #     'employee_id': 1
+    #         # }
+    #         # data[2]['employee_id'] = 1
+    #         print data[2]
+    #         data[2]['name'] = '2017-08-26'
+    #         print data[2]
+    #     return attendance_ids
+    #
+    # @api.multi
+    # def write(self, vals):
+    #     res = super(leave_request, self).write(vals)
+    #     return res
