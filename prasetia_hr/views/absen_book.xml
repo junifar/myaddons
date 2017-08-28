@@ -1,0 +1,68 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="absen_book_form_view">
+			<field name="name">Absen Book</field>
+			<field name="model">hr.employee.absen.book</field>
+			<field name="arch" type="xml">
+				<form string="Absen Book">
+					<header></header>
+					<sheet>
+						<group>
+                            <group>
+                                <field name="id" invisible="1"/>
+                                <field name="company_id"/>
+                                <field name="name" attrs="{'readonly': [('id', '>', 0)]}"/>
+                            </group>
+                            <group>
+                            </group>
+						</group>
+                        <notebook>
+                            <page name="attendance_detail" string="Detail Absen">
+                                <field name="absen_ids">
+                                     <tree string="Absen List" editable="bottom">
+                                         <field name="employee_id"/>
+                                         <field name="name"/>
+                                         <field name="absent_in"/>
+                                         <field name="absent_out"/>
+                                         <field name="attendance_status"/>
+                                         <field name="note"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <footer>
+                            <group>
+                                <button name="sync_absen" type="object"
+                                        string="Synchronize" class="oe_highlight oe_edit_only"/>
+                            </group>
+                        </footer>
+                    </sheet>
+				</form>
+			</field>
+
+        </record>
+
+         <record model="ir.ui.view" id="absen_book_tree_view">
+            <field name="name">Absen Book</field>
+            <field name="model">hr.employee.absen.book</field>
+            <field name="arch" type="xml">
+                <tree string="Absen Book" create="true">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+         </record>
+
+        <record model="ir.actions.act_window" id="absen_book_list_action">
+            <field name="name">Absen Book</field>
+            <field name="res_model">hr.employee.absen.book</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="Help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Data Absen Book
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

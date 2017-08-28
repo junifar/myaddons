@@ -192,6 +192,7 @@ class Attendance(models.Model):
                                           ('izin', 'Izin'), ('mangkir', 'Mangkir')],
                                          string="Status Kehadiran")
     leave_request_id = fields.Many2one('hr.employee.leave.request', string="Ijin Tidak Bekerja")
+    absen_book_id = fields.Many2one('hr.employee.absen.book', string="Absen Book")
 
     _sql_constraints = [
         ('unique_employee_id_absent_date', 'unique(employee_id, name)', 'Data Already Exists')
@@ -291,4 +292,8 @@ class leave_request(models.Model):
     @api.multi
     def action_reject(self):
         self.state = 'reject'
+
+    @api.multi
+    def sync_absen(self):
+        return None
 

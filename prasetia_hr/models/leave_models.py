@@ -20,7 +20,7 @@ class LeavePeriode(models.Model):
     cuti_pemerintah_ids = fields.Many2many('hr.employee.calendar.cuti.pemerintah', 'rel_cuti_pemerintah_leave_periode',
                                            string="Cuti Bersama Pemerintah")
     cuti_perusahaan_ids = fields.One2many('hr.employee.calendar.cuti.perusahaan', 'leave_periode_id',
-                                                     string="List Cuti Perusahaan Detail Line")
+                                          string="List Cuti Perusahaan Detail Line")
 
     @api.multi
     def action_import_employee(self):
@@ -99,4 +99,31 @@ class CutiPerusahaan(models.Model):
     description = fields.Char(string="Deskripsi")
     _sql_constraints = [
         ('unique_cuti_perusahaan', 'unique(leave_periode_id, tanggal_libur)', 'Data Already Exists')
+    ]
+
+
+class AbsenBook(models.Model):
+    _name = "hr.employee.absen.book"
+
+    company_id = fields.Many2one('res.company', required=True, string="Perusahaan")
+    name = fields.Date(string="Periode Absen", required=True)
+    absen_ids = fields.One2many('hr.employee.attendance', 'absen_book_id',
+                                string="List Attendance")
+
+    @api.multi
+    def sync_absen(self):
+        employee_attendance_pool = self.env['hr.employee.attendance']
+
+        employee_attendance_datas = employee_attendance_pool.search(['&', ('name', '=', self.name),
+                                                                     ('employee_id.company_id.id', '=',
+                                                                      self.company_id.id)])
+
+        if employee_attendance_datas:
+            for data in employee_attendance_datas:
+                if not data.absen_book_id:
+                    data.absen_book_id = self.id
+        return None
+
+    _sql_constraints = [
+        ('unique_absen_book_company_id_name', 'unique(company_id, name)', 'Data Already Registered')
     ]

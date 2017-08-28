@@ -36,6 +36,7 @@
         <menuitem id="administration_report_sub_menu" name="Report" parent="administration_menu" sequence="2"/>
         <menuitem id="administration_configuration_menu" name="Configuration" parent="administration_menu" sequence="3"/>
         <menuitem id="administration_directorate_menu" name="Directorate" parent="administration_configuration_menu" action="directorate_list_action"/>
+        <menuitem id="absen_book_menu" name="Absen Book" parent="administration_configuration_menu" action="absen_book_list_action"/>
         <menuitem id="calendar_year_menu" name="Calendar Tahunan" parent="administration_configuration_menu" action="calendar_year_list_action"/>
         <!--<menuitem id="report_attendance_all_empolyee_menu" name="Laporan Absen Karyawan"-->
                   <!--parent="administration_sub_menu" action="report_absen_wizard_action"/>-->
