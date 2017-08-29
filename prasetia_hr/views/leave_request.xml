@@ -39,16 +39,22 @@
 						</group>
 						<notebook>
 							<page string="Tanggal Izin Bekerja">
-								<field name="attendance_ids" context="{'default_employee_id': name,
-								'default_note': reason,
-								'default_attendance_status': 'izin'}">
+								<field name="leave_request_line" context="{'default_note': reason}">
 									<tree editable="top">
-										<field name="employee_id" domain="[('id', '=', parent.name)]"/>
-										<field name="attendance_status"/>
 										<field name="name" string="Tanggal Izin"/>
 										<field name="note" string="Remark"/>
 									</tree>
 								</field>
+								<!--<field name="attendance_ids" context="{'default_employee_id': name,-->
+								<!--'default_note': reason,-->
+								<!--'default_attendance_status': 'izin'}">-->
+									<!--<tree editable="top">-->
+										<!--<field name="employee_id" domain="[('id', '=', parent.name)]"/>-->
+										<!--<field name="attendance_status"/>-->
+										<!--<field name="name" string="Tanggal Izin"/>-->
+										<!--<field name="note" string="Remark"/>-->
+									<!--</tree>-->
+								<!--</field>-->
 							</page>
 						</notebook>
 						<group string="Documentation">

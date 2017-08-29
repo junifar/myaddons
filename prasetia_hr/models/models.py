@@ -272,6 +272,8 @@ class leave_request(models.Model):
     attachment_name = fields.Char(String='File Name')
     attendance_ids = fields.One2many('hr.employee.attendance', 'leave_request_id',
                                      string="List Izin Karyawan")
+    leave_request_line = fields.One2many('hr.employee.leave.request.line', 'leave_request_id',
+                                         string="List Izin Karyawan")
 
     @api.multi
     def action_draft(self):
@@ -297,3 +299,14 @@ class leave_request(models.Model):
     def sync_absen(self):
         return None
 
+
+class leave_request_line(models.Model):
+    _name = 'hr.employee.leave.request.line'
+
+    name = fields.Date(required=True, string="Date to Import")
+    leave_request_id = fields.Many2one('hr.employee.leave.request', string="Ijin Tidak Bekerja")
+    note = fields.Text(string="Keterangan")
+
+    _sql_constraints = [
+        ('unique_employee_request_line', 'unique(leave_request_id, name)', 'Data Already Exists')
+    ]

@@ -110,20 +110,67 @@ class AbsenBook(models.Model):
     absen_ids = fields.One2many('hr.employee.attendance', 'absen_book_id',
                                 string="List Attendance")
 
-    @api.multi
-    def sync_absen(self):
+    def _check_available_employee(self):
         employee_attendance_pool = self.env['hr.employee.attendance']
+        hr_employee_pool = self.env['hr.employee']
 
-        employee_attendance_datas = employee_attendance_pool.search(['&', ('name', '=', self.name),
-                                                                     ('employee_id.company_id.id', '=',
-                                                                      self.company_id.id)])
+        hr_employee_datas = hr_employee_pool.search(['&', ('resource_id.company_id.id', '=', self.company_id.id),
+                                                     ('resource_id.active', '=', True)])
 
-        if employee_attendance_datas:
-            for data in employee_attendance_datas:
-                if not data.absen_book_id:
-                    data.absen_book_id = self.id
-        return None
+        if hr_employee_datas:
+            for data in hr_employee_datas:
+                is_found = False
+                for check in employee_attendance_pool.search(['&', ('name', '=', self.name),
+                                                              ('employee_id.id', '=', data.id)]):
+                    if check.employee_id.id == data.id:
+                        is_found = True
+                        break
+
+                if not is_found:
+                    values = {
+                        'absen_book_id': self.id,
+                        'employee_id': data.id,
+                        'name': self.name
+                    }
+                    employee_attendance_pool.create(values)
 
     _sql_constraints = [
         ('unique_absen_book_company_id_name', 'unique(company_id, name)', 'Data Already Registered')
     ]
+
+    def _check_employee_attendance_machine(self):
+        hr_employee_attendance_import_line_pool = self.env['hr.employee.attendance.import.line']
+
+        for data in self.absen_ids:
+            hr_employee_attendance_import_line_data = hr_employee_attendance_import_line_pool.search(
+                ['&', ('name.employee_id.id', '=', data.employee_id.id),
+                 ('attendance_import_id.name', '=', self.name)])
+            if hr_employee_attendance_import_line_data:
+                print '====TEST===='
+                for data_hr_employee_attendance_import_line in hr_employee_attendance_import_line_data:
+                    data.attendance_status = 'hadir'
+                    data.absent_in = data_hr_employee_attendance_import_line.absent
+                    data.absent_out = data_hr_employee_attendance_import_line.absent_out
+        return None
+
+    def _check_employee_leave(self):
+        leave_request_line_pool = self.env['hr.employee.leave.request.line']
+
+        for data in self.absen_ids:
+            leave_request_line_data = leave_request_line_pool.search(['&', ('name', '=', self.name),
+                                                                      ('leave_request_id.name.id', '=',
+                                                                       data.employee_id.id)])
+            if leave_request_line_data:
+                for data_request_line in leave_request_line_data:
+                    data.attendance_status = 'izin'
+                    data.leave_request_id = data_request_line.leave_request_id.id
+                    data.note = data_request_line.note
+
+        return None
+
+    @api.multi
+    def sync_absen(self):
+        self._check_available_employee()
+        self._check_employee_attendance_machine()
+        self._check_employee_leave()
+        return None
