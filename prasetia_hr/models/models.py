@@ -257,7 +257,8 @@ class leave_type(models.Model):
 class leave_request(models.Model):
     _name = 'hr.employee.leave.request'
 
-    serial_number = fields.Char(String='Form Number Number')
+    serial_number = fields.Char(string='Form Number Number')
+    tanggal_pengajuan = fields.Date(string='Tanggal Pengajuan', required=True)
     name = fields.Many2one('hr.employee', String="Employee Name", ondelete='cascade', required=True)
     department_id = fields.Many2one('hr.department', String="Departement", required=True)
     leave_category = fields.Selection([('cuti tahunan', 'Cuti Tahunan'), ('cuti panjang', 'Cuti Panjang'),
@@ -274,6 +275,11 @@ class leave_request(models.Model):
                                      string="List Izin Karyawan")
     leave_request_line = fields.One2many('hr.employee.leave.request.line', 'leave_request_id',
                                          string="List Izin Karyawan")
+    leave_request_annual_leave_activity_line = fields.One2many('hr.employee.annual.leave.request.cuti',
+                                                               'leave_request_id', string="Update Sisa Cuti")
+    long_leave_request_annual_leave_activity_line = fields.One2many('hr.employee.annual.long.leave.request.cuti',
+                                                                    'leave_request_id',
+                                                                    string="Update Sisa Cuti 5 Tahunan")
 
     @api.multi
     def action_draft(self):
@@ -296,7 +302,36 @@ class leave_request(models.Model):
         self.state = 'reject'
 
     @api.multi
-    def sync_absen(self):
+    def sync_leave(self):
+        annual_leave_employee_pool = self.env['hr.employee.leave.periode.detail']
+        annual_leave_employee_datas = annual_leave_employee_pool.search(
+            ['&', '&', ('employee_id.id', '=', self.name.id),
+             ('start_periode', '<=', datetime.now().strftime("%Y-%m-%d")),
+             ('end_periode', '>=', datetime.now().strftime("%Y-%m-%d"))
+             ])
+        if annual_leave_employee_datas:
+            for data in annual_leave_employee_datas:
+                print '===test==='
+                print data.id
+                is_found = False
+                for check in self.leave_request_annual_leave_activity_line:
+                    if check.leave_periode_detail_id.id == data.id:
+                        is_found = True
+                        break
+                if not is_found:
+                    values = {
+                        'leave_request_id': self.id,
+                        'leave_periode_detail_id': data.id,
+                        'annual_leave': data.annual_leave,
+                        'start_periode': data.start_periode,
+                        'end_periode': data.end_periode,
+                        'annual_leave_remaining': data.annual_leave_used
+                    }
+                    self.leave_request_annual_leave_activity_line.create(values)
+        return None
+
+    @api.multi
+    def sync_long_leave(self):
         return None
 
 
@@ -310,3 +345,29 @@ class leave_request_line(models.Model):
     _sql_constraints = [
         ('unique_employee_request_line', 'unique(leave_request_id, name)', 'Data Already Exists')
     ]
+
+
+class leave_request_annual_leave_activity(models.Model):
+    _name = 'hr.employee.annual.leave.request.cuti'
+
+    leave_request_id = fields.Many2one('hr.employee.leave.request', string="Ijin Tidak Bekerja")
+    leave_periode_detail_id = fields.Many2one('hr.employee.leave.periode.detail', required=True,
+                                              string="Periode Cuti Line")
+    annual_leave = fields.Integer(string='Hak Cuti Tahunan', required=True)
+    start_periode = fields.Date(string='Tanggal Mulai Berlaku', required=True)
+    end_periode = fields.Date(string='Tanggal Akhir Berlaku', required=True)
+    annual_leave_remaining = fields.Integer(string='Sisa Cuti Tahunan', requird=True)
+    annual_leave_used = fields.Integer(string='Cuti Terpakai')
+
+
+class leave_request_long_leave_activity(models.Model):
+    _name = 'hr.employee.annual.long.leave.request.cuti'
+
+    leave_request_id = fields.Many2one('hr.employee.leave.request', string="Ijin Tidak Bekerja")
+    long_leave_periode_detail_id = fields.Many2one('hr.employee.long.leave.periode.detail', required=True,
+                                                   string="Periode Cuti Lima Tahunan Line")
+    annual_leave = fields.Integer(string='Hak Cuti 5 Tahunan', required=True)
+    start_periode = fields.Date(string='Tanggal Mulai Berlaku', required=True)
+    end_periode = fields.Date(string='Tanggal Akhir Berlaku', required=True)
+    annual_leave_remaining = fields.Integer(string='Sisa Hak Cuti 5 Tahunan', required=True)
+    annual_leave_used = fields.Integer(string='Cuti Terpakai')

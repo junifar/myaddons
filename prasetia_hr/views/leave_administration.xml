@@ -42,6 +42,9 @@
                                     <tree string="Cuti 5 Tahunan" editable="bottom">
                                         <field name="employee_id"/>
                                         <field name="annual_leave"/>
+                                        <field name="annual_leave_used"/>
+                                        <field name="start_periode"/>
+                                        <field name="end_periode"/>
                                     </tree>
                                 </field>
                             </page>

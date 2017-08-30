@@ -75,6 +75,9 @@ class LongLeavePeriodeDetail(models.Model):
     leave_periode_id = fields.Many2one('hr.employee.leave.periode', required=True, string="Periode Cuti")
     employee_id = fields.Many2one('hr.employee', required=True, string="Nama Pegawai")
     annual_leave = fields.Integer(string='Hak Cuti 5 Tahunan', required=True)
+    annual_leave_used = fields.Integer(string='Cuti Terpakai', requird=True)
+    start_periode = fields.Date(string='Tanggal Mulai Berlaku', required=True)
+    end_periode = fields.Date(string='Tanggal Akhir Berlaku', required=True)
 
 
 class LeaveType(models.Model):
@@ -146,7 +149,6 @@ class AbsenBook(models.Model):
                 ['&', ('name.employee_id.id', '=', data.employee_id.id),
                  ('attendance_import_id.name', '=', self.name)])
             if hr_employee_attendance_import_line_data:
-                print '====TEST===='
                 for data_hr_employee_attendance_import_line in hr_employee_attendance_import_line_data:
                     data.attendance_status = 'hadir'
                     data.absent_in = data_hr_employee_attendance_import_line.absent
@@ -165,7 +167,6 @@ class AbsenBook(models.Model):
                     data.attendance_status = 'izin'
                     data.leave_request_id = data_request_line.leave_request_id.id
                     data.note = data_request_line.note
-
         return None
 
     @api.multi

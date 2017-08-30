@@ -33,10 +33,46 @@
                                 ('leave_category','=','cuti tahunan'), ('leave_category', '=', 'cuti panjang')]}"/>
 							</group>
 							<group>
-								<field name="serial_number" placeholder="Form Number"/>
+								<field name="tanggal_pengajuan"/>
 								<field name="reason"/>
                             </group>
 						</group>
+						<notebook>
+							<page string="Cuti Tahunan">
+								<header>
+									<group>
+										<button name="sync_leave" type="object"
+												string="Info Cuti" class="oe_highlight"/>
+									</group>
+								</header>
+								<field name="leave_request_annual_leave_activity_line">
+									<tree string="Cuti Tahunan" editable="bottom" create="false">
+										<field name="start_periode" readonly="1"/>
+										<field name="end_periode" readonly="1"/>
+										<field name="annual_leave" readonly="1"/>
+										<field name="annual_leave_remaining" readonly="1"/>
+										<field name="annual_leave_used"/>
+									</tree>
+								</field>
+							</page>
+							<page string="Cuti 5 Tahunan">
+								<header>
+									<group>
+										<button name="sync_long_leave" type="object"
+												string="Info Cuti" class="oe_highlight"/>
+									</group>
+								</header>
+								<field name="long_leave_request_annual_leave_activity_line">
+									<tree string="Cuti 5 Tahunan" editable="bottom" create="false">
+										<field name="start_periode" readonly="1"/>
+										<field name="end_periode" readonly="1"/>
+										<field name="annual_leave" readonly="1"/>
+										<field name="annual_leave_remaining" readonly="1"/>
+										<field name="annual_leave_used"/>
+									</tree>
+								</field>
+							</page>
+						</notebook>
 						<notebook>
 							<page string="Tanggal Izin Bekerja">
 								<field name="leave_request_line" context="{'default_note': reason}">
@@ -73,6 +109,7 @@
 			<field name="model">hr.employee.leave.request</field>
 			<field name="arch" type="xml">
 				<tree string="Permohonan Cuti" create="true">
+					<field name="tanggal_pengajuan"/>
                     <field name="name"/>
                     <field name="department_id"/>
                     <field name="reason"/>
