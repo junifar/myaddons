@@ -74,6 +74,7 @@ class ReportPersonalLeave(models.AbstractModel):
             'doc_model': self.model,
             'data': data['form'],
             'docs': docs,
+            'employee_name': docs.employee_id.name,
             'data_absen': self._get_harian_absent(docs)
         }
 
