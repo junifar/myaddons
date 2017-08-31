@@ -27,11 +27,11 @@ class personal_leave(models.TransientModel):
     year_filter = fields.Integer(string="Tahun", default=datetime.now().year)
 
     def _print_data(self, data):
-        return self.env['report'].with_context(landscape=False).get_action(self, 'prasetia_hr.report_personal_leave', data=data)
+        return self.env['report'].with_context(landscape=False).get_action(self, 'prasetia_hr.report_personal_leave',
+                                                                           data=data)
 
     @api.multi
     def show_data(self):
-        self.ensure_one()
         self_obj = self.env.context
 
         while True:
@@ -47,5 +47,5 @@ class personal_leave(models.TransientModel):
         data = {}
         data['ids'] = self_obj.get('active_ids', [])
         data['model'] = self_obj.get('active_model', 'ir.ui.menu')
-        data['form'] = self.read(['employee_id', 'month_filter', 'year_filter'])[0]
+        data['form'] = self.read(['employee_id', 'month_filter', 'year_filter', 'company_id', 'employee_id'])[0]
         return self._print_data(data)

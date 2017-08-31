@@ -34,8 +34,8 @@ class ReportPersonalLeave(models.AbstractModel):
                     LEFT JOIN "public".res_company ON "public".resource_resource.company_id = "public".res_company."id"
                     WHERE
                         "public".resource_resource.company_id = %d AND
-                        "public".hr_employee_attendance."name" = '%s'
-        """ % (data.company_id.id, data.date_filter)
+                        "public".hr_employee_attendance.employee_id = '%s'
+        """ % (data.company_id.id, data.employee_id.id)
         return query
 
     @staticmethod
@@ -50,8 +50,10 @@ class ReportPersonalLeave(models.AbstractModel):
         self.env.cr.execute(query)
         res = self.env.cr.dictfetchall()
         for r in res:
-            r['absent_out'] = self.convert_time_zone(r['absent_out'])
-            r['absent_in'] = self.convert_time_zone(r['absent_in'])
+            if r['absent_out']:
+                r['absent_out'] = self.convert_time_zone(r['absent_out'])
+            if r['absent_in']:
+                r['absent_in'] = self.convert_time_zone(r['absent_in'])
             lines.append(r)
 
         return lines
@@ -72,8 +74,9 @@ class ReportPersonalLeave(models.AbstractModel):
             'doc_model': self.model,
             'data': data['form'],
             'docs': docs,
-            'report_type': docs.report_type,
-            'data_absen': process_report[docs.report_type]
+            'data_absen': self._get_harian_absent(docs)
         }
+
+        # 'data_absen': process_report[docs.report_type]
 
         return self.env['report'].render('prasetia_hr.report_personal_leave', docargs)

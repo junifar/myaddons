@@ -311,8 +311,6 @@ class leave_request(models.Model):
              ])
         if annual_leave_employee_datas:
             for data in annual_leave_employee_datas:
-                print '===test==='
-                print data.id
                 is_found = False
                 for check in self.leave_request_annual_leave_activity_line:
                     if check.leave_periode_detail_id.id == data.id:
@@ -332,6 +330,29 @@ class leave_request(models.Model):
 
     @api.multi
     def sync_long_leave(self):
+        long_leave_employee_pool = self.env['hr.employee.long.leave.periode.detail']
+        long_leave_employee_data = long_leave_employee_pool.search([
+            '&', '&', ('employee_id.id', '=', self.name.id),
+            ('start_periode', '<=', datetime.now().strftime("%Y-%m-%d")),
+            ('end_periode', '>=', datetime.now().strftime("%Y-%m-%d"))
+        ])
+        if long_leave_employee_data:
+            for data in long_leave_employee_data:
+                is_found = False
+                for check in self.long_leave_request_annual_leave_activity_line:
+                    if check.leave_periode_detail_id.id == data.id:
+                        is_found = True
+                        break
+                if not is_found:
+                    values = {
+                        'leave_request_id': self.id,
+                        'long_leave_periode_detail_id': data.id,
+                        'annual_leave': data.annual_leave,
+                        'start_periode': data.start_periode,
+                        'end_periode': data.end_periode,
+                        'annual_leave_remaining': data.annual_leave_used
+                    }
+                    self.long_leave_request_annual_leave_activity_line.create(values)
         return None
 
 
