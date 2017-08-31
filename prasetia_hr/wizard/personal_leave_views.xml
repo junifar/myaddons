@@ -12,14 +12,14 @@
 					<group>
 						<field name="employee_id"/>
 					</group>
-					<group>
-                        <group>
-                            <field name="month_filter"/>
-                        </group>
-                        <group>
-                            <field name="year_filter" widget="payment"/>
-                        </group>
-					</group>
+					<!--<group>-->
+                        <!--<group>-->
+                            <!--<field name="month_filter"/>-->
+                        <!--</group>-->
+                        <!--<group>-->
+                            <!--<field name="year_filter" widget="payment"/>-->
+                        <!--</group>-->
+					<!--</group>-->
 					<footer>
                         <button name="show_data" type="object"
                                 string="show" class="oe_highlight"/>

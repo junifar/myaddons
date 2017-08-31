@@ -58,13 +58,34 @@ class ReportPersonalLeave(models.AbstractModel):
 
         return lines
 
+    def _get_leave_data(self, docs):
+        leave_periode_detail_pools = self.env['hr.employee.leave.periode.detail']
+        leave_periode_detail_data = leave_periode_detail_pools.search(['&', '&',
+                                                                       ('employee_id.id', '=', docs.employee_id.id),
+                                                                       ('start_periode', '<=',
+                                                                        datetime.now().strftime("%Y-%m-%d")),
+                                                                       ('end_periode', '>=',
+                                                                        datetime.now().strftime("%Y-%m-%d"))
+                                                                       ])
+        return leave_periode_detail_data
+
+    def _get_government_leave_data(self, docs):
+        leave_periode_pools = self.env['hr.employee.leave.periode']
+        leave_periode_data = leave_periode_pools.search([('name', '=', datetime.now().strftime("%Y"))])
+        count_data = 0
+        for data in leave_periode_data:
+            for child in data.cuti_pemerintah_ids:
+                count_data += 1
+
+        return count_data
+
     @api.model
     def render_html(self, docids, data=None):
         self.model = self.env.context.get('active_model')
         docs = self.env[self.model].browse(self.env.context.get('active_id'))
 
         process_report = {
-            'Harian': self._get_harian_absent(docs),
+            'Harian': None,
             'Bulanan': None,
             'Custom': None
         }
@@ -75,7 +96,10 @@ class ReportPersonalLeave(models.AbstractModel):
             'data': data['form'],
             'docs': docs,
             'employee_name': docs.employee_id.name,
-            'data_absen': self._get_harian_absent(docs)
+            'data_absen': None,
+            'periode': datetime.now().strftime("%B %Y"),
+            'leave_data': self._get_leave_data(docs),
+            'gov_leave_data': self._get_government_leave_data(docs)
         }
 
         # 'data_absen': process_report[docs.report_type]

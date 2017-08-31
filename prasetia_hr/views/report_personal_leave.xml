@@ -19,42 +19,77 @@
                     <div class="col-sm-6 invoice-col">
                       <b>LAPORAN CUTI KARYAWAN</b><br/>
                       <br/>
-                      <b>Noreg :</b> 110075<br/>
+                      <b>Noreg :</b> <span t-esc="docs.employee_id.registration_id"/><br/>
                       <b>Nama Karyawan :</b> <span t-esc="employee_name"/><br/>
-                      <b>Periode :</b> Juni 2017
+                      <b>Periode :</b><span t-esc="periode"/>
                     </div>
                     <div class="col-sm-6 invoice-col"/>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 table-responsive">
-                        <br/>
-                        <table class="table table-striped table-condensed table-bordered">
-                            <thead>
+                    <br/>
+                    <table class="table table-striped table-condensed table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Jenis Cuti</th>
+                            <th>Tanggal Mulai Berlaku</th>
+                            <th>Tanggal Akhir Berlaku</th>
+                            <th>Hak Cuti</th>
+                            <th>Sisa Cuti</th>
+                            <th>Cuti Terpakai</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <t t-foreach="leave_data" t-as="val">
                             <tr>
-                                <th>Tanggal</th>
-                                <th>Jam Kerja</th>
-                                <th>Masuk</th>
-                                <th>Keluar</th>
-                                <th>Jam Bekerja</th>
-                                <th>Keterangan</th>
+                                <td>Cuti Tahunan</td>
+                                <td><span t-esc="val.start_periode"/></td>
+                                <td><span t-esc="val.end_periode"/></td>
+                                <td><span t-esc="val.annual_leave"/></td>
+                                <td>0</td>
+                                <td>0</td>
                             </tr>
-                            </thead>
-                            <tbody>
-                                <t t-set="inc" t-value="1"/>
-                                <t t-foreach="employee_absen" t-as="data">
-                                     <tr>
-                                        <td><span t-esc="data['name']"/> </td>
-                                        <td>08:30 - 17:30</td>
-                                        <td><span t-esc="data['absent_in']"/> </td>
-                                        <td><span t-esc="data['absent_out']"/></td>
-                                        <td><span t-esc="data['work_hours']"/></td>
-                                        <td><span t-esc="data['note']"/></td>
-                                    </tr>
-                                </t>
-                            </tbody>
-                        </table>
-                    </div>
+                        </t>
+                            <tr>
+                                <td>Cuti Bersama Pemerintah</td>
+                                <td>2017-01-01</td>
+                                <td>2017-12-31</td>
+                                <td><span t-esc="gov_leave_data"/></td>
+                                <td><span t-esc="gov_leave_data"/></td>
+                                <td><span t-esc="gov_leave_data"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+                <!--<div class="row">-->
+                    <!--<div class="col-xs-12 table-responsive">-->
+                        <!--<br/>-->
+                        <!--<table class="table table-striped table-condensed table-bordered">-->
+                            <!--<thead>-->
+                            <!--<tr>-->
+                                <!--<th>Tanggal</th>-->
+                                <!--<th>Jam Kerja</th>-->
+                                <!--<th>Masuk</th>-->
+                                <!--<th>Keluar</th>-->
+                                <!--<th>Jam Bekerja</th>-->
+                                <!--<th>Keterangan</th>-->
+                            <!--</tr>-->
+                            <!--</thead>-->
+                            <!--<tbody>-->
+                                <!--<t t-set="inc" t-value="1"/>-->
+                                <!--<t t-foreach="employee_absen" t-as="data">-->
+                                     <!--<tr>-->
+                                        <!--<td><span t-esc="data['name']"/> </td>-->
+                                        <!--<td>08:30 - 17:30</td>-->
+                                        <!--<td><span t-esc="data['absent_in']"/> </td>-->
+                                        <!--<td><span t-esc="data['absent_out']"/></td>-->
+                                        <!--<td><span t-esc="data['work_hours']"/></td>-->
+                                        <!--<td><span t-esc="data['note']"/></td>-->
+                                    <!--</tr>-->
+                                <!--</t>-->
+                            <!--</tbody>-->
+                        <!--</table>-->
+                    <!--</div>-->
+                <!--</div>-->
             </section>
         </div>
         </t>
