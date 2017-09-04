@@ -63,6 +63,9 @@ class LeavePeriodeDetail(models.Model):
     start_periode = fields.Date(string='Tanggal Mulai Berlaku', required=True)
     end_periode = fields.Date(string='Tanggal Akhir Berlaku', required=True)
     locked = fields.Boolean(string='Locked', default=False)
+    annual_leave_request_cuti_line = fields.One2many('hr.employee.annual.leave.request.cuti',
+                                                                    'leave_periode_detail_id',
+                                                                    string="Annual Leave Request Cuti Line")
 
     _sql_constraints = [
         ('unique_leave_periode_id_employee_id', 'unique(leave_periode_id, employee_id)', 'Employee Already Registered')

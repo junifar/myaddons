@@ -98,6 +98,7 @@ class ReportPersonalLeave(models.AbstractModel):
             'employee_name': docs.employee_id.name,
             'data_absen': None,
             'periode': datetime.now().strftime("%B %Y"),
+            'periode_year': datetime.now().strftime("%Y"),
             'leave_data': self._get_leave_data(docs),
             'gov_leave_data': self._get_government_leave_data(docs)
         }

@@ -19,9 +19,20 @@
                     <div class="col-sm-6 invoice-col">
                       <b>LAPORAN CUTI KARYAWAN</b><br/>
                       <br/>
-                      <b>Noreg :</b> <span t-esc="docs.employee_id.registration_id"/><br/>
-                      <b>Nama Karyawan :</b> <span t-esc="employee_name"/><br/>
-                      <b>Periode :</b><span t-esc="periode"/>
+                        <table class="table">
+                            <tr>
+                                <th>Noreg</th>
+                                <th><span t-esc="docs.employee_id.registration_id"/></th>
+                            </tr>
+                            <tr>
+                                <th>Nama Karyawan</th>
+                                <th><span t-esc="employee_name"/></th>
+                            </tr>
+                            <tr>
+                                <th>Periode</th>
+                                <th><span t-esc="periode"/></th>
+                            </tr>
+                        </table>
                     </div>
                     <div class="col-sm-6 invoice-col"/>
                 </div>
@@ -34,28 +45,45 @@
                             <th>Tanggal Mulai Berlaku</th>
                             <th>Tanggal Akhir Berlaku</th>
                             <th>Hak Cuti</th>
-                            <th>Sisa Cuti</th>
                             <th>Cuti Terpakai</th>
+                            <th>Sisa Cuti</th>
                         </tr>
                         </thead>
                         <tbody>
+                        <t t-set="sum_hak_cuti" t-value="0"/>
+                        <t t-set="sum_sisa_cuti" t-value="0"/>
+                        <t t-set="sum_cuti_terpakai" t-value="0"/>
                         <t t-foreach="leave_data" t-as="val">
                             <tr>
                                 <td>Cuti Tahunan</td>
                                 <td><span t-esc="val.start_periode"/></td>
                                 <td><span t-esc="val.end_periode"/></td>
                                 <td><span t-esc="val.annual_leave"/></td>
-                                <td>0</td>
-                                <td>0</td>
+                                <t t-set="sub_total_cuti_terpakai" t-value="0"/>
+                                <t t-foreach="val.annual_leave_request_cuti_line" t-as="val_compute">
+                                    <t t-set="sub_total_cuti_terpakai" t-value="sub_total_cuti_terpakai+val_compute.annual_leave_used"/>
+                                </t>
+                                <td><span t-esc="sub_total_cuti_terpakai"/></td>
+                                <td><span t-esc="val.annual_leave-sub_total_cuti_terpakai"/></td>
+                                <t t-set="sum_hak_cuti" t-value="sum_hak_cuti+val.annual_leave"/>
+                                <t t-set="sum_cuti_terpakai" t-value="sum_cuti_terpakai+sub_total_cuti_terpakai"/>
+                                <t t-set="sum_sisa_cuti" t-value="sum_sisa_cuti+val.annual_leave-sub_total_cuti_terpakai"/>
                             </tr>
                         </t>
                             <tr>
                                 <td>Cuti Bersama Pemerintah</td>
-                                <td>2017-01-01</td>
-                                <td>2017-12-31</td>
+                                <td><span t-esc="periode_year"/>-01-01</td>
+                                <td><span t-esc="periode_year"/>-12-31</td>
                                 <td><span t-esc="gov_leave_data"/></td>
-                                <td><span t-esc="gov_leave_data"/></td>
-                                <td><span t-esc="gov_leave_data"/></td>
+                                <td>-</td>
+                                <td>-</td>
+                                <t t-set="sum_hak_cuti" t-value="sum_hak_cuti+gov_leave_data"/>
+                            </tr>
+                            <tr>
+                                <th colspan="3">Total</th>
+                                <th><span t-esc="sum_hak_cuti"/></th>
+                                <th><span t-esc="sum_cuti_terpakai"> </span> (Cuti Terpakai) <br/><span t-esc="gov_leave_data"> </span> (C.B Pemerintah)</th>
+                                <th><span t-esc="sum_sisa_cuti"/></th>
                             </tr>
                         </tbody>
                     </table>
