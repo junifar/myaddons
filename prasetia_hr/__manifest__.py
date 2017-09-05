@@ -30,6 +30,7 @@
         'views/education.xml',
         'views/device.xml',
         'views/contract.xml',
+        'views/organization_structure.xml',
         'views/directorate.xml',
         'views/absen_book.xml',
         'views/calendar_tahunan.xml',

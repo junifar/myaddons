@@ -30,6 +30,10 @@
         <menuitem id="leave_request_type_menu" name="Jenis Cuti" parent="employee_cuti_menu"
         action="leave_request_type_list_action"/>
 
+        <menuitem id="organization_menu" name="Organization" sequence="100"/>
+        <menuitem id="organization_structure_sub_menu" name="Structure" parent="organization_menu" sequence="1"/>
+        <menuitem id="organization_structure_menu" name="Organization Structure" parent="organization_structure_sub_menu" action="organization_structure_list_action"/>
+
         <menuitem id="administration_menu" name="Administration" sequence="101"/>
         <menuitem id="administration_leave_management_sub_menu" name="Leave Management" parent="administration_menu" sequence="1"/>
         <menuitem id="administration_leave_periode_menu" name="Cuti" parent="administration_leave_management_sub_menu" action="leave_periode_list_action"/>
