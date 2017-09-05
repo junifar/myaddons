@@ -29,9 +29,33 @@
                     <div class="col-sm-6 invoice-col">
                       <b>LAPORAN KEHADIRAN KARYAWAN</b><br/>
                       <br/>
-                      <b>Noreg :</b> 110075<br/>
-                      <b>Nama Karyawan :</b> <span t-esc="employee_name"/><br/>
-                      <b>Periode :</b> Juni 2017
+                        <table class="table">
+                            <tr>
+                                <th>Noreg</th>
+                                <th><span t-esc="docs.employee_id.registration_id"/></th>
+                            </tr>
+                            <tr>
+                                <th>Nama Karyawan</th>
+                                <th><span t-esc="employee_name"/></th>
+                            </tr>
+                            <tr>
+                                <th>Periode</th>
+                                <th>
+                                    <t t-if="docs.month_filter == 1">Januari </t>
+                                    <t t-if="docs.month_filter == 2">Februari </t>
+                                    <t t-if="docs.month_filter == 3">Maret </t>
+                                    <t t-if="docs.month_filter == 4">April </t>
+                                    <t t-if="docs.month_filter == 5">Mei </t>
+                                    <t t-if="docs.month_filter == 6">Juni </t>
+                                    <t t-if="docs.month_filter == 7">Juli </t>
+                                    <t t-if="docs.month_filter == 8">Agustus </t>
+                                    <t t-if="docs.month_filter == 9">September </t>
+                                    <t t-if="docs.month_filter == 10">Oktober </t>
+                                    <t t-if="docs.month_filter == 11">November </t>
+                                    <t t-if="docs.month_filter == 12">Desember </t>
+                                    -<span t-esc="docs.year_filter"/></th>
+                            </tr>
+                        </table>
                     </div>
                     <div class="col-sm-6 invoice-col"/>
                 </div>
@@ -46,19 +70,22 @@
                                 <th>Masuk</th>
                                 <th>Keluar</th>
                                 <th>Jam Bekerja</th>
+                                <th>Status</th>
                                 <th>Keterangan</th>
                             </tr>
                             </thead>
                             <tbody>
                                 <t t-set="inc" t-value="1"/>
-                                <t t-foreach="employee_absen" t-as="data">
+                                <t t-foreach="employee_absen_data" t-as="data">
                                      <tr>
-                                        <td><span t-esc="data['name']"/> </td>
-                                        <td>08:30 - 17:30</td>
-                                        <td><span t-esc="data['absent_in']"/> </td>
-                                        <td><span t-esc="data['absent_out']"/></td>
-                                        <td><span t-esc="data['work_hours']"/></td>
-                                        <td><span t-esc="data['note']"/></td>
+                                         <td><span t-esc="data['name']"/> </td>
+                                         <td>08:30 - 17:30</td>
+                                         <td><span t-esc="data['absent_in']"/> </td>
+                                         <td><span t-esc="data['absent_out']"/></td>
+                                         <t t-set="work_hours" t-value="date_difference(data['absent_in'], data['absent_out'])"/>
+                                         <td><span t-esc="work_hours"/></td>
+                                         <td><span t-esc="data.attendance_status"/></td>
+                                         <td><span t-esc="data['note']"/></td>
                                     </tr>
                                 </t>
                             </tbody>

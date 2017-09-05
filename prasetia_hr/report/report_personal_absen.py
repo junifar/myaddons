@@ -1,4 +1,5 @@
-from datetime import datetime, timedelta
+import calendar
+from datetime import datetime, timedelta, date
 import pytz
 from odoo import api, models
 
@@ -44,11 +45,38 @@ class ReportPersonalAbsen(models.AbstractModel):
         self.env.cr.execute(query)
         res = self.env.cr.dictfetchall()
         for r in res:
-            r['absent_out'] = self.convert_time_zone(r['absent_out'])
-            r['absent_in'] = self.convert_time_zone(r['absent_in'])
+            if r['absent_out']:
+                r['absent_out'] = self.convert_time_zone(r['absent_out'])
+            if r['absent_in']:
+                r['absent_in'] = self.convert_time_zone(r['absent_in'])
             lines.append(r)
 
         return lines
+
+    def _get_absen(self, docs):
+        hr_employee_attendance_pools = self.env['hr.employee.attendance']
+        hr_employee_attendance_data = hr_employee_attendance_pools.search(['&', '&',
+                                                                           ('employee_id.id', '=', docs.employee_id.id),
+                                                                           ('name', '<=',
+                                                                            str(docs.year_filter) + '-' +
+                                                                            str(docs.month_filter) +
+                                                                            '-' +
+                                                                            str(calendar.monthrange(docs.year_filter,
+                                                                                                    docs.month_filter)[
+                                                                                    1])),
+                                                                           ('name', '>=',
+                                                                            str(docs.year_filter) + '-' +
+                                                                            str(docs.month_filter) + '-1')
+                                                                           ])
+        return hr_employee_attendance_data
+
+    @staticmethod
+    def _date_different(from_date, to_date):
+        if not from_date:
+            return None
+        if not to_date:
+            return None
+        return datetime.strptime(to_date, '%Y-%m-%d %H:%M:%S')-datetime.strptime(from_date, '%Y-%m-%d %H:%M:%S')
 
     @api.model
     def render_html(self, docids, data=None):
@@ -60,7 +88,11 @@ class ReportPersonalAbsen(models.AbstractModel):
             'doc_model': self.model,
             'data': data['form'],
             'docs': docs,
+            'periode': datetime.now().strftime("%B %Y"),
+            'periode_year': datetime.now().strftime("%Y"),
             'employee_name': docs.employee_id.name,
-            'employee_absen': self._get_personal_absent(docs)
+            'employee_absen': self._get_personal_absent(docs),
+            'employee_absen_data': self._get_absen(docs),
+            'date_difference': self._date_different
         }
         return self.env['report'].render('prasetia_hr.report_personal_absen', docargs)
