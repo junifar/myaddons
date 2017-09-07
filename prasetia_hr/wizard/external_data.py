@@ -33,7 +33,7 @@ class import_external_data(models.TransientModel):
         }
         print values
         print employee_attendance_pool.create(values)
-        print '===saved triggere==='
+        print '===saved trigger==='
         return None
 
     @api.multi
