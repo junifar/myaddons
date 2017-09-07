@@ -329,6 +329,17 @@ class leave_request(models.Model):
         return None
 
     @api.multi
+    def import_data(self):
+        return {
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'external.import',
+            'target': 'new',
+            'type': 'ir.actions.act_window',
+            'context': {'current_id': self.id}
+        }
+
+    @api.multi
     def sync_long_leave(self):
         long_leave_employee_pool = self.env['hr.employee.long.leave.periode.detail']
         long_leave_employee_data = long_leave_employee_pool.search([

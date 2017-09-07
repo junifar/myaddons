@@ -53,6 +53,7 @@
         'wizard/personal_absen_views.xml',
         'wizard/personal_leave_views.xml',
         'wizard/report_absen_wizard_views.xml',
+        'wizard/external_data_views.xml'
     ],
     # only loaded in demonstration mode
     'demo': [

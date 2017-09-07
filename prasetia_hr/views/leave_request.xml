@@ -43,6 +43,10 @@
 									<group>
 										<button name="sync_leave" type="object"
 												string="Info Cuti" class="oe_highlight"/>
+										<!--<button name="import_data" type="object"-->
+												<!--string="Import Data" class="oe_highlight"/>-->
+										<!--<button name="%(external_data_action)d" type="action" string="Import Wizard"-->
+												<!--class="oe_highlight"/>-->
 									</group>
 								</header>
 								<field name="leave_request_annual_leave_activity_line">

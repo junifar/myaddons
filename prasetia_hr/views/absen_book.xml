@@ -18,6 +18,14 @@
 						</group>
                         <notebook>
                             <page name="attendance_detail" string="Detail Absen">
+                                <header>
+                                    <group>
+                                    <button name="import_data" type="object"
+                                                    string="Import Data" class="oe_highlight"/>
+                                    <!--<button name="%(external_data_action)d" type="action" string="Import Wizard"-->
+                                            <!--class="oe_highlight"/>-->
+                                    </group>
+                                </header>
                                 <field name="absen_ids">
                                      <tree string="Absen List" editable="bottom">
                                          <field name="employee_id"/>

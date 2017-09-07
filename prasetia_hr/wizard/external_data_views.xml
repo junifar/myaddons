@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="wizard_external_data_form">
+            <field name="name">wizard.form.external.data</field>
+            <field name="model">external.import</field>
+            <field name="arch" type="xml">
+                <form string="External Data">
+                    <h1>Select an Excel file to import :</h1>
+                    <field name="name" invisible="1"/>
+                    <field name="bin_file" widget="binary" height="64" filename="name"/>
+                    <!--<group>-->
+                        <!--<field name="name" invisible="1"/>-->
+                    <!--</group>-->
+                    <!--<group>-->
+                        <!--<field name="bin_file" widget="binary" height="64" filename="name"/>-->
+                    <!--</group>-->
+                    <footer>
+                        <button name="show_data" type="object"
+                                string="show" class="oe_highlight"/>
+                        or
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="external_data_action" model="ir.actions.act_window">
+            <field name="name">Wizard External Data</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">external.import</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_external_data_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="external_data_menu" name="External Data" parent="prasetia_hr.information_cuti_menu"
+        action="external_data_action"/>
+    </data>
+</odoo>

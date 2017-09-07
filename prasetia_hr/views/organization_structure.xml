@@ -1,10 +1,10 @@
 <odoo>
     <data>
-        <record model="ir.ui.view" id="organization_structure_form_view">
-			<field name="name">Organization Structure</field>
-			<field name="model">hr.employee.organization.structure</field>
+        <record model="ir.ui.view" id="organization_role_form_view">
+			<field name="name">Organization Role</field>
+			<field name="model">hr.employee.organization.role</field>
 			<field name="arch" type="xml">
-				<form string="Struktur Organisasi">
+				<form string="Struktur Jabatan">
 					<header></header>
 					<sheet>
                         <h1>
@@ -12,9 +12,7 @@
                         </h1>
 						<group>
                             <group>
-                                <!--<field name="director"/>-->
-                                <!--<field name="vice_director"/>-->
-                                <!--<field name="parent_id"/>-->
+                                <field name="parent_id" string="Parent"/>
                             </group>
                             <group>
                             </group>
@@ -24,21 +22,96 @@
 			</field>
 		</record>
 
-        <record model="ir.ui.view" id="organization_structure_tree_view">
+		<record model="ir.ui.view" id="organization_structure_form_view">
 			<field name="name">Organization Structure</field>
 			<field name="model">hr.employee.organization.structure</field>
 			<field name="arch" type="xml">
-				<tree string="Struktur Organisasi" create="true">
+				<form string="Struktur Organisasi">
+					<header></header>
+					<sheet>
+                        <h1>
+                            <field name="name" placeholder="Nama Divisi"/>
+                        </h1>
+						<group>
+                            <group>
+                                <field name="president" string="Direktur"/>
+								<field name="vice_president" string="VP"/>
+                            </group>
+                            <group>
+                            </group>
+						</group>
+						<notebook>
+                            <page name="oganization_stucture_line" string="Detail List">
+                                <field name="organization_team_line">
+                                     <tree string="Organization List" editable="bottom">
+										 <field name="name"/>
+										 <field name="organization_role_id"/>
+										 <field name="cluster_id"/>
+										 <field name="area_id"/>
+										 <field name="customer_id"/>
+                                    </tree>
+                                    <form string="Organization List">
+										<sheet>
+											<h1>
+												<field name="name" placeholder="Nama Divisi"/>
+											</h1>
+											<group>
+												<group>
+													<field name="organization_role_id"/>
+												</group>
+												<group>
+													<field name="cluster_id"/>
+													<field name="area_id"/>
+													<field name="customer_id"/>
+												</group>
+											</group>
+										</sheet>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="organization_role_tree_view">
+			<field name="name">Organization Role</field>
+			<field name="model">hr.employee.organization.role</field>
+			<field name="arch" type="xml">
+				<tree string="Struktur Jabatan" create="true">
                     <field name="name" placeholder="Nama"/>
-                    <!--<field name="director"/>-->
-                    <!--<field name="vice_director"/>-->
                     <field name="parent_id"/>
 				</tree>
 			</field>
 		</record>
 
+		<record model="ir.ui.view" id="organization_structure_tree_view">
+			<field name="name">Organization Structure</field>
+			<field name="model">hr.employee.organization.structure</field>
+			<field name="arch" type="xml">
+				<tree string="Struktur Organisasi" create="true">
+                    <field name="name" placeholder="Nama"/>
+                    <field name="president" placeholder="Direktur"/>
+                    <field name="vice_president" placeholder="VP"/>
+				</tree>
+			</field>
+		</record>
 
-        <record model="ir.actions.act_window" id="organization_structure_list_action">
+
+        <record model="ir.actions.act_window" id="organization_role_list_action">
+			<field name="name">Organization Role</field>
+			<field name="res_model">hr.employee.organization.role</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Organization Role
+				</p>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="organization_structure_list_action">
 			<field name="name">Organization Structure</field>
 			<field name="res_model">hr.employee.organization.structure</field>
 			<field name="view_type">form</field>
