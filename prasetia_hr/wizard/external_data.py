@@ -16,16 +16,23 @@ class import_external_data(models.TransientModel):
     name = fields.Char(string='Nama File', required=True)
     bin_file = fields.Binary(string="Upload File", required=True)
 
+    @api.multi
     def _insert_sample(self, context):
         print '===work insert_sample==='
         _logger.critical('CREATE test')
+        employee_organization_area_pool = self.env['hr.employee.organization.area']
+        values = {
+            'name': 'APA'
+        }
+        print employee_organization_area_pool.create(values)
+
         employee_attendance_pool = self.env['hr.employee.attendance']
         values = {
             'employee_id': 1,
             'name': '2017-07-25'
         }
         print values
-        print employee_attendance_pool.create(values).post()
+        print employee_attendance_pool.create(values)
         print '===saved triggere==='
         return None
 
@@ -44,7 +51,6 @@ class import_external_data(models.TransientModel):
                     col_value = []
                     for col in range(s.ncols):
                         value = s.cell(row, col).value
-                        # print value
                         try:
                             value = str(int(value))
                         except:
@@ -54,7 +60,6 @@ class import_external_data(models.TransientModel):
                 print values
             print "===  TEST  ==="
             print self.name
-            # print self.bin_file
             print "===TEST END==="
         except XLRDError:
             raise ValidationError(_('File Bukan Tipe Excell'))
