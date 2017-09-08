@@ -199,6 +199,12 @@ class Attendance(models.Model):
     ]
 
     @api.multi
+    def post(self, values):
+        self.create(values)
+        print '===post called==='
+        return None
+
+    @api.multi
     def open_ui(self):
         ctx = self._context.copy()
         return {
