@@ -6,11 +6,6 @@ from odoo.exceptions import ValidationError
 from xlrd import XLRDError
 from xlrd import open_workbook
 from odoo import models, fields, api, _
-from odoo.exceptions import UserError
-
-# import logging
-# _logger = logging.getLogger(__name__)
-from xlrd import xldate_as_tuple
 
 
 class import_external_data(models.TransientModel):
@@ -21,7 +16,6 @@ class import_external_data(models.TransientModel):
 
     @api.multi
     def _insert_sample(self, ctx):
-        # _logger.critical('CREATE test')
         employee_attendance_pool = self.env['hr.employee.attendance']
         values = {
             'employee_id': 1,
@@ -88,23 +82,11 @@ class import_external_data(models.TransientModel):
             else:
                 date_absen = None
 
-            print '======'
-            print date_absen
-
             for row in range(sheet.nrows):
                 col_values = []
                 if row >= 5:
                     if not sheet.cell(row, 6).value == '':
                         noreg = self._check_str(sheet.cell(row, 2).value)
-                        # try:
-                        #     year, month, day, hour, minute, second = xldate_as_tuple(sheet.cell(row, 3).value, 0)
-                        # except ValueError:
-                        #     pass
-                        #
-                        # try:
-                        #     date_absen = datetime(year, month, day)
-                        # except ValueError:
-                        #     date_absen = None
 
                         value_hour = self._check_str(sheet.cell(row, 6).value)
                         value_minute = self._check_str(sheet.cell(row, 7).value)
@@ -131,67 +113,11 @@ class import_external_data(models.TransientModel):
                         col_values.append(value_out)
 
                         self._update_check_date(ctx, noreg, date_absen, value_in, value_out)
-
-                        # value = self._check_str(sheet.cell(row, 2).value)
-                        # col_values.append(value)
-
-                        # value = None
-                        # try:
-                        #     year, month, day, hour, minute, second = xldate_as_tuple(sheet.cell(row, 3).value, 0)
-                        # except ValueError:
-                        #     pass
-                        # col_values.append(datetime(year, month, day, hour, minute, second))
-                        #
-                        # value_hour = self._check_str(sheet.cell(row, 6).value)
-                        # value_minute = self._check_str(sheet.cell(row, 7).value)
-                        # try:
-                        #     value_in = datetime.strptime(
-                        #         '%s-%s-%s %s:%s' % (year, month, day, value_hour, value_minute),
-                        #         '%Y-%m-%d %H:%M')
-                        # except ValueError:
-                        #     value_in = None
-                        # col_values.append(value_in)
-                        #
-                        # value_hour = self._check_str(sheet.cell(row, 8).value)
-                        # value_minute = self._check_str(sheet.cell(row, 9).value)
-                        # try:
-                        #     value_out = datetime.strptime(
-                        #         '%s-%s-%s %s:%s' % (year, month, day, value_hour, value_minute),
-                        #         '%Y-%m-%d %H:%M')
-                        # except ValueError:
-                        #     value_out = None
-                        # col_values.append(value_out)
-                        # values.append(col_values)
-                        # print values
         except XLRDError:
             raise ValidationError(_('File Bukan Tipe Excel'))
 
     @api.multi
     def show_data(self):
         ctx = self._context
-        # self._insert_sample(ctx)
-
-        # try:
-        #     workbook = open_workbook(file_contents=base64.decodestring(self.bin_file))
-        #     # sheet = workbook.sheets()[0]
-        #     # for s in workbook.sheets():
-        #     #     values = []
-        #     #     for row in range(s.nrows):
-        #     #         col_value = []
-        #     #         for col in range(s.ncols):
-        #     #             value = s.cell(row, col).value
-        #     #             try:
-        #     #                 value = str(int(value))
-        #     #             except:
-        #     #                 pass
-        #     #             col_value.append(value)
-        #     #         values.append(col_value)
-        #     #     print values
-        #     print "===  TEST  ==="
-        #     print self.name
-        #     print "===TEST END==="
-        # except XLRDError:
-        #     raise ValidationError(_('File Bukan Tipe Excell'))
-        #     pass
         self._import_process(ctx)
         return None
