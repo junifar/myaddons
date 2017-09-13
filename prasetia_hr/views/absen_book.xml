@@ -30,8 +30,8 @@
                                      <tree string="Absen List" editable="bottom">
                                          <field name="employee_id"/>
                                          <field name="name"/>
-                                         <field name="absent_in"/>
-                                         <field name="absent_out"/>
+                                         <field name="absent_in" widget="time"/>
+                                         <field name="absent_out" widget="time"/>
                                          <field name="attendance_status"/>
                                          <field name="note"/>
                                     </tree>
