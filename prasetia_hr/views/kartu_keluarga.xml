@@ -25,11 +25,13 @@
                                      <tree string="Family List" editable="bottom">
                                         <field name="name"/>
                                         <field name="relation"/>
+                                         <field name="status"/>
                                     </tree>
                                     <form string="Family List">
                                         <group>
                                             <field name="name"/>
                                             <field name="relation"/>
+                                            <field name="status"/>
                                         </group>
                                     </form>
                                 </field>

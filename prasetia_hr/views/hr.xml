@@ -1,5 +1,28 @@
 <openerp>
 	<data>
+
+		<record id="hr_hr_employee_prasetia_kanban_view" model="ir.ui.view">
+			<field name="name">hr.hr.employee.prasetia.kanban.view</field>
+			<field name="model">hr.employee</field>
+			<field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+			<field name="arch" type="xml">
+				<field name="name" position="before">
+					<field name="registration_id"/> -
+				</field>
+				<button name="action_unfollow" position="replace">
+					<button t-if="record.message_is_follower.raw_value" name="action_unfollow" type="object"
+							class="o_follow_btn o_following btn btn-sm btn-default" invisible="1">
+						<span class="o_unfollow">Unfollow</span>
+						<span class="o_following">Following</span>
+					</button>
+				</button>
+				<button name="action_follow" position="replace">
+					<button t-if="!record.message_is_follower.raw_value" name="action_follow" type="object"
+							class="o_follow_btn o_follow btn btn-sm btn-primary" invisible="1">Follow</button>
+				</button>
+			</field>
+		</record>
+
  		<record id="hr_hr_employee_prasetia_view_form" model="ir.ui.view">
  			<field name="name">hr.hr.employee.prasetia.view.form</field>
             <field name="model">hr.employee</field>
@@ -19,6 +42,7 @@
 									<field name="mobile_phone_2"/>
 									<field name="work_email" widget="email"/>
 									<field name="date_join"/>
+									<field name="employee_status"/>
 									<!--<field name="birth_place"/>-->
 									<!--<field name="birthday"/>-->
 								</group>
@@ -26,7 +50,7 @@
 									<field name="directorate_id"/>
 									<field name="department_id"/>
 									<field name="job_id"/>
-									<field name="parent_id"/>
+									<field name="parent_id" invisible="1"/>
 								</group>
 								<group string="Birth">
 									<field name="birth_place"/>
@@ -123,6 +147,35 @@
 									<field name="name"/>
 									<field name="start_date"/>
 									<field name="end_date"/>
+								</tree>
+								<form string="Status Kepegawaian">
+									<header></header>
+										<sheet>
+											<group>
+												<group>
+													<field name="name"/>
+												</group>
+												<group>
+													<field name="start_date"/>
+													<field name="end_date"/>
+												</group>
+											</group>
+											<notebook>
+												<page name="note" string="note">
+													<field name="note"/>
+												</page>
+											</notebook>
+										</sheet>
+									</form>
+							</field>
+						</page>
+
+						<page name="kartu_keluarga" string="Kartu Keluarga">
+							<field name="kartu_keluarga_ids">
+								<tree string="Kartu Keluarga">
+									<field name="name"/>
+									<field name="kepala_keluarga"/>
+									<field name="active"/>
 								</tree>
 							</field>
 						</page>
@@ -233,6 +286,7 @@
 											<group>
 												<group>
 													<field name="major"/>
+													<field name="city"/>
 												</group>
 												<group>
 													<field name="year_start"/>
@@ -321,6 +375,7 @@
 										<field name="year_end"/>
 										<field name="city"/>
 										<field name="reason_leave"/>
+										<field name="note"/>
 									</tree>
 									<form string="Riwayat Pekerjaan">
 										<header></header>

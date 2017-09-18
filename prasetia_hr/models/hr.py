@@ -42,6 +42,7 @@ class Employee(models.Model):
     work_history_ids = fields.One2many('hr.employee.work.history', 'employee_id', string="List Employee Work History")
     attendance_ids = fields.One2many('hr.employee.attendance', 'employee_id', string="List Employee Attendance")
     contract_ids = fields.One2many('hr.employee.contract', 'employee_id', string="List Employee Contract")
+    kartu_keluarga_ids = fields.One2many('hr.employee.kartu.keluarga', 'employee_id', string="List Employee KK")
     date_join = fields.Date(string='Tanggal Masuk', required=True)
     mobile_phone_2 = fields.Char(string="Work Mobile 2")
     telepon = fields.Char(string="Telepon")
@@ -50,21 +51,47 @@ class Employee(models.Model):
     directorate_id = fields.Many2one('hr.employee.directorate', string='Direktorat', required=True)
 
     no_npwp = fields.Char(string="No NPWP")
-    tanggal_npwp = fields.Char(string="Tgl NPWP")
+    tanggal_npwp = fields.Date(string="Tgl NPWP")
 
     no_bpjs_kesehatan = fields.Char(string="No BPJS Kesehatan")
-    tanggal_kepesertaan_BPJS_kesehatan = fields.Char(string="Tgl Kepesertaan")
+    tanggal_kepesertaan_BPJS_kesehatan = fields.Date(string="Tgl Kepesertaan")
 
     no_bpjs_ketenagakerjaan = fields.Char(string="No BPJS Ketenagakerjaan")
-    tanggal_kepesertaan_BPJS_ketenagakerjaan = fields.Char(string="Tgl Kepesertaan")
+    tanggal_kepesertaan_BPJS_ketenagakerjaan = fields.Date(string="Tgl Kepesertaan")
 
     employee_bank_id = fields.Many2one('res.bank', string='Bank')
     employee_account_bank = fields.Char(string="Nomor Rekening")
     employee_account_bank_branch = fields.Char(string="Cabang")
+    employee_status = fields.Char(string="Status Pekerja", compute="_compute_status_pekerja")
 
-    @property
-    def __str__(self):
-        return self.registration_id + ' - ' + self.name
+    def _compute_status_pekerja(self):
+        for line in self.contract_ids:
+            self.employee_status = line.name.name
+            # self.employee_status = 'Test'
+
+    # @property
+    # def __str__(self):
+    #     return self.registration_id + ' - ' + self.name
+
+    @api.multi
+    def name_get(self):
+        res = []
+        for record in self:
+            values = '******'
+            if record.registration_id:
+                values = record.registration_id
+            res.append((record.id, values + " - " + record.name))
+        return res
+
+    @api.model
+    def name_search(self, name='', args=None, operator='ilike', limit=100):
+        args = args or []
+        recs = self.browse()
+        if name:
+            recs = self.search([('registration_id', operator, name)] + args, limit=limit)
+        if not recs:
+            recs = self.search([('name', operator, name)] + args, limit=limit)
+        return recs.name_get()
 
 
 class DriverLicense(models.Model):
@@ -146,6 +173,8 @@ class KartuKeluargaDetail(models.Model):
     relation = fields.Selection([('Kepala Keluarga', 'Kepala Keluarga'),
                                  ('Istri', 'Istri'), ('Anak', 'Anak'),
                                  ('Saudara', 'Saudara')], string="Hubungan Dalam Keluarga")
+    status = fields.Selection([('hidup', 'Hidup'),
+                               ('meninggal', 'Meninggal')], string="Keterangan Kondisi")
 
 
 class CalendarYear(models.Model):

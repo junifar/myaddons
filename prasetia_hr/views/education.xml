@@ -15,6 +15,7 @@
                             <group>
                                 <field name="employee_id"/>
                                 <field name="major"/>
+								<field name="city"/>
                             </group>
                             <group>
                                 <field name="year_start"/>

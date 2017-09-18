@@ -66,6 +66,7 @@ class LeavePeriodeDetail(models.Model):
     annual_leave_request_cuti_line = fields.One2many('hr.employee.annual.leave.request.cuti',
                                                                     'leave_periode_detail_id',
                                                                     string="Annual Leave Request Cuti Line")
+    remark = fields.Text(string="Keterangan")
 
     _sql_constraints = [
         ('unique_leave_periode_id_employee_id', 'unique(leave_periode_id, employee_id)', 'Employee Already Registered')
@@ -81,6 +82,7 @@ class LongLeavePeriodeDetail(models.Model):
     annual_leave_used = fields.Integer(string='Cuti Terpakai', requird=True)
     start_periode = fields.Date(string='Tanggal Mulai Berlaku', required=True)
     end_periode = fields.Date(string='Tanggal Akhir Berlaku', required=True)
+    remark = fields.Text(string="Keterangan")
 
 
 class LeaveType(models.Model):
@@ -95,6 +97,7 @@ class OtherLeavePeriodeDetail(models.Model):
     leave_type_id = fields.Many2one('hr.employee.leave.type', requred=True, string="Jenis Cuti")
     employee_id = fields.Many2one('hr.employee', required=True, string="Nama Pegawai")
     annual_leave = fields.Integer(string='Hak Cuti Lainnya', required=True)
+    remark = fields.Text(string="Keterangan")
 
 
 class CutiPerusahaan(models.Model):
@@ -103,6 +106,7 @@ class CutiPerusahaan(models.Model):
     leave_periode_id = fields.Many2one('hr.employee.leave.periode', required=True, string="Periode Cuti")
     tanggal_libur = fields.Date(string="Tanggal", required=True)
     description = fields.Char(string="Deskripsi")
+    remark = fields.Text(string="Keterangan")
     _sql_constraints = [
         ('unique_cuti_perusahaan', 'unique(leave_periode_id, tanggal_libur)', 'Data Already Exists')
     ]
