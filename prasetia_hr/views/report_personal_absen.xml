@@ -57,7 +57,23 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="col-sm-6 invoice-col"/>
+                    <div class="col-sm-6 invoice-col">
+                        <br/><br/>
+                        <table class="table">
+                            <tr>
+                                <th>Departement</th>
+                                <th><span t-esc="docs.employee_id.department_id.name"/></th>
+                            </tr>
+                            <tr>
+                                <th>Status Kepegawaian</th>
+                                <th><span t-esc="docs.employee_id.employee_status"/></th>
+                            </tr>
+                            <tr>
+                                <th>Tanggal Masuk</th>
+                                <th><span t-esc="docs.employee_id.date_join"/></th>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 table-responsive">
