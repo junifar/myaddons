@@ -6,9 +6,6 @@
 			<field name="model">hr.employee</field>
 			<field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
 			<field name="arch" type="xml">
-				<!--<xpath expr="//field[@class='oe_kanban_details']" position="replace">-->
-					<!--test-->
-				<!--</xpath>-->
 				<field name="name" position="before">
 					<field name="registration_id"/> -
 				</field>
@@ -413,13 +410,16 @@
             <field name="model">hr.employee</field>
             <field name="arch" type="xml">
                 <tree string="Employees" decoration-bf="message_needaction==True">
-                    <field name="name"/>
-                    <field name="work_phone"/>
-                    <field name="work_email"/>
-                    <field name="company_id" groups="base.group_multi_company"/>
-                    <field name="department_id"/>
-                    <field name="job_id"/>
-                    <field name="parent_id"/>
+                    <field name="registration_id"/>
+					<field name="name"/>
+					<field name="department_id"/>
+					<field name="employee_status"/>
+					<field name="company_id" groups="base.group_multi_company"/>
+					<field name="date_join"/>
+					<!--<field name="work_phone"/>-->
+					<!--<field name="work_email"/>-->
+                    <!--<field name="job_id"/>-->
+                    <!--<field name="parent_id"/>-->
                     <field name="coach_id" invisible="1"/>
                     <field name="message_needaction" invisible="1"/>
                 </tree>

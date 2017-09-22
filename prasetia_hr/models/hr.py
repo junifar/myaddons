@@ -62,7 +62,7 @@ class Employee(models.Model):
     employee_bank_id = fields.Many2one('res.bank', string='Bank')
     employee_account_bank = fields.Char(string="Nomor Rekening")
     employee_account_bank_branch = fields.Char(string="Cabang")
-    employee_status = fields.Char(string="Status Pekerja", compute="_compute_status_pekerja")
+    employee_status = fields.Char(string="Status Pekerja", compute="_compute_status_pekerja", store=True)
 
     def _compute_status_pekerja(self):
         for line in self.contract_ids:
