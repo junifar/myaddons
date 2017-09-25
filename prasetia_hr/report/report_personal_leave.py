@@ -129,6 +129,4 @@ class ReportPersonalLeave(models.AbstractModel):
             'gov_leave_data': self._get_government_leave_data(docs)
         }
 
-        # 'data_absen': process_report[docs.report_type]
-
         return self.env['report'].render('prasetia_hr.report_personal_leave', docargs)
