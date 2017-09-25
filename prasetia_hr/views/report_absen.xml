@@ -44,49 +44,42 @@
                                 <th>NIK</th>
                                 <th>Nama Pegawai</th>
                                 <th>Masuk Bekerja</th>
-                                <th>Sakit</th>
                                 <th>Izin</th>
                                 <th>Mangkir</th>
                                 <th>Lembur</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>110075</td>
-                                <td>Junifar Hidayat</td>
-                                <td>22</td>
-                                <td>1</td>
-                                <td>3</td>
-                                <td>0</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>110075</td>
-                                <td>Junifar Hidayat</td>
-                                <td>22</td>
-                                <td>1</td>
-                                <td>3</td>
-                                <td>0</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>110075</td>
-                                <td>Junifar Hidayat</td>
-                                <td>22</td>
-                                <td>1</td>
-                                <td>3</td>
-                                <td>0</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>110075</td>
-                                <td>Junifar Hidayat</td>
-                                <td>22</td>
-                                <td>1</td>
-                                <td>3</td>
-                                <td>0</td>
-                                <td>3</td>
-                            </tr>
+                            <t t-foreach="employee_name" t-as="data">
+                                <tr>
+                                    <td><span t-esc="data['registration_id']"/></td>
+                                    <td><span t-esc="data['name']"/></td>
+                                    <t t-set="hadir" t-value="0"/>
+                                    <t t-set="izin" t-value="0"/>
+                                    <t t-set="mangkir" t-value="0"/>
+                                    <t t-set="no_data" t-value="0"/>
+                                    <t t-foreach="data_absen" t-as="absen">
+                                        <t t-if="absen['id'] == data['id']">
+                                            <t t-if="absen['attendance_status'] == 'hadir'">
+                                                <t t-set="hadir" t-value="hadir+absen['total']"/>
+                                            </t>
+                                            <t t-if="absen['attendance_status'] == 'izin'">
+                                                <t t-set="izin" t-value="izin+absen['total']"/>
+                                            </t>
+                                            <t t-if="absen['attendance_status'] == 'mangkir'">
+                                                <t t-set="mangkir" t-value="mangkir+absen['total']"/>
+                                            </t>
+                                            <t t-if="absen['attendance_status'] == ''">
+                                                <t t-set="no_data" t-value="no_data+absen['total']"/>
+                                            </t>
+                                        </t>
+                                    </t>
+                                    <td><span t-esc="hadir"/></td>
+                                    <td><span t-esc="izin"/></td>
+                                    <td><span t-esc="mangkir"/></td>
+                                    <td><span t-esc="no_data"/></td>
+                                </tr>
+                            </t>
                         </tbody>
                     </table>
             </div>
@@ -94,7 +87,39 @@
     </template>
 
     <template id="custom_absen_layout_template">
-        Contoh report custom
+        <div class="row">
+            <div class="col-xs-12 table-responsive">
+                <br/>
+                    <table class="table table-striped table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th>NIK</th>
+                                <th>Nama Pegawai</th>
+                                <th>Tanggal</th>
+                                <th>Jam Kerja</th>
+                                <th>Masuk</th>
+                                <th>Keluar</th>
+                                <th>Jam Bekerja</th>
+                                <th>Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="data_absen" t-as="data">
+                                <tr>
+                                    <td><span t-esc="data['registration_id']"/></td>
+                                    <td><span t-esc="data['name_related']"/></td>
+                                    <td><span t-esc="data['name']"/></td>
+                                    <td>08:30 - 17:30</td>
+                                    <td><span t-esc="data['absent_in']"/> </td>
+                                    <td><span t-esc="data['absent_out']"/></td>
+                                    <td><span t-esc="data['work_hours']"/></td>
+                                    <td><span t-esc="data['note']"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
     </template>
 
     <template id="report_absen">
