@@ -70,6 +70,40 @@
                                 <t t-set="sum_sisa_cuti" t-value="sum_sisa_cuti+val.annual_leave-sub_total_cuti_terpakai"/>
                             </tr>
                         </t>
+                        <t t-foreach="long_leave_data" t-as="val">
+                            <tr>
+                                <td>Cuti Panjang</td>
+                                <td><span t-esc="val.start_periode"/></td>
+                                <td><span t-esc="val.end_periode"/></td>
+                                <td><span t-esc="val.annual_leave"/></td>
+                                <t t-set="sub_total_cuti_panjang_terpakai" t-value="0"/>
+                                <t t-foreach="val.long_leave_request_cuti_line" t-as="val_compute">
+                                    <t t-set="sub_total_cuti_panjang_terpakai" t-value="sub_total_cuti_panjang_terpakai+val_compute.annual_leave_used"/>
+                                </t>
+                                <td><span t-esc="sub_total_cuti_panjang_terpakai"/></td>
+                                <td><span t-esc="val.annual_leave-sub_total_cuti_panjang_terpakai"/></td>
+                                <t t-set="sum_hak_cuti" t-value="sum_hak_cuti+val.annual_leave"/>
+                                <t t-set="sum_cuti_terpakai" t-value="sum_cuti_terpakai+sub_total_cuti_panjang_terpakai"/>
+                                <t t-set="sum_sisa_cuti" t-value="sum_sisa_cuti+val.annual_leave-sub_total_cuti_panjang_terpakai"/>
+                            </tr>
+                        </t>
+                        <t t-foreach="other_leave_data" t-as="val">
+                            <tr>
+                                <td><span t-esc="val.leave_type_id.name"/></td>
+                                <td><span t-esc="val.start_periode"/></td>
+                                <td><span t-esc="val.end_periode"/></td>
+                                <td><span t-esc="val.other_leave"/></td>
+                                <t t-set="sub_total_cuti_lain_terpakai" t-value="0"/>
+                                <t t-foreach="val.other_leave_request_cuti_line" t-as="val_compute">
+                                    <t t-set="sub_total_cuti_lain_terpakai" t-value="sub_total_cuti_lain_terpakai+val_compute.other_leave_used"/>
+                                </t>
+                                <td><span t-esc="sub_total_cuti_lain_terpakai"/></td>
+                                <td><span t-esc="val.other_leave-sub_total_cuti_lain_terpakai"/></td>
+                                <t t-set="sum_hak_cuti" t-value="sum_hak_cuti+val.other_leave"/>
+                                <t t-set="sum_cuti_terpakai" t-value="sum_cuti_terpakai+sub_total_cuti_lain_terpakai"/>
+                                <t t-set="sum_sisa_cuti" t-value="sum_sisa_cuti+val.other_leave-sub_total_cuti_lain_terpakai"/>
+                            </tr>
+                        </t>
                             <tr>
                                 <td>Cuti Bersama Pemerintah</td>
                                 <td><span t-esc="periode_year"/>-01-01</td>

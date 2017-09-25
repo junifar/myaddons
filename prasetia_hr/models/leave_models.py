@@ -82,6 +82,9 @@ class LongLeavePeriodeDetail(models.Model):
     annual_leave_used = fields.Integer(string='Cuti Terpakai', requird=True)
     start_periode = fields.Date(string='Tanggal Mulai Berlaku', required=True)
     end_periode = fields.Date(string='Tanggal Akhir Berlaku', required=True)
+    long_leave_request_cuti_line = fields.One2many('hr.employee.annual.long.leave.request.cuti',
+                                                     'long_leave_periode_detail_id',
+                                                     string="Long Leave Request Cuti Line")
     remark = fields.Text(string="Keterangan")
 
 
@@ -96,7 +99,13 @@ class OtherLeavePeriodeDetail(models.Model):
     leave_periode_id = fields.Many2one('hr.employee.leave.periode', required=True, string="Periode Cuti")
     leave_type_id = fields.Many2one('hr.employee.leave.type', requred=True, string="Jenis Cuti")
     employee_id = fields.Many2one('hr.employee', required=True, string="Nama Pegawai")
-    annual_leave = fields.Integer(string='Hak Cuti Lainnya', required=True)
+    other_leave = fields.Integer(string='Hak Cuti Lainnya', required=True)
+    other_leave_used = fields.Integer(string='Cuti Terpakai', requird=True)
+    start_periode = fields.Date(string='Tanggal Mulai Berlaku', required=True)
+    end_periode = fields.Date(string='Tanggal Akhir Berlaku', required=True)
+    other_leave_request_cuti_line = fields.One2many('hr.employee.other.leave.request.cuti',
+                                                   'other_leave_periode_detail_id',
+                                                   string="Other Leave Request Cuti Line")
     remark = fields.Text(string="Keterangan")
 
 

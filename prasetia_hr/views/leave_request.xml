@@ -28,13 +28,13 @@
 						<group>
 							<group>
 								<field name="department_id"/>
-								<field name="leave_category" widget="radio"/>
+								<field name="leave_category" widget="radio" string="Jenis Cuti"/>
 								<field name="leave_type_id" attrs="{'invisible':['|',
                                 ('leave_category','=','cuti tahunan'), ('leave_category', '=', 'cuti panjang')]}"/>
 							</group>
 							<group>
 								<field name="tanggal_pengajuan"/>
-								<field name="reason"/>
+								<field name="reason" string="Tujuan Cuti"/>
                             </group>
 						</group>
 						<notebook>
@@ -76,6 +76,23 @@
 									</tree>
 								</field>
 							</page>
+							<page string="Cuti Lainnya">
+								<header>
+									<group>
+										<button name="sync_Other_leave" type="object"
+												string="Info Cuti" class="oe_highlight"/>
+									</group>
+								</header>
+								<field name="other_leave_request_annual_leave_activity_line">
+									<tree string="Cuti Lainnya" editable="bottom" create="false">
+										<field name="start_periode" readonly="1"/>
+										<field name="end_periode" readonly="1"/>
+										<field name="other_leave" readonly="1"/>
+										<field name="other_leave_remaining" readonly="1"/>
+										<field name="other_leave_used"/>
+									</tree>
+								</field>
+							</page>
 						</notebook>
 						<notebook>
 							<page string="Tanggal Izin Bekerja">
@@ -85,22 +102,13 @@
 										<field name="note" string="Remark"/>
 									</tree>
 								</field>
-								<!--<field name="attendance_ids" context="{'default_employee_id': name,-->
-								<!--'default_note': reason,-->
-								<!--'default_attendance_status': 'izin'}">-->
-									<!--<tree editable="top">-->
-										<!--<field name="employee_id" domain="[('id', '=', parent.name)]"/>-->
-										<!--<field name="attendance_status"/>-->
-										<!--<field name="name" string="Tanggal Izin"/>-->
-										<!--<field name="note" string="Remark"/>-->
-									<!--</tree>-->
-								<!--</field>-->
 							</page>
 						</notebook>
 						<group string="Documentation">
 							<group>
-								<field widget="binary" height="64" name="attachment" filename="attachment_name" />
-								<field name="attachment_name"/>
+								<field widget="binary" height="64" name="attachment" filename="attachment_name"
+									   string="Lampiran" />
+								<field name="attachment_name" string="Nama Lampiran"/>
 							</group>
 						</group>
 					</sheet>

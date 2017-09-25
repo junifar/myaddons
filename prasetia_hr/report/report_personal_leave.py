@@ -79,6 +79,30 @@ class ReportPersonalLeave(models.AbstractModel):
 
         return count_data
 
+    def _get_long_leave_data(self, docs):
+        long_leave_periode_detail_pools = self.env['hr.employee.long.leave.periode.detail']
+        long_leave_periode_detail_data = long_leave_periode_detail_pools.search([
+            '&', '&',
+            ('employee_id.id', '=', docs.employee_id.id),
+            ('start_periode', '<=',
+             datetime.now().strftime("%Y-%m-%d")),
+            ('end_periode', '>=',
+             datetime.now().strftime("%Y-%m-%d"))
+        ])
+        return long_leave_periode_detail_data
+
+    def _get_other_leave_date(self, docs):
+        other_leave_periode_detail_pools = self.env['hr.employee.other.leave.periode.detail']
+        other_leave_periode_detail_data = other_leave_periode_detail_pools.search([
+            '&', '&',
+            ('employee_id.id', '=', docs.employee_id.id),
+            ('start_periode', '<=',
+             datetime.now().strftime("%Y-%m-%d")),
+            ('end_periode', '>=',
+             datetime.now().strftime("%Y-%m-%d"))
+        ])
+        return other_leave_periode_detail_data
+
     @api.model
     def render_html(self, docids, data=None):
         self.model = self.env.context.get('active_model')
@@ -100,6 +124,8 @@ class ReportPersonalLeave(models.AbstractModel):
             'periode': datetime.now().strftime("%B %Y"),
             'periode_year': datetime.now().strftime("%Y"),
             'leave_data': self._get_leave_data(docs),
+            'long_leave_data': self._get_long_leave_data(docs),
+            'other_leave_data': self._get_other_leave_date(docs),
             'gov_leave_data': self._get_government_leave_data(docs)
         }
 

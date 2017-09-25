@@ -55,7 +55,10 @@
                                     <tree string="Cuti Lainnya" editable="bottom">
                                         <field name="employee_id"/>
                                         <field name="leave_type_id"/>
-                                        <field name="annual_leave"/>
+                                        <field name="other_leave"/>
+                                        <field name="other_leave_used"/>
+                                        <field name="start_periode"/>
+                                        <field name="end_periode"/>
                                         <field name="remark"/>
                                     </tree>
                                 </field>

@@ -286,6 +286,9 @@ class leave_request(models.Model):
     long_leave_request_annual_leave_activity_line = fields.One2many('hr.employee.annual.long.leave.request.cuti',
                                                                     'leave_request_id',
                                                                     string="Update Sisa Cuti 5 Tahunan")
+    other_leave_request_annual_leave_activity_line = fields.One2many('hr.employee.other.leave.request.cuti',
+                                                                    'leave_request_id',
+                                                                    string="Update Sisa Cuti Lainnya")
 
     @api.multi
     def action_draft(self):
@@ -372,6 +375,33 @@ class leave_request(models.Model):
                     self.long_leave_request_annual_leave_activity_line.create(values)
         return None
 
+    @api.multi
+    def sync_Other_leave(self):
+        other_leave_employee_pool = self.env['hr.employee.other.leave.periode.detail']
+        other_leave_employee_data = other_leave_employee_pool.search([
+            '&', '&', ('employee_id.id', '=', self.name.id),
+            ('start_periode', '<=', datetime.now().strftime("%Y-%m-%d")),
+            ('end_periode', '>=', datetime.now().strftime("%Y-%m-%d"))
+        ])
+        if other_leave_employee_data:
+            for data in other_leave_employee_data:
+                is_found = False
+                for check in self.other_leave_request_annual_leave_activity_line:
+                    if check.leave_periode_detail_id.id == data.id:
+                        is_found = True
+                        break
+                if not is_found:
+                    values = {
+                        'leave_request_id': self.id,
+                        'other_leave_periode_detail_id': data.id,
+                        'other_leave': data.other_leave,
+                        'start_periode': data.start_periode,
+                        'end_periode': data.end_periode,
+                        'other_leave_remaining': data.other_leave_used
+                    }
+                    self.other_leave_request_annual_leave_activity_line.create(values)
+        return None
+
 
 class leave_request_line(models.Model):
     _name = 'hr.employee.leave.request.line'
@@ -409,3 +439,16 @@ class leave_request_long_leave_activity(models.Model):
     end_periode = fields.Date(string='Tanggal Akhir Berlaku', required=True)
     annual_leave_remaining = fields.Integer(string='Sisa Hak Cuti 5 Tahunan', required=True)
     annual_leave_used = fields.Integer(string='Cuti Terpakai')
+
+
+class leave_request_other_activity(models.Model):
+    _name = 'hr.employee.other.leave.request.cuti'
+
+    leave_request_id = fields.Many2one('hr.employee.leave.request', string="Ijin Tidak Bekerja")
+    other_leave_periode_detail_id = fields.Many2one('hr.employee.other.leave.periode.detail', required=True,
+                                                   string="Periode Cuti Lainnya Line")
+    other_leave = fields.Integer(string='Hak Cuti 5 Tahunan', required=True)
+    start_periode = fields.Date(string='Tanggal Mulai Berlaku', required=True)
+    end_periode = fields.Date(string='Tanggal Akhir Berlaku', required=True)
+    other_leave_remaining = fields.Integer(string='Sisa Hak Cuti Lainnya', required=True)
+    other_leave_used = fields.Integer(string='Cuti Terpakai')
