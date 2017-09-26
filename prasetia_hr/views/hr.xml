@@ -269,7 +269,7 @@
                             </h1>
                         </div>
 						<notebook>
-							<page name="education_information" string="Education Information" groups="hr.group_hr_user">
+							<page name="education_information" string="Pendidikan" groups="hr.group_hr_user">
 								<field name="education_ids">
 									<tree string="Pendidikan" create="true">
 										<field name="name"/>
@@ -319,7 +319,7 @@
                             </h1>
                         </div>
 						<notebook>
-							<page name="family_information" string="Family Information" groups="hr.group_hr_user">
+							<page name="family_information" string="Informasi Keluarga" groups="hr.group_hr_user">
 								<field name="family_ids">
 									<tree string="Keluarga" create="true">
 										<field name="name"/>
@@ -366,7 +366,7 @@
                             </h1>
                         </div>
 						<notebook>
-							<page name="work_history_information" string="Work History Information" groups="hr.group_hr_user">
+							<page name="work_history_information" string="Riwayat Pekerjaan" groups="hr.group_hr_user">
 								<field name="work_history_ids">
 									<tree string="Riwayat Pekerjaan" create="true">
 										<field name="name"/>

@@ -7,7 +7,7 @@
 			<field name="arch" type="xml">
 				<form string="Personal Absent">
 					<group>
-						<field name="employee_id"/>
+						<field name="employee_id" string="Nama Karyawan"/>
 					</group>
 					<group>
                         <group>
@@ -19,16 +19,16 @@
 					</group>
 					<footer>
                         <button name="show_data" type="object"
-                                string="show" class="oe_highlight"/>
+                                string="Tampil" class="oe_highlight"/>
                         or
-                        <button special="cancel" string="Cancel"/>
+                        <button special="cancel" string="Batal"/>
                     </footer>
 				</form>
 			</field>
 		</record>
 
         <record id="personal_absen_action" model="ir.actions.act_window">
-            <field name="name">Wizard Personal Absen</field>
+            <field name="name">Informasi Absen</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">hr.employee.personal.absent</field>
             <field name="view_type">form</field>

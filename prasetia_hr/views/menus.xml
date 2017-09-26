@@ -1,51 +1,72 @@
 <odoo>
     <data>
-        <menuitem id="personal_information_menu" name="Personal Info" parent="hr.menu_hr_root" sequence="3"/>
+        <menuitem id="personal_information_menu" name="Data Personal" parent="hr.menu_hr_root" sequence="3"/>
         <menuitem id="family_menu" name="Keluarga" parent="personal_information_menu" action="hr_family_list_action" />
         <menuitem id="education_menu" name="Pendidikan" parent="personal_information_menu" action="hr_education_list_action" />
         <menuitem id="work_history_menu" name="Riwayat Pekerjaan" parent="personal_information_menu" action="hr_work_history_list_action" />
         <menuitem id="contract_menu" name="Status Kepegawaian" parent="personal_information_menu" action="contract_list_action" />
         <menuitem id="kartu_keluarga_menu" name="Kartu Keluarga" parent="personal_information_menu" action="kartu_keluarga_list_action" />
 
-        <menuitem id="import_attendance_sub_menu" name="Import Absen" parent="hr.menu_hr_root"/>
-        <menuitem id="import_attendance_menu" name="Import Absen" parent="import_attendance_sub_menu" action="attendance_import_list_action" />
-        <menuitem id="device_menu" name="Devices" parent="import_attendance_sub_menu" action="device_attendance_list_action" />
+        <record model="ir.ui.menu" id="hr.menu_hr_root">
+            <field name="name">Data Karyawan</field>
+        </record>
+        <record model="ir.ui.menu" id="hr.menu_open_view_employee_list_my">
+            <field name="name">Data Karyawan</field>
+        </record>
 
 
         <!--<menuitem id="employee_master_menu" name="Master Data" parent="hr.menu_hr_root"/>-->
 
-        <menuitem id="employee_attendance_menu_root" name="Attendance" web_icon="prasetia_hr,static/description/icon.png" sequence="101"/>
-        <menuitem id="employee_attendance_menu" name="Attendance" parent="employee_attendance_menu_root"
-        action="employee_attendance_list_action"/>
-        <menuitem id="attendance_report_menu" name="Attendance Report" parent="employee_attendance_menu_root"
-        action="attendance_report_list_action"/>
+        <!--<menuitem id="employee_attendance_menu_root" name="Attendance" web_icon="prasetia_hr,static/description/icon.png" sequence="101"/>-->
+        <!--<menuitem id="employee_attendance_menu" name="Attendance" parent="employee_attendance_menu_root"-->
+        <!--action="employee_attendance_list_action"/>-->
+        <!--<menuitem id="attendance_report_menu" name="Attendance Report" parent="employee_attendance_menu_root"-->
+        <!--action="attendance_report_list_action"/>-->
 
         <menuitem id="employee_cuti_root_menu" name="Cuti" sequence="99"/>
-        <menuitem id="information_cuti_menu" name="Information" parent="employee_cuti_root_menu" sequence="1"/>
+        <menuitem id="information_cuti_menu" name="Informasi" parent="employee_cuti_root_menu" sequence="1"/>
         <!--<menuitem id="report_cuti_menu" name="Sisa Cuti Karyawan" parent="information_cuti_menu"-->
         <!--action="prasetia_hr.personal_leave_action"/>-->
-        <menuitem id="employee_cuti_menu" name="Cuti" parent="employee_cuti_root_menu" sequence="2"/>
-        <menuitem id="leave_request_menu" name="Permohonan Cuti" parent="employee_cuti_menu"
-        action="leave_request_list_action"/>
-        <menuitem id="leave_request_type_menu" name="Jenis Cuti" parent="employee_cuti_menu"
-        action="leave_request_type_list_action"/>
 
-        <menuitem id="organization_menu" name="Organization" sequence="100"/>
-        <menuitem id="organization_structure_sub_menu" name="Structure" parent="organization_menu" sequence="1"/>
+
+        <menuitem id="organization_menu" name="Organisasi" sequence="100"/>
+        <menuitem id="organization_structure_sub_menu" name="Struktur" parent="organization_menu" sequence="1"/>
         <menuitem id="organization_role_menu" name="Jabatan Organisasi" parent="organization_structure_sub_menu"
                   action="organization_role_list_action"/>
         <menuitem id="organization_structure_menu" name="Struktur Organisasi" parent="organization_structure_sub_menu"
                   action="organization_structure_list_action"/>
 
-        <menuitem id="administration_menu" name="Administration" sequence="101"/>
-        <menuitem id="administration_leave_management_sub_menu" name="Leave Management" parent="administration_menu" sequence="1"/>
-        <menuitem id="administration_leave_periode_menu" name="Cuti" parent="administration_leave_management_sub_menu" action="leave_periode_list_action"/>
-        <menuitem id="administration_report_sub_menu" name="Report" parent="administration_menu" sequence="2"/>
-        <menuitem id="administration_configuration_menu" name="Configuration" parent="administration_menu" sequence="3"/>
-        <menuitem id="administration_directorate_menu" name="Directorate" parent="administration_configuration_menu" action="directorate_list_action"/>
-        <menuitem id="absen_book_menu" name="Absen Book" parent="administration_configuration_menu" action="absen_book_list_action"/>
-        <menuitem id="calendar_year_menu" name="Calendar Tahunan" parent="administration_configuration_menu" action="calendar_year_list_action"/>
+        <menuitem id="administration_menu" name="Administrasi" sequence="101"/>
+        <menuitem id="administration_leave_management_sub_menu" name="Manajemen Cuti" parent="administration_menu" sequence="1"/>
+        <menuitem id="administration_leave_periode_menu" name="Cuti" parent="administration_leave_management_sub_menu" action="leave_periode_list_action" sequence="1"/>
+        <menuitem id="administration_report_sub_menu" name="Laporan" parent="administration_menu" sequence="2"/>
+        <menuitem id="administration_configuration_menu" name="Konfigurasi" parent="administration_menu" sequence="3"/>
+        <menuitem id="administration_directorate_menu" name="Direktorat" parent="administration_configuration_menu" action="directorate_list_action"/>
+        <menuitem id="absen_book_menu" name="Buku Absen" parent="administration_configuration_menu" action="absen_book_list_action"/>
+        <menuitem id="calendar_year_menu" name="Kalender Tahunan" parent="administration_configuration_menu" action="calendar_year_list_action"/>
+
+        <menuitem id="import_attendance_sub_menu" name="Import Absen" parent="administration_menu"/>
+        <menuitem id="import_attendance_menu" name="Import Absen" parent="import_attendance_sub_menu" action="attendance_import_list_action" />
+        <menuitem id="device_menu" name="Devices" parent="import_attendance_sub_menu" action="device_attendance_list_action" />
+
+        <!--<menuitem id="employee_cuti_menu" name="Cuti" parent="administration_menu" sequence="2"/>-->
+        <menuitem id="leave_request_menu" name="Permohonan Cuti" parent="administration_leave_management_sub_menu"
+        action="leave_request_list_action" sequence="2"/>
+        <menuitem id="leave_request_type_menu" name="Jenis Cuti" parent="administration_leave_management_sub_menu"
+        action="leave_request_type_list_action" sequence="3"/>
+
         <!--<menuitem id="report_attendance_all_empolyee_menu" name="Laporan Absen Karyawan"-->
                   <!--parent="administration_sub_menu" action="report_absen_wizard_action"/>-->
+
+        <menuitem id="employee_attendance_menu_root" name="Manajemen Absen" parent="administration_menu" sequence="101"/>
+        <menuitem id="employee_attendance_menu" name="Attendance" parent="employee_attendance_menu_root"
+        action="employee_attendance_list_action"/>
+        <menuitem id="attendance_report_menu" name="Attendance Report" parent="employee_attendance_menu_root"
+        action="attendance_report_list_action"/>
+
+        <menuitem id="hr.menu_hr_department_tree" parent="administration_menu" name="Departments"/>
+        <!--<record model="ir.ui.menu" id="hr.menu_hr_department_tree">-->
+            <!--<field name="name">test</field>-->
+        <!--</record>-->
     </data>
 </odoo>

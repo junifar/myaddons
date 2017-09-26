@@ -80,7 +80,7 @@
 			<field name="model">hr.employee.organization.role</field>
 			<field name="arch" type="xml">
 				<tree string="Struktur Jabatan" create="true">
-                    <field name="name" placeholder="Nama"/>
+                    <field name="name" string="Nama"/>
                     <field name="parent_id"/>
 				</tree>
 			</field>
@@ -91,9 +91,9 @@
 			<field name="model">hr.employee.organization.structure</field>
 			<field name="arch" type="xml">
 				<tree string="Struktur Organisasi" create="true">
-                    <field name="name" placeholder="Nama"/>
-                    <field name="president" placeholder="Direktur"/>
-                    <field name="vice_president" placeholder="VP"/>
+                    <field name="name" string="Nama"/>
+                    <field name="president" string="Direktur"/>
+                    <field name="vice_president" string="VP"/>
 				</tree>
 			</field>
 		</record>

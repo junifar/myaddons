@@ -26,7 +26,7 @@
                             </group>
 						</group>
                         <notebook>
-                            <page name="note_information" string="Note">
+                            <page name="note_information" string="Catatan">
                                 <field name="note"/>
                             </page>
                         </notebook>
@@ -40,7 +40,7 @@
 			<field name="model">hr.employee.contract</field>
 			<field name="arch" type="xml">
 				<tree string="Status Kepegawaian" create="true">
-                    <field name="employee_id"/>
+                    <field name="employee_id" string="Nama Karyawan"/>
                     <field name="name"/>
                     <field name="start_date"/>
                     <field name="end_date"/>

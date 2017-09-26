@@ -35,7 +35,7 @@
             <field name="target">new</field>
         </record>
 
-        <menuitem id="external_data_menu" name="External Data" parent="prasetia_hr.information_cuti_menu"
-        action="external_data_action"/>
+        <!--<menuitem id="external_data_menu" name="External Data" parent="prasetia_hr.information_cuti_menu"-->
+        <!--action="external_data_action"/>-->
     </data>
 </odoo>
