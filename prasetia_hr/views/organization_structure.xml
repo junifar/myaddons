@@ -27,7 +27,9 @@
 			<field name="model">hr.employee.organization.structure</field>
 			<field name="arch" type="xml">
 				<form string="Struktur Organisasi">
-					<header></header>
+					<header>
+						<button name="print_data" type="object" string="Cetak" class="oe_highlight"/>
+					</header>
 					<sheet>
                         <h1>
                             <field name="name" placeholder="Nama Divisi"/>

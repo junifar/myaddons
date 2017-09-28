@@ -49,6 +49,7 @@
         'views/report_personal_absen.xml',
         'views/report_absen.xml',
         'views/report_family.xml',
+        'views/report_organization_structure.xml',
         'views/prasetia_hr_report.xml',
         'wizard/personal_absen_views.xml',
         'wizard/personal_leave_views.xml',

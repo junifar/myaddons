@@ -49,5 +49,14 @@
 			name = "prasetia_hr.family_report"
 			file = "prasetia_hr.family_report"
 			/>
+
+		<report id="action_report_organization_structure"
+			model = 'hr.employee.organization.structure'
+			string = "Report Organization Structure"
+			report_type = "qweb-pdf"
+			paperformat="paper_format_A4"
+			name = "prasetia_hr.report_organization_structure"
+			file = "prasetia_hr.report_organization_structure"
+			/>
     </data>
 </odoo>

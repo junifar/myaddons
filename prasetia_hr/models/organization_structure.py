@@ -38,6 +38,19 @@ class organization_structure(models.Model):
     organization_team_line = fields.One2many('hr.employee.organization.structure.line', 'organization_structure_id',
                                              'Organization Team')
 
+    @api.multi
+    def print_data(self):
+        self.ensure_one()
+        self_obj = self.env.context
+
+        data = {}
+        data['ids'] = self_obj.get('active_ids', [])
+        data['model'] = self_obj.get('active_model', 'ir.ui.menu')
+        print 'Sample'
+        return self.env['report'].with_context(landscape=False).get_action(self,
+                                                                           'prasetia_hr.report_organization_structure',
+                                                                           data=data)
+
 
 class organization_area(models.Model):
     _name = "hr.employee.organization.area"

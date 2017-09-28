@@ -1,0 +1,67 @@
+<odoo>
+    <template id="report_organization_structure">
+        <t t-set="data_report_margin_top" t-value="12"/>
+        <t t-set="data_report_header_spacing" t-value="9"/>
+        <t t-set="data_report_dpi" t-value="110"/>
+        <t t-call="report.html_container">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/AdminLTE.min.css" />
+            <div class="page">
+                <section class="invoice">
+                    <div class="row">
+                        <div class="col-xs-12">
+                          <h2 class="page-header">
+                            <i class="fa fa-globe"></i> PT. Prasetia Dwidharma
+                            <small class="pull-right">6 Juni 2017</small>
+                          </h2>
+                        </div>
+                    </div>
+                </section>
+                <div class="row invoice-info">
+                    <div class="col-sm-6 invoice-col">
+                      <b>STRUKTUR ORGANISASI <span t-esc="docs.name"/> </b>
+                    </div>
+                    <div class="col-sm-6 invoice-col">
+                        <br/><br/>
+                        <table class="table table-striped table-condensed table-bordered">
+                            <tr>
+                                <th>Direktur</th>
+                                <th><span t-esc="docs.president.resource_id.name"/></th>
+                            </tr>
+                            <tr>
+                                <th>Wakil Direktur</th>
+                                <th><span t-esc="docs.vice_president.resource_id.name"/></th>
+                            </tr>
+                            <tr>
+                                <th colspan="2">
+                                    List Karyawan
+                                </th>
+                            </tr>
+                            <tr>
+                                <th colspan="2">
+                                    <table class="table table-striped table-condensed table-bordered">
+                                        <tr>
+                                            <th>Nama Karyawan</th>
+                                            <th>Jabatan</th>
+                                            <th>Cluster</th>
+                                            <th>Area</th>
+                                            <th>Customer</th>
+                                        </tr>
+                                        <t t-foreach="docs.organization_team_line" t-as="data">
+                                            <tr>
+                                                <td><span t-esc="data.name.resource_id.name"/></td>
+                                                <td><span t-esc="data.organization_role_id.name"/></td>
+                                                <td><span t-esc="data.cluster_id.name"/></td>
+                                                <td><span t-esc="data.area_id.name"/></td>
+                                                <td><span t-esc="data.customer_id.name"/></td>
+                                            </tr>
+                                        </t>
+                                    </table>
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
