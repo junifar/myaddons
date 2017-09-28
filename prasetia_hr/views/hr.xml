@@ -506,5 +506,6 @@
 			<field name="view_id" ref="hr_hr_employee_education_prasetia_view_tree"/>
 			<field name="act_window_id" ref="hr.open_view_employee_list_my"/>
 		</record>
+
 	</data>
 </openerp>
