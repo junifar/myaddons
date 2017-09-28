@@ -34,8 +34,34 @@ class ReportPersonalAbsen(models.AbstractModel):
 
     @staticmethod
     def convert_time_zone(date):
-        date_convert = datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
-        return (date_convert + timedelta(hours=7)).time()
+        if date:
+            date_convert = datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
+            return (date_convert + timedelta(hours=7)).time()
+        else:
+            return None
+
+    @staticmethod
+    def convert_time(date):
+        if date:
+            date_convert = datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
+            return (date_convert + timedelta(hours=7)).time()
+        else:
+            return None
+
+    @staticmethod
+    def late_check(date):
+        if date:
+            time_limit = datetime.strptime('08:30', '%H:%M')
+            date_convert = datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
+            time_convert = (date_convert + timedelta(hours=7)).strftime('%H:%M')
+            time_compare = datetime.strptime(time_convert, '%H:%M')
+            if (time_limit - time_compare).total_seconds() < 0:
+                return 1
+            else:
+                return None
+
+        else:
+            return None
 
     def _get_personal_absent(self, data):
         lines = []
@@ -76,7 +102,7 @@ class ReportPersonalAbsen(models.AbstractModel):
             return None
         if not to_date:
             return None
-        return datetime.strptime(to_date, '%Y-%m-%d %H:%M:%S')-datetime.strptime(from_date, '%Y-%m-%d %H:%M:%S')
+        return datetime.strptime(to_date, '%Y-%m-%d %H:%M:%S') - datetime.strptime(from_date, '%Y-%m-%d %H:%M:%S')
 
     @api.model
     def render_html(self, docids, data=None):
@@ -93,6 +119,8 @@ class ReportPersonalAbsen(models.AbstractModel):
             'employee_name': docs.employee_id.name,
             'employee_absen': self._get_personal_absent(docs),
             'employee_absen_data': self._get_absen(docs),
-            'date_difference': self._date_different
+            'date_difference': self._date_different,
+            'convert_time': self.convert_time,
+            'late_check': self.late_check
         }
         return self.env['report'].render('prasetia_hr.report_personal_absen', docargs)

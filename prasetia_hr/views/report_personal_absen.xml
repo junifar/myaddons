@@ -96,11 +96,18 @@
                                      <tr>
                                          <td><span t-esc="data['name']"/> </td>
                                          <td>08:30 - 17:30</td>
-                                         <td><span t-esc="data['absent_in']"/> </td>
-                                         <td><span t-esc="data['absent_out']"/></td>
+                                         <td><span t-esc="convert_time(data['absent_in'])"/> </td>
+                                         <td><span t-esc="convert_time(data['absent_out'])"/></td>
                                          <t t-set="work_hours" t-value="date_difference(data['absent_in'], data['absent_out'])"/>
                                          <td><span t-esc="work_hours"/></td>
-                                         <td><span t-esc="data.attendance_status"/></td>
+                                         <td>
+                                             <t t-if="late_check(data['absent_in']) == 1">
+                                                Terlambat
+                                             </t>
+                                             <t t-if="late_check(data['absent_in']) == None">
+                                                 <span t-esc="data.attendance_status"/>
+                                             </t>
+                                         </td>
                                          <td><span t-esc="data['note']"/></td>
                                     </tr>
                                 </t>
