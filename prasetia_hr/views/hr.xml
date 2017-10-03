@@ -37,10 +37,10 @@
 									<field name="registration_id"/>
 									<field name="nama_panggilan"/>
 									<field name="identification_id" groups="hr.group_hr_user"/>
-									<field name="religion_id"/>
-									<field name="mobile_phone"/>
-									<field name="mobile_phone_2"/>
-									<field name="work_email" widget="email"/>
+									<field name="religion_id" string="agama"/>
+									<field name="mobile_phone" string="Nomor HP"/>
+									<field name="mobile_phone_2" string="Nomor HP"/>
+									<field name="work_email" widget="email" string="Alamat Email"/>
 									<field name="date_join"/>
 									<field name="employee_status"/>
 									<!--<field name="birth_place"/>-->
@@ -48,18 +48,18 @@
 								</group>
 								<group string="Position">
 									<field name="directorate_id"/>
-									<field name="department_id"/>
-									<field name="job_id"/>
+									<field name="department_id" string="Departement"/>
+									<field name="job_id" string="Status Pegawai"/>
 									<field name="parent_id" invisible="1"/>
 								</group>
 								<group string="Birth">
-									<field name="birth_place"/>
-									<field name="birthday"/>
-									<field name="blood_type"/>
+									<field name="birth_place" string="Tempat Lahir"/>
+									<field name="birthday" string="Tanggal Lahir"/>
+									<field name="blood_type" string="Golongan darah"/>
 								</group>
 								<group string="Status">
-									<field name="gender"/>
-									<field name="marital"/>
+									<field name="gender" string="Jenis Kelamin"/>
+									<field name="marital" string="Status Pernikahan"/>
 								</group>
 								<group string="Bank Account Information">
 									<field name="employee_bank_id"/>
