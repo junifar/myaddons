@@ -193,6 +193,7 @@ class Attendance(models.Model):
                                          string="Status Kehadiran")
     leave_request_id = fields.Many2one('hr.employee.leave.request', string="Ijin Tidak Bekerja")
     absen_book_id = fields.Many2one('hr.employee.absen.book', string="Absen Book")
+    terlambat = fields.Char(string='Terlambat')
 
     _sql_constraints = [
         ('unique_employee_id_absent_date', 'unique(employee_id, name)', 'Data Already Exists')

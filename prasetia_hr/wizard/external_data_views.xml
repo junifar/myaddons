@@ -8,6 +8,8 @@
                 <form string="External Data">
                     <h1>Select an Excel file to import :</h1>
                     <field name="name" invisible="1"/>
+                    Format Data File :
+                    <field name="finger_print_type"/><br/>
                     <field name="bin_file" widget="binary" height="64" filename="name"/>
                     <!--<group>-->
                         <!--<field name="name" invisible="1"/>-->
@@ -17,7 +19,8 @@
                     <!--</group>-->
                     <footer>
                         <button name="show_data" type="object"
-                                string="show" class="oe_highlight"/>
+                                string="show" class="oe_highlight"
+                                confirm="Pastikan Tipe Format Data File Telah Benar Untuk Melanjutkan"/>
                         or
                         <button special="cancel" string="Cancel"/>
                     </footer>
