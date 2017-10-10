@@ -50,8 +50,10 @@ class import_external_data(models.TransientModel):
             if data.name == convert_date_absen(date_absen):
                 for line in data.absen_ids:
                     if line.employee_id.registration_id == noreg:
-                        line.absent_in = self.utcConvert(check_in)
-                        line.absent_out = self.utcConvert(check_out)
+                        print noreg
+                        print '===pass123==='
+                        line.absent_in = self.utcConvert(check_in) if check_in is not None else None
+                        line.absent_out = self.utcConvert(check_out) if check_out is not None else None
                         line.attendance_status = 'hadir'
         return None
 
@@ -133,8 +135,7 @@ class import_external_data(models.TransientModel):
                             year = int(cell_date_absen[0])
                             month = int(cell_date_absen[1])
                             day = int(cell_date_absen[2])
-
-                            print noreg
+                            date_absen = datetime(year, month, day)
 
                             cell_time_in = sheet.cell(row, 9).value.split(":") if sheet.cell(row, 9).value else None
                             value_hour = int(cell_time_in[0]) if cell_time_in else None
@@ -159,42 +160,7 @@ class import_external_data(models.TransientModel):
                                 value_out = None
                             except ValueError:
                                 value_out = None
-
-                            print '======'
-                            print noreg
-                            print sheet.cell(row, 5).value
-                            print value_in
-                            print value_out
-                            print '======'
-
-                            # if not sheet.cell(row, 6).value == '':
-                            #     noreg = self._check_str(sheet.cell(row, 2).value)
-                            #
-                            #     value_hour = self._check_str(sheet.cell(row, 6).value)
-                            #     value_minute = self._check_str(sheet.cell(row, 7).value)
-                            #
-                            #     try:
-                            #         value_in = datetime.strptime(
-                            #             '%s-%s-%s %s:%s' % (year, month, day, value_hour, value_minute),
-                            #             '%Y-%m-%d %H:%M')
-                            #     except TypeError:
-                            #         value_in = None
-                            #     except ValueError:
-                            #         value_in = None
-                            #
-                            #     value_hour = self._check_str(sheet.cell(row, 8).value)
-                            #     value_minute = self._check_str(sheet.cell(row, 9).value)
-                            #     try:
-                            #         value_out = datetime.strptime(
-                            #             '%s-%s-%s %s:%s' % (year, month, day, value_hour, value_minute),
-                            #             '%Y-%m-%d %H:%M')
-                            #     except TypeError:
-                            #         value_out = None
-                            #     except ValueError:
-                            #         value_out = None
-                            #     col_values.append(value_out)
-                            #
-                            #     self._update_check_date(ctx, noreg, date_absen, value_in, value_out)
+                            self._update_check_date(ctx, noreg, date_absen, value_in, value_out)
         except XLRDError:
             raise ValidationError(_('File Bukan Tipe Excel'))
 
