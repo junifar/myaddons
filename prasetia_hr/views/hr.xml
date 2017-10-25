@@ -422,6 +422,17 @@
             </field>
         </record>
 
+		<record id="view_hr_employee_control_search" model="ir.ui.view">
+            <field name="name">hr.employee.search</field>
+            <field name="model">hr.employee</field>
+			<field name="inherit_id" ref="hr.view_employee_filter"/>
+            <field name="arch" type="xml">
+				 <field name="name" position="before">
+					<field name="registration_id" string="NIK"/>
+				 </field>
+            </field>
+        </record>
+
 		<record model="ir.actions.act_window" id="hr_education_list_action">
 			<field name="name">Employee Education</field>
 			<field name="res_model">hr.employee</field>
@@ -434,7 +445,7 @@
 			</field>
 		</record>
 
-		<record model="ir.actions.act_window.view" id="act_hr_employee_tree_view">
+		<record model="ir.actions.act_window.view" id="act_hr_employee_tree_view1">
 			<field eval="2" name="sequence"/>
 			<field name="view_mode">tree</field>
 			<field name="view_id" ref="hr_hr_employee_education_prasetia_view_tree"/>

@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="barang_tree_view">
+            <field name="name">Barang</field>
+            <field name="model">prasetia.barang</field>
+            <field name="arch" type="xml">
+                <tree string="Barang" create="true">
+                    <field name="name"/>
+                    <field name="qty"/>
+                </tree>
+            </field>
+         </record>
+
+        <record model="ir.actions.act_window" id="barang_list_action">
+            <field name="name">Barang</field>
+            <field name="res_model">prasetia.barang</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="Help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Barang
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="barang_menu" name="Barang"/>
+        <menuitem id="barang_sub_menu" name="Barang" action="barang_list_action"/>
+    </data>
+</odoo>

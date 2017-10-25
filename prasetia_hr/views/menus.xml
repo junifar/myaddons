@@ -1,7 +1,7 @@
 <odoo>
     <data>
         <menuitem id="personal_information_menu" name="Data Personal" parent="hr.menu_hr_root" sequence="3"/>
-        <menuitem id="family_menu" name="Keluarga" parent="personal_information_menu" action="hr_family_list_action" />
+        <!--<menuitem id="family_menu" name="Keluarga" parent="personal_information_menu" action="hr_family_list_action" />-->
         <menuitem id="education_menu" name="Pendidikan" parent="personal_information_menu" action="hr_education_list_action" />
         <menuitem id="work_history_menu" name="Riwayat Pekerjaan" parent="personal_information_menu" action="hr_work_history_list_action" />
         <menuitem id="contract_menu" name="Status Kepegawaian" parent="personal_information_menu" action="contract_list_action" />
