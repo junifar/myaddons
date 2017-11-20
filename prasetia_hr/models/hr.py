@@ -93,6 +93,12 @@ class Employee(models.Model):
             recs = self.search([('name', operator, name)] + args, limit=limit)
         return recs.name_get()
 
+    @api.onchange('user_id')
+    def _onchange_user(self):
+        self.work_email = self.work_email
+        self.name = self.name
+        self.image = self.image
+
 
 class DriverLicense(models.Model):
     _name = "hr.employee.driver.license"
