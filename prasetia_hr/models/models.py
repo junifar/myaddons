@@ -189,7 +189,8 @@ class Attendance(models.Model):
     absent_out = fields.Datetime(string="Absent Date Out")
     note = fields.Text(string="Note")
     attendance_status = fields.Selection([('hadir', 'Present'),
-                                          ('izin', 'Izin'), ('mangkir', 'Mangkir')],
+                                          ('izin', 'Izin'), ('mangkir', 'Mangkir'),
+                                          ('dinas', 'Dinas')],
                                          string="Status Kehadiran")
     leave_request_id = fields.Many2one('hr.employee.leave.request', string="Ijin Tidak Bekerja")
     absen_book_id = fields.Many2one('hr.employee.absen.book', string="Absen Book")
