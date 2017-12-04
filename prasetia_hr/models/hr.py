@@ -64,6 +64,12 @@ class Employee(models.Model):
     employee_account_bank_branch = fields.Char(string="Cabang")
     employee_status = fields.Char(string="Status Pekerja", compute="_compute_status_pekerja", store=True)
 
+    current_user = fields.Many2one('res.users', compute='_get_current_user')
+
+    def _get_current_user(self):
+        for data in self:
+            data.current_user = self.env.user
+
     def _compute_status_pekerja(self):
         for line in self.contract_ids:
             self.employee_status = line.name.name

@@ -92,6 +92,9 @@ class import_external_data(models.TransientModel):
                     if not sheet.cell(row, 6).value == '':
                         noreg = self._check_str(sheet.cell(row, 2).value)
 
+                        print noreg
+                        print '======'
+
                         value_hour = self._check_str(sheet.cell(row, 6).value)
                         value_minute = self._check_str(sheet.cell(row, 7).value)
 
