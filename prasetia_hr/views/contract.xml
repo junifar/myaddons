@@ -53,6 +53,8 @@
             <field name="model">hr.employee.contract</field>
             <field name="arch" type="xml">
                 <search string="Search Contract">
+                    <field name="employee_id" string="Nama Karyawan"/>
+                    <field name="name"/>
                     <filter string="Karyawan" name="employee" context="{'group_by':'employee_id'}"/>
                 </search>
             </field>

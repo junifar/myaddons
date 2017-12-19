@@ -117,6 +117,8 @@
                                     <t t-set="work_hours"/>
                                     <t t-set="attendance_status"/>
                                     <t t-set="late_check_val"/>
+                                    <t t-set="libur_description"/>
+                                    <t t-set="cuti_bersama"/>
                                     <t t-foreach="employee_absen_data" t-as="data">
                                         <t t-if="check_date_name(day, data['name'])">
                                             <t t-set="absent_in" t-value="convert_time(data['absent_in'])"/>
@@ -124,6 +126,16 @@
                                             <t t-set="attendance_status" t-value="data.attendance_status"/>
                                             <t t-set="work_hours" t-value="date_difference(data['absent_in'], data['absent_out'])"/>
                                             <t t-set="late_check_val" t-value="late_check(data['absent_in'])"/>
+                                        </t>
+                                    </t>
+                                    <t t-foreach="libur_nasional[0].libur_nasional_ids" t-as="data">
+                                        <t t-if="check_date_name(day, data['tanggal_libur'])">
+                                            <t t-set="libur_description" t-value="data['description']"/>
+                                        </t>
+                                    </t>
+                                    <t t-foreach="libur_nasional[0].cuti_pemerintah_ids" t-as="data">
+                                        <t t-if="check_date_name(day, data['tanggal_libur'])">
+                                            <t t-set="cuti_bersama" t-value="data['description']"/>
                                         </t>
                                     </t>
                                     <tr>
@@ -136,6 +148,12 @@
 
                                             <t t-if="not day.isoweekday() in range(1,6)">
                                                 <strong>Hari Libur</strong><br/>
+                                            </t>
+                                            <t t-if="libur_description != ''">
+                                                <strong><span t-esc="libur_description"/></strong><br/>
+                                            </t>
+                                            <t t-if="cuti_bersama != ''">
+                                                <strong><span t-esc="cuti_bersama"/></strong><br/>
                                             </t>
                                             <t t-if="late_check_val == 1">
                                                 Terlambat

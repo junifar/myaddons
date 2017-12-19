@@ -75,6 +75,11 @@ class ReportPersonalAbsen(models.AbstractModel):
         num_days = calendar.monthrange(year, month)[1]
         return [datetime.date(year, month, day) for day in range(1, num_days + 1)]
 
+    def _get_libur_national(self, docs):
+        hr_employee_calendar_year_pools = self.env['hr.employee.calendar.year']
+        hr_employee_calendar_year_data = hr_employee_calendar_year_pools.search([('name', '=', str(docs.year_filter))])
+        return hr_employee_calendar_year_data
+
     def _get_personal_absent(self, data):
         lines = []
 
@@ -136,6 +141,7 @@ class ReportPersonalAbsen(models.AbstractModel):
             'convert_time': self.convert_time,
             'late_check': self.late_check,
             'days_of_month': self.getMonthDay(docs.month_filter, docs.year_filter),
+            'libur_nasional': self._get_libur_national(docs),
             'check_date_name': self.checkDateName
         }
         return self.env['report'].render('prasetia_hr.report_personal_absen', docargs)
