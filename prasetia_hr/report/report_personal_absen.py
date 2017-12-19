@@ -1,6 +1,7 @@
 import calendar
-from datetime import datetime, timedelta, date
-import pytz
+import datetime
+from datetime import timedelta
+
 from odoo import api, models
 
 
@@ -29,13 +30,15 @@ class ReportPersonalAbsen(models.AbstractModel):
                         EXTRACT(MONTH FROM "public".hr_employee_attendance."name") = %s AND
                         EXTRACT(YEAR FROM "public".hr_employee_attendance."name") = %s AND
                         "public".hr_employee_attendance.employee_id = %d
+                    ORDER BY
+                      "public".hr_employee_attendance."name" ASC
         """ % (data.month_filter, data.year_filter, data.employee_id.id)
         return query
 
     @staticmethod
     def convert_time_zone(date):
         if date:
-            date_convert = datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
+            date_convert = datetime.datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
             return (date_convert + timedelta(hours=7)).time()
         else:
             return None
@@ -43,18 +46,22 @@ class ReportPersonalAbsen(models.AbstractModel):
     @staticmethod
     def convert_time(date):
         if date:
-            date_convert = datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
+            date_convert = datetime.datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
             return (date_convert + timedelta(hours=7)).time()
         else:
             return None
 
     @staticmethod
+    def checkDateName(date1, date2):
+        return date1.strftime('%Y-%m-%d') == date2
+
+    @staticmethod
     def late_check(date):
         if date:
-            time_limit = datetime.strptime('08:30', '%H:%M')
-            date_convert = datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
+            time_limit = datetime.datetime.strptime('08:30', '%H:%M')
+            date_convert = datetime.datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
             time_convert = (date_convert + timedelta(hours=7)).strftime('%H:%M')
-            time_compare = datetime.strptime(time_convert, '%H:%M')
+            time_compare = datetime.datetime.strptime(time_convert, '%H:%M')
             if (time_limit - time_compare).total_seconds() < 0:
                 return 1
             else:
@@ -62,6 +69,11 @@ class ReportPersonalAbsen(models.AbstractModel):
 
         else:
             return None
+
+    @staticmethod
+    def getMonthDay(month, year):
+        num_days = calendar.monthrange(year, month)[1]
+        return [datetime.date(year, month, day) for day in range(1, num_days + 1)]
 
     def _get_personal_absent(self, data):
         lines = []
@@ -93,7 +105,7 @@ class ReportPersonalAbsen(models.AbstractModel):
                                                                            ('name', '>=',
                                                                             str(docs.year_filter) + '-' +
                                                                             str(docs.month_filter) + '-1')
-                                                                           ])
+                                                                           ], order='name asc')
         return hr_employee_attendance_data
 
     @staticmethod
@@ -102,7 +114,8 @@ class ReportPersonalAbsen(models.AbstractModel):
             return None
         if not to_date:
             return None
-        return datetime.strptime(to_date, '%Y-%m-%d %H:%M:%S') - datetime.strptime(from_date, '%Y-%m-%d %H:%M:%S')
+        return datetime.datetime.strptime(to_date, '%Y-%m-%d %H:%M:%S') - datetime.datetime.strptime(from_date,
+                                                                                                     '%Y-%m-%d %H:%M:%S')
 
     @api.model
     def render_html(self, docids, data=None):
@@ -114,13 +127,15 @@ class ReportPersonalAbsen(models.AbstractModel):
             'doc_model': self.model,
             'data': data['form'],
             'docs': docs,
-            'periode': datetime.now().strftime("%B %Y"),
-            'periode_year': datetime.now().strftime("%Y"),
+            'periode': datetime.datetime.now().strftime("%B %Y"),
+            'periode_year': datetime.datetime.now().strftime("%Y"),
             'employee_name': docs.employee_id.name,
             'employee_absen': self._get_personal_absent(docs),
             'employee_absen_data': self._get_absen(docs),
             'date_difference': self._date_different,
             'convert_time': self.convert_time,
-            'late_check': self.late_check
+            'late_check': self.late_check,
+            'days_of_month': self.getMonthDay(docs.month_filter, docs.year_filter),
+            'check_date_name': self.checkDateName
         }
         return self.env['report'].render('prasetia_hr.report_personal_absen', docargs)

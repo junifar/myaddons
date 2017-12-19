@@ -195,6 +195,8 @@ class CalendarYear(models.Model):
     name = fields.Char(String='Periode Tahun Berjalan', required=True)
     cuti_pemerintah_ids = fields.One2many('hr.employee.calendar.cuti.pemerintah', 'calendar_year_id',
                                           string='Cuti Bersama Pemerintah')
+    libur_nasional_ids = fields.One2many('hr.employee.calendar.libur.nasional', 'calendar_year_id',
+                                          string='Libur Nasional')
 
 
 class CutiPemerintah(models.Model):
@@ -211,5 +213,20 @@ class CutiPemerintah(models.Model):
 
     @api.depends('tanggal_libur', 'description')
     def _compute_desc_cuti_bersama_pemerintah(self):
+        for rec in self:
+            rec.name = rec.tanggal_libur + " - " + rec.description
+
+
+class LiburNasional(models.Model):
+    _name = "hr.employee.calendar.libur.nasional"
+
+    calendar_year_id = fields.Many2one('hr.employee.calendar.year', required=True)
+    tanggal_libur = fields.Date(string="Tanggal", required=True)
+    description = fields.Char(string="Deskripsi")
+    name = fields.Char(string="Tanggal Libur Nasinal", compute="_compute_desc_libur_nasional",
+                       store=True)
+
+    @api.depends('tanggal_libur', 'description')
+    def _compute_desc_libur_nasional(self):
         for rec in self:
             rec.name = rec.tanggal_libur + " - " + rec.description
