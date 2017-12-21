@@ -180,9 +180,10 @@ class AbsenBook(models.Model):
                                                                        data.employee_id.id)])
             if leave_request_line_data:
                 for data_request_line in leave_request_line_data:
-                    data.attendance_status = 'izin'
-                    data.leave_request_id = data_request_line.leave_request_id.id
-                    data.note = data_request_line.note
+                    if data_request_line.leave_request_id.state == 'approved':
+                        data.attendance_status = 'izin'
+                        data.leave_request_id = data_request_line.leave_request_id.id
+                        data.note = data_request_line.note
         return None
 
     @api.multi
