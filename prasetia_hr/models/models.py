@@ -312,6 +312,18 @@ class leave_request(models.Model):
     def action_reject(self):
         self.state = 'reject'
 
+    def get_annual_leave_used(self, id):
+        hr_employee_annual_leave_request_cuti_pool = self.env['hr.employee.annual.leave.request.cuti']
+        hr_employee_annual_leave_request_cuti_datas = hr_employee_annual_leave_request_cuti_pool.search([
+            ('leave_periode_detail_id.id', '=', id)
+        ])
+        leave_remaining = 0
+        if hr_employee_annual_leave_request_cuti_datas:
+            for data in hr_employee_annual_leave_request_cuti_datas:
+                if data.leave_request_id.state == 'approved':
+                    leave_remaining += data.annual_leave_used
+        return leave_remaining
+
     @api.multi
     def sync_leave(self):
         annual_leave_employee_pool = self.env['hr.employee.leave.periode.detail']
@@ -334,7 +346,8 @@ class leave_request(models.Model):
                         'annual_leave': data.annual_leave,
                         'start_periode': data.start_periode,
                         'end_periode': data.end_periode,
-                        'annual_leave_remaining': data.annual_leave_used
+                        # 'annual_leave_remaining': data.annual_leave_used
+                        'annual_leave_remaining': data.annual_leave - self.get_annual_leave_used(data.id)
                     }
                     self.leave_request_annual_leave_activity_line.create(values)
         return None
