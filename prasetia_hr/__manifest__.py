@@ -23,6 +23,7 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
+        'security/prasetia_hr_security.xml',
         'views/views.xml',
         'views/templates.xml',
         'views/hr.xml',
@@ -43,6 +44,7 @@
         'views/leave_request.xml',
         'views/leave_request_workflow.xml',
         'views/leave_request_type.xml',
+        'views/show_bank_information.xml',
         'views/leave_administration.xml',
         'views/menus.xml',
         'views/report_personal_leave.xml',

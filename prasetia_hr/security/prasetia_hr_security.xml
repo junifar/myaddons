@@ -1,0 +1,5 @@
+<odoo>
+    <record id="group_prasetia_show_bank_account_information" model="res.groups">
+        <field name="name">Show Bank Information</field>
+    </record>
+</odoo>

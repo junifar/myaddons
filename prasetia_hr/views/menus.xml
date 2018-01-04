@@ -7,6 +7,9 @@
         <menuitem id="contract_menu" name="Status Kepegawaian" parent="personal_information_menu" action="contract_list_action" />
         <menuitem id="kartu_keluarga_menu" name="Kartu Keluarga" parent="personal_information_menu" action="kartu_keluarga_list_action" />
 
+        <menuitem id="prasetia_hr_configuration_menu" name="Configuration" parent="hr.menu_hr_root" sequence="4"/>
+        <menuitem id="show_bank_information_menu" name="Access Bank Information" parent="prasetia_hr_configuration_menu" action="show_bank_information_list_action" />
+
         <record model="ir.ui.menu" id="hr.menu_hr_root">
             <field name="name">Data Karyawan</field>
         </record>

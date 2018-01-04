@@ -289,8 +289,8 @@ class leave_request(models.Model):
                                                                     'leave_request_id',
                                                                     string="Update Sisa Cuti 5 Tahunan")
     other_leave_request_annual_leave_activity_line = fields.One2many('hr.employee.other.leave.request.cuti',
-                                                                    'leave_request_id',
-                                                                    string="Update Sisa Cuti Lainnya")
+                                                                     'leave_request_id',
+                                                                     string="Update Sisa Cuti Lainnya")
 
     @api.multi
     def action_draft(self):
@@ -461,9 +461,15 @@ class leave_request_other_activity(models.Model):
 
     leave_request_id = fields.Many2one('hr.employee.leave.request', string="Ijin Tidak Bekerja")
     other_leave_periode_detail_id = fields.Many2one('hr.employee.other.leave.periode.detail', required=True,
-                                                   string="Periode Cuti Lainnya Line")
+                                                    string="Periode Cuti Lainnya Line")
     other_leave = fields.Integer(string='Hak Cuti 5 Tahunan', required=True)
     start_periode = fields.Date(string='Tanggal Mulai Berlaku', required=True)
     end_periode = fields.Date(string='Tanggal Akhir Berlaku', required=True)
     other_leave_remaining = fields.Integer(string='Sisa Hak Cuti Lainnya', required=True)
     other_leave_used = fields.Integer(string='Cuti Terpakai')
+
+
+class show_bank_information(models.Model):
+    _name = 'hr.employee.show.bank.information'
+
+    name = fields.Many2one('res.users', required=True)

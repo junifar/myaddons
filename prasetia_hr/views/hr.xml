@@ -63,10 +63,19 @@
 									<!--<field name="gender" string="Jenis Kelamin"/>-->
 									<!--<field name="marital" string="Status Pernikahan"/>-->
 								<!--</group>-->
-								<group string="Bank Account Information">
+
+								<group string="Test">
+									<h1>Test</h1>
+								</group>
+
+								<group string="Bank Account Information" attrs="{'invisible':[('show_bank_information', '==', False)]}">
+									<!--groups="prasetia_hr.group_prasetia_show_bank_account_information"-->
 									<!--TODO:MOdify this-->
 									<!--<field name="current_user"/>-->
+									<!--<field name="current_user_id"/>-->
+									<field name="show_bank_information"/>
 									<field name="employee_bank_id"/>
+									<!--attrs="{'invisible':[('current_user', '!=', 'current_user_id')]}"-->
 									<field name="employee_account_bank"/>
 									<field name="employee_account_bank_branch"/>
 									<!--<field name="bank_account_id" context="{'default_partner_id': address_home_id}"/>-->
