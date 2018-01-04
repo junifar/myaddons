@@ -63,9 +63,6 @@ class Employee(models.Model):
     employee_account_bank = fields.Char(string="Nomor Rekening")
     employee_account_bank_branch = fields.Char(string="Cabang")
     employee_status = fields.Char(string="Status Pekerja", compute="_compute_status_pekerja", store=True)
-
-    # current_user = fields.Many2one('res.users', compute='_get_current_user')
-    # current_user_id = fields.Many2one('res.users', compute='_get_current_user_id')
     show_bank_information = fields.Boolean(compute='_show_bank_information')
 
     def _show_bank_information(self):
@@ -86,23 +83,9 @@ class Employee(models.Model):
 
         return val
 
-    # def _get_current_user(self):
-    #     for data in self:
-    #         data.current_user = self.env.user
-    #
-    # def _get_current_user_id(self):
-    #     for data in self:
-    #         data.current_user_id = data.resource_id.user_id
-    #         # data.current_user_id = self.resource_id.user_id
-
     def _compute_status_pekerja(self):
         for line in self.contract_ids:
             self.employee_status = line.name.name
-            # self.employee_status = 'Test'
-
-    # @property
-    # def __str__(self):
-    #     return self.registration_id + ' - ' + self.name
 
     @api.multi
     def name_get(self):
