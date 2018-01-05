@@ -193,6 +193,7 @@ class KartuKeluargaDetail(models.Model):
     relation = fields.Selection([('Kepala Keluarga', 'Kepala Keluarga'),
                                  ('Istri', 'Istri'), ('Anak', 'Anak'),
                                  ('Saudara', 'Saudara')], string="Hubungan Dalam Keluarga")
+    relation_position = fields.Integer(string='ke- ')
     status = fields.Selection([('hidup', 'Hidup'),
                                ('meninggal', 'Meninggal')], string="Keterangan Kondisi")
 

@@ -38,9 +38,9 @@
                                         string="Batch" class="oe_highlight oe_edit_only "
                                         confirm="Are you sure you want to do this?"/>
                             </page>
-                            <page name="long_leave_periode_line" string="Cuti 5 Tahunan">
+                            <page name="long_leave_periode_line" string="Cuti Panjang">
                                 <field name="long_leave_periode_detail_ids">
-                                    <tree string="Cuti 5 Tahunan" editable="bottom">
+                                    <tree string="Cuti Panjang" editable="bottom">
                                         <field name="employee_id"/>
                                         <field name="annual_leave"/>
                                         <field name="annual_leave_used"/>

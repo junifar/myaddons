@@ -59,7 +59,7 @@
 									</tree>
 								</field>
 							</page>
-							<page string="Cuti 5 Tahunan">
+							<page string="Cuti Panjang">
 								<header>
 									<group>
 										<button name="sync_long_leave" type="object"
@@ -67,7 +67,7 @@
 									</group>
 								</header>
 								<field name="long_leave_request_annual_leave_activity_line">
-									<tree string="Cuti 5 Tahunan" editable="bottom" create="false">
+									<tree string="Cuti Panjang" editable="bottom" create="false">
 										<field name="start_periode" readonly="1"/>
 										<field name="end_periode" readonly="1"/>
 										<field name="annual_leave" readonly="1"/>
