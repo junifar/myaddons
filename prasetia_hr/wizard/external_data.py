@@ -90,8 +90,7 @@ class import_external_data(models.TransientModel):
                 col_values = []
                 if row >= 5:
                     if not sheet.cell(row, 6).value == '':
-                        noreg = self._check_str(sheet.cell(row, 1).value)
-
+                        noreg = self._check_str(sheet.cell(row, 1).value).zfill(6)
                         value_hour = self._check_str(sheet.cell(row, 6).value)
                         value_minute = self._check_str(sheet.cell(row, 7).value)
 
