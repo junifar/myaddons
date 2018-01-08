@@ -38,7 +38,7 @@
 							<group>
 								<field name="tanggal_pengajuan"/>
 								<field name="reason" string="Tujuan Cuti"/>
-								<field name="leave_category" widget="radio" string="Jenis Cuti"/>
+								<field name="leave_category" widget="radio" string="Jenis Cuti" invisible="1"/>
                             </group>
 						</group>
 						<notebook>
