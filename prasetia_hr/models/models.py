@@ -262,6 +262,12 @@ class leave_type(models.Model):
     name = fields.Char(String="Leave Type Name", required=True)
 
 
+class leave_category(models.Model):
+    _name = 'hr.employee.leave.request.category'
+
+    name = fields.Char(String="Leave Type Name", required=True)
+
+
 class leave_request(models.Model):
     _name = 'hr.employee.leave.request'
 
@@ -272,6 +278,8 @@ class leave_request(models.Model):
     leave_category = fields.Selection([('cuti tahunan', 'Cuti Tahunan'), ('cuti panjang', 'Cuti Panjang'),
                                        ('other', 'Cuti Lainnya')], default='cuti tahunan')
     leave_type_id = fields.Many2one('hr.employee.leave.request.type', string="Leave Type")
+    leave_category_ids = fields.Many2many('hr.employee.leave.request.category', 'rel_leave_request_category',
+                                          string="Leave Category")
     # from_date = fields.Date(String="From Date", required=True)
     # to_date = fields.Date(String="To Date", required=True)
     reason = fields.Text(String="Reason", required=True)
@@ -291,6 +299,20 @@ class leave_request(models.Model):
     other_leave_request_annual_leave_activity_line = fields.One2many('hr.employee.other.leave.request.cuti',
                                                                      'leave_request_id',
                                                                      string="Update Sisa Cuti Lainnya")
+    show_other_leave_type = fields.Boolean(compute='_show_other_leave_type')
+
+    def _leave_type_state(self, data):
+        val = False
+
+        for check in data.leave_category_ids:
+            if check.name == 'Cuti Lainnya':
+                return True
+        return val
+
+    @api.depends('leave_category_ids.name')
+    def _show_other_leave_type(self):
+        for data in self:
+            data.show_other_leave_type = self._leave_type_state(data)
 
     @api.multi
     def action_draft(self):

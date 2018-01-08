@@ -28,13 +28,17 @@
 						<group>
 							<group>
 								<field name="department_id"/>
-								<field name="leave_category" widget="radio" string="Jenis Cuti"/>
-								<field name="leave_type_id" attrs="{'invisible':['|',
-                                ('leave_category','=','cuti tahunan'), ('leave_category', '=', 'cuti panjang')]}"/>
+								<field name="show_other_leave_type" invisible="1"/>
+								<field name="leave_category_ids" widget="many2many_tags"
+    options="{'no_create_edit': True}" string="Jenis Cuti"/>
+								<!--<field name="leave_type_id" attrs="{'invisible':['|',-->
+                                <!--('leave_category','=','cuti tahunan'), ('leave_category', '=', 'cuti panjang')]}"/>-->
+								<field name="leave_type_id" attrs="{'invisible':[('show_other_leave_type', '==', False)]}"/>
 							</group>
 							<group>
 								<field name="tanggal_pengajuan"/>
 								<field name="reason" string="Tujuan Cuti"/>
+								<field name="leave_category" widget="radio" string="Jenis Cuti"/>
                             </group>
 						</group>
 						<notebook>

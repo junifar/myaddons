@@ -42,6 +42,7 @@
         'views/attendance_report.xml',
         'views/print_leave_form.xml',
         'views/leave_request.xml',
+        'data/leave_category_data.xml',
         'views/leave_request_workflow.xml',
         'views/leave_request_type.xml',
         'views/show_bank_information.xml',

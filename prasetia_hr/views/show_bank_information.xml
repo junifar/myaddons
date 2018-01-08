@@ -22,7 +22,7 @@
             <field name="name">Show Bank Information</field>
 			<field name="model">hr.employee.show.bank.information</field>
 			<field name="arch" type="xml">
-				<tree string="Allow Show Bank Information" create="true">
+				<tree string="Allow Show Bank Information" create="true" editable="top">
                     <field name="name"/>
 				</tree>
 			</field>

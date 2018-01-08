@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+        <record id="view_prasetia_hr_employee_config_settings" model="ir.ui.view">
+            <field name="name">Prasetia HR Employee Settings</field>
+            <field name="model">prasetia.hr.config.settings</field>
+            <field name="arch" type="xml">
+                <form string="Configure HR Employee" class="oe_form_configuration">
+                    <header>
+                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                    </header>
+                    <group string="HR Employee">
+                        <label for="id" string="Allow Read Employees Bank Information"/>
+                        <div>
+                            <field name="read_bank_information">
+                                <tree string="Allowed User" editable="bottom">
+                                     <field name="name"/>
+                                </tree>
+                            </field>
+                        </div>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_prasetia_hr_employee_config" model="ir.actions.act_window">
+            <field name="name">Configure HR Employees</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">prasetia.hr.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+    </data>
+</odoo>
