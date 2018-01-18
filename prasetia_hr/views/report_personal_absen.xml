@@ -119,6 +119,7 @@
                                     <t t-set="late_check_val"/>
                                     <t t-set="libur_description"/>
                                     <t t-set="cuti_bersama"/>
+                                    <t t-set="note"/>
                                     <t t-foreach="employee_absen_data" t-as="data">
                                         <t t-if="check_date_name(day, data['name'])">
                                             <t t-set="absent_in" t-value="convert_time(data['absent_in'])"/>
@@ -126,6 +127,7 @@
                                             <t t-set="attendance_status" t-value="data.attendance_status"/>
                                             <t t-set="work_hours" t-value="date_difference(data['absent_in'], data['absent_out'])"/>
                                             <t t-set="late_check_val" t-value="late_check(data['absent_in'])"/>
+                                            <t t-set="note" t-value="data['note']"/>
                                         </t>
                                     </t>
                                     <t t-foreach="libur_nasional[0].libur_nasional_ids" t-as="data">
@@ -161,6 +163,8 @@
                                             <t t-if="late_check_val == None">
                                                  <span t-esc="attendance_status"/>
                                             </t>
+
+                                            <span t-esc="note"/>
                                         </td>
                                         <td></td>
                                     </tr>
