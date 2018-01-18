@@ -163,10 +163,10 @@
                                             <t t-if="late_check_val == None">
                                                  <span t-esc="attendance_status"/>
                                             </t>
-
+                                        </td>
+                                        <td>
                                             <span t-esc="note"/>
                                         </td>
-                                        <td></td>
                                     </tr>
                                 </t>
                             </tbody>
