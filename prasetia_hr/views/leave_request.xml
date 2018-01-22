@@ -74,8 +74,8 @@
 									<tree string="Cuti Panjang" editable="bottom" create="false">
 										<field name="start_periode" readonly="1"/>
 										<field name="end_periode" readonly="1"/>
-										<field name="annual_leave" readonly="1"/>
-										<field name="annual_leave_remaining" readonly="1"/>
+										<field name="annual_leave" readonly="1" string="Hak Cuti Panjang"/>
+										<field name="annual_leave_remaining" readonly="1" string="Sisa Hak Cuti Panjang"/>
 										<field name="annual_leave_used"/>
 									</tree>
 								</field>
