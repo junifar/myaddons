@@ -192,7 +192,8 @@ class KartuKeluargaDetail(models.Model):
     name = fields.Char(String="Nama Lengkap", required=True)
     relation = fields.Selection([('Kepala Keluarga', 'Kepala Keluarga'),
                                  ('Istri', 'Istri'), ('Anak', 'Anak'),
-                                 ('Saudara', 'Saudara')], string="Hubungan Dalam Keluarga")
+                                 ('Saudara', 'Saudara'), ('Mertua', 'Mertua'),
+                                 ('Keluarga Lain', 'Keluarga Lain')], string="Hubungan Dalam Keluarga")
     relation_position = fields.Integer(string='ke- ')
     status = fields.Selection([('hidup', 'Hidup'),
                                ('meninggal', 'Meninggal')], string="Keterangan Kondisi")
