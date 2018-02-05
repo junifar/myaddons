@@ -206,6 +206,8 @@ class KartuKeluargaDetail(models.Model):
     relation_position = fields.Integer(string='ke- ')
     status = fields.Selection([('hidup', 'Hidup'),
                                ('meninggal', 'Meninggal')], string="Keterangan Kondisi")
+    birth_place = fields.Char(string='Birth Place')
+    birthday = fields.Date('Date of Birth')
 
 
 class CalendarYear(models.Model):

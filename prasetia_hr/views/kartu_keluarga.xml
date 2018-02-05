@@ -26,6 +26,8 @@
                                          <field name="name"/>
                                          <field name="relation"/>
                                          <field name="relation_position"/>
+                                         <field name="birth_place"/>
+                                         <field name="birthday"/>
                                          <field name="status"/>
                                     </tree>
                                     <form string="Family List">
@@ -33,6 +35,8 @@
                                             <field name="name"/>
                                             <field name="relation"/>
                                             <field name="relation_position"/>
+                                            <field name="birth_place"/>
+                                            <field name="birthday"/>
                                             <field name="status"/>
                                         </group>
                                     </form>
