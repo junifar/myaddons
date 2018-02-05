@@ -42,6 +42,7 @@
         'views/attendance_report.xml',
         'views/print_leave_form.xml',
         'views/leave_request.xml',
+        'views/employee_office_area.xml',
         'data/leave_category_data.xml',
         'views/leave_request_workflow.xml',
         'views/leave_request_type.xml',

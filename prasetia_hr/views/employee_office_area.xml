@@ -1,0 +1,43 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="employee_office_area_form_view">
+			<field name="name">Employee Office Area</field>
+			<field name="model">hr.employee.office.area</field>
+			<field name="arch" type="xml">
+				<form string="Area">
+					<header></header>
+					<sheet>
+                        <group>
+                            <group>
+                                <field name="name" placeholder="name"/>
+                            </group>
+                            <group></group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="employee_office_area_tree_view">
+            <field name="name">Employee Office Area</field>
+			<field name="model">hr.employee.office.area</field>
+			<field name="arch" type="xml">
+				<tree string="Area" create="true">
+                    <field name="name"/>
+				</tree>
+			</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="employee_office_area_list_action">
+			<field name="name">Employee Office Area</field>
+			<field name="res_model">hr.employee.office.area</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="Help" type="html">
+				<p class="oe_view_nocontent_create">
+					Employee Office Area
+				</p>
+			</field>
+		</record>
+    </data>
+</odoo>

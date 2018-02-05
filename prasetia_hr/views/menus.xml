@@ -47,6 +47,7 @@
         <menuitem id="administration_directorate_menu" name="Direktorat" parent="administration_configuration_menu" action="directorate_list_action"/>
         <menuitem id="absen_book_menu" name="Buku Absen" parent="administration_configuration_menu" action="absen_book_list_action"/>
         <menuitem id="calendar_year_menu" name="Kalender Tahunan" parent="administration_configuration_menu" action="calendar_year_list_action"/>
+        <menuitem id="employee_office_area_menu" name="Office Area" parent="administration_configuration_menu" action="employee_office_area_list_action"/>
 
         <menuitem id="import_attendance_sub_menu" name="Import Absen" parent="administration_menu"/>
         <menuitem id="import_attendance_menu" name="Import Absen" parent="import_attendance_sub_menu" action="attendance_import_list_action" />

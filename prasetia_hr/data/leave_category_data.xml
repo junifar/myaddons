@@ -9,5 +9,15 @@
         <record id="category_cuti_lainnya" model="hr.employee.leave.request.category">
             <field name="name">Cuti Lainnya</field>
         </record>
+
+        <record id="employee_office_area_head_office" model="hr.employee.office.area">
+            <field name="name">HO</field>
+        </record>
+        <record id="employee_office_area_palembang" model="hr.employee.office.area">
+            <field name="name">Palembang</field>
+        </record>
+        <record id="employee_office_area_makassar" model="hr.employee.office.area">
+            <field name="name">Makassar</field>
+        </record>
     </data>
 </odoo>

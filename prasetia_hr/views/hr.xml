@@ -51,6 +51,7 @@
 									<field name="department_id" string="Departement"/>
 									<field name="job_id" string="Status Pegawai"/>
 									<field name="parent_id" invisible="1"/>
+									<field name="office_area_id"/>
 								</group>
 								<group string="Birth">
 									<field name="birth_place" string="Tempat Lahir"/>

@@ -1,6 +1,12 @@
 from odoo import models, fields, api
 
 
+class employee_office_area(models.Model):
+    _name = 'hr.employee.office.area'
+
+    name = fields.Char(String="Office Area Name", required=True)
+
+
 class Employee(models.Model):
     _inherit = "hr.employee"
 
@@ -10,6 +16,7 @@ class Employee(models.Model):
     religion_id = fields.Many2one('hr.religion', string='Religion', required=False)
     blood_type = fields.Selection([('A', 'A'), ('B', 'B'), ('O', 'O'), ('AB', 'AB')], string="Golongan Darah")
     marital_status = fields.Selection([('TK', 'TK - Tidak Kawin'), ('K', 'K - Kawin')], string="Status Pernikahan")
+    office_area_id = fields.Many2one('hr.employee.office.area', string='Area', required=False)
     jumlah_tanggungan = fields.Integer(string='Jumlah Tanggungan')
     street = fields.Char(string="Jalan")
     rt_rw = fields.Char(string="RT/RW")
