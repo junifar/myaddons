@@ -65,6 +65,10 @@
 									<!--<field name="bank_account_id" context="{'default_partner_id': address_home_id}"/>-->
 									<!--<field name="bank_account_id"/>-->
 								</group>
+								<group string="Status Pajak">
+									<field name="marital_status"/>
+									<field name="jumlah_tanggungan"/>
+								</group>
 							</group>
 							<field name="notes" placeholder="Other Information ..." colspan="4"/>
 						</page>

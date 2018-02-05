@@ -9,6 +9,8 @@ class Employee(models.Model):
     birth_place = fields.Char(string='Birth Place')
     religion_id = fields.Many2one('hr.religion', string='Religion', required=False)
     blood_type = fields.Selection([('A', 'A'), ('B', 'B'), ('O', 'O'), ('AB', 'AB')], string="Golongan Darah")
+    marital_status = fields.Selection([('TK', 'TK - Tidak Kawin'), ('K', 'K - Kawin')], string="Status Pernikahan")
+    jumlah_tanggungan = fields.Integer(string='Jumlah Tanggungan')
     street = fields.Char(string="Jalan")
     rt_rw = fields.Char(string="RT/RW")
     home_no = fields.Char(string="No. Rumah")
