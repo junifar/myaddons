@@ -57,7 +57,7 @@
 									<field name="birthday" string="Tanggal Lahir"/>
 									<field name="blood_type" string="Golongan darah"/>
 								</group>
-								<group string="Bank Account Information" attrs="{'invisible':[('show_bank_information', '==', False)]}">
+								<group string="Bank Account Information" attrs="{'invisible':['&amp;', ('show_bank_information', '==', False), ('name', '!=', False)]}">
 									<field name="show_bank_information" invisible="1"/>
 									<field name="employee_bank_id"/>
 									<field name="employee_account_bank"/>
